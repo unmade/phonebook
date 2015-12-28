@@ -1,0 +1,16 @@
+{
+  "name": "phonebook-project",
+  "version": "0.0.0",
+  "authors": [
+    "Aleksey Maslakov <lesha.maslakov@gmail.com>"
+  ],
+  "description": "Simple Phone Book",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
