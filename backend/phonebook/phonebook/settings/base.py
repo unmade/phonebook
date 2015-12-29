@@ -58,6 +58,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'core',
     'companies',
     'contacts',
     'employees',
@@ -140,6 +141,9 @@ MEDIA_URL = '/media/'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',
-                                'rest_framework.filters.SearchFilter'),
-    'PAGE_SIZE': 10
+                                'rest_framework.filters.SearchFilter',
+                                'rest_framework.filters.OrderingFilter'),
+    'PAGE_SIZE': 20,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }

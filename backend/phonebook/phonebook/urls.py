@@ -16,9 +16,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
+import django.views.defaults
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^api/', include('core.api'))
 ]
 
 if settings.DEBUG:
@@ -26,9 +29,9 @@ if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
-        url(r'^400/$', 'django.views.defaults.bad_request'),
-        url(r'^403/$', 'django.views.defaults.permission_denied'),
-        url(r'^404/$', 'django.views.defaults.page_not_found'),
-        url(r'^500/$', 'django.views.defaults.server_error'),
+        url(r'^400/$', django.views.defaults.bad_request),
+        url(r'^403/$', django.views.defaults.permission_denied),
+        url(r'^404/$', django.views.defaults.page_not_found),
+        url(r'^500/$', django.views.defaults.server_error),
         url(r'^__debug__/', include(debug_toolbar.urls))
     ]

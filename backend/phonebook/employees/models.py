@@ -59,8 +59,8 @@ class Employee(models.Model):
     position = models.ForeignKey('Position', null=True, blank=True, verbose_name='Должность')
     place = models.CharField(max_length=255, blank=True, verbose_name='Рабочее место')
     comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
-    phones = models.ManyToManyField('contacts.Phone', null=True, blank=True, verbose_name='Телефоны')
-    emails = models.ManyToManyField('contacts.Email', null=True, blank=True, verbose_name='Эл. адреса')
+    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')
+    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name='Эл. адреса')
     boss = models.ForeignKey('self', null=True, blank=True, related_name='secretary', verbose_name='Руководитель')
 
     class Meta:

@@ -24,8 +24,8 @@ class Company(models.Model):
     full_name = models.TextField(verbose_name='Полное название')
     short_name = models.CharField(max_length=255, verbose_name='Сокращенное название')
     address = models.CharField(max_length=400, verbose_name='Адрес')
-    phones = models.ManyToManyField('contacts.Phone', null=True, blank=True, verbose_name='Телефоны')
-    emails = models.ManyToManyField('contacts.Email', null=True, blank=True, verbose_name='Эл. адреса')
+    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')
+    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name='Эл. адреса')
     logo = models.ImageField(upload_to='logos', default='logos/no-logo.png', blank=True, verbose_name='Логотип')
     comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
 
@@ -44,15 +44,15 @@ class Center(models.Model):
     number = models.CharField(max_length=10, verbose_name='Номер')
     name = models.CharField(max_length=255, verbose_name='Название')
     comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
-    phones = models.ManyToManyField('contacts.Phone', null=True, blank=True, verbose_name='Телефоны')
-    emails = models.ManyToManyField('contacts.Email', null=True, blank=True, verbose_name='Эл. адреса')
+    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')
+    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name='Эл. адреса')
 
     class Meta:
         verbose_name = 'Центр'
         verbose_name_plural = 'Центры'
 
     def __str__(self):
-        return "%s: %s - %s" % (self.company.short_name, self.number, self.name)
+        return "%s - %s" % (self.number, self.name)
 
 
 class Division(models.Model):
@@ -61,12 +61,12 @@ class Division(models.Model):
                              related_name='division_head', verbose_name='Начальник')
     number = models.CharField(max_length=10, verbose_name='Номер')
     name = models.CharField(max_length=255, blank=True, verbose_name='Название')
-    phones = models.ManyToManyField('contacts.Phone', null=True, blank=True, verbose_name='Телефоны')
-    emails = models.ManyToManyField('contacts.Email', null=True, blank=True, verbose_name='Эл. адреса')
+    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')
+    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name='Эл. адреса')
 
     class Meta:
         verbose_name = 'Отделение/Отдел'
         verbose_name_plural = 'Отделения/Отделы'
 
     def __str__(self):
-        return "%s: %s - %s" % (self.center.company.short_name, self.number, self.name)
+        return "%s - %s" % (self.number, self.name)
