@@ -21,7 +21,7 @@ import django.views.defaults
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^api/', include('core.api'))
+    url(r'^api/', include('core.api', namespace='api'))
 ]
 
 if settings.DEBUG:

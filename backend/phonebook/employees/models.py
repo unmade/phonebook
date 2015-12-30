@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 from companies.models import Company, Center, Division
@@ -50,7 +51,7 @@ class Position(models.Model):
 
 class Employee(models.Model):
     surname = models.ForeignKey('Surname', null=True, blank=True, verbose_name='Фамилия')
-    first_name = models.ForeignKey('FirstName', null=True, blank=True, verbose_name='Имя')
+    firstname = models.ForeignKey('FirstName', null=True, blank=True, verbose_name='Имя')
     patronymic = models.ForeignKey('Patronymic', null=True, blank=True, verbose_name='Отчество')
     birthday = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
     company = models.ForeignKey('companies.Company', null=True, blank=True, verbose_name='Предприятие')
@@ -67,5 +68,8 @@ class Employee(models.Model):
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
 
+    def get_absolute_api_url(self):
+        return reverse('api:employees-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
-        return "%s %s" % (self.surname, self.first_name)
+        return "%s %s %s" % (self.surname, self.firstname, self.patronymic)

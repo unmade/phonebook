@@ -26,8 +26,8 @@ class PositionAdmin(admin.ModelAdmin):
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
     filter_horizontal = ('phones', 'emails')
-    list_display = ('surname', 'first_name', 'company', 'center', 'division')
+    list_display = ('surname', 'firstname', 'company', 'center', 'division')
     list_filter = ('company', 'center', 'division')
-    list_select_related = ('surname', 'first_name', 'company', 'center', 'division')
-    search_fields = ('surname', 'first_name')
-    ordering = ('surname', 'first_name')
+    list_select_related = ('surname', 'firstname', 'company', 'center', 'division')
+    search_fields = ('surname', 'firstname')
+    ordering = ('surname', 'firstname')

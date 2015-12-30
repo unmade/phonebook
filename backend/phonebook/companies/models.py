@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 from contacts.models import Email, Phone
@@ -33,6 +34,9 @@ class Company(models.Model):
         verbose_name = "Предприятие"
         verbose_name_plural = "Предприятия"
 
+    def get_absolute_api_url(self):
+        return reverse('api:company-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.name
 
@@ -51,6 +55,9 @@ class Center(models.Model):
         verbose_name = 'Центр'
         verbose_name_plural = 'Центры'
 
+    def get_absolute_api_url(self):
+        return reverse('api:center-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return "%s - %s" % (self.number, self.name)
 
@@ -67,6 +74,9 @@ class Division(models.Model):
     class Meta:
         verbose_name = 'Отделение/Отдел'
         verbose_name_plural = 'Отделения/Отделы'
+
+    def get_absolute_api_url(self):
+        return reverse('api:division-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "%s - %s" % (self.number, self.name)

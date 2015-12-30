@@ -1,8 +1,12 @@
+import json
+
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from rest_framework.test import APITestCase
 
 from .models import Company, Center, Division
+from .serializers import CompanySerializer, CenterSerializer, DivisionSerializer
 
 
 class CompaniesTests(TestCase):
@@ -21,7 +25,7 @@ class CompaniesTests(TestCase):
             short_name='НИЦ Планета',
             address='123242, г. Москва, Большой Предтеченский пер., д.7'
         )
-        сenter126 = Center.objects.get_or_create(
+        center126 = Center.objects.get_or_create(
             company=npol[0],
             number=126,
             name="Центр целевых комплексов"
@@ -32,43 +36,64 @@ class CompaniesTests(TestCase):
             name="Центр управления МКА ФКИ"
         )
         division126_2_1 = Division.objects.get_or_create(
-            center=сenter126[0],
+            center=center126[0],
             number="126-2-1",
             name="Отдел ведения документации"
         )
         division126_2_2 = Division.objects.get_or_create(
-            center=сenter126[0],
+            center=center126[0],
             number="126-2-2",
             name="Отдел стратегических исследований"
         )
         division126_2_3 = Division.objects.get_or_create(
-            center=сenter126[0],
+            center=center126[0],
             number="126-2-3",
             name="Отдел наземных комплексов"
         )
 
-        self.company_url = '/api/companies/'
-        self.center_url = '/api/centers/'
-        self.division_url = '/api/divisions/'
+        self.serialized_company = CompanySerializer(npol[0])
+        self.serialized_center = CenterSerializer(center126[0])
+        self.serialized_division = DivisionSerializer(division126_2_3[0])
+
+        self.companies_list_url = reverse('api:companies-list')
+        self.centers_list_url = reverse('api:centers-list')
+        self.divisions_list_url = reverse('api:divisions-list')
+
+        self.company_detail_url = reverse('api:company-detail', kwargs={'pk': npol[0].pk})
+        self.center_detail_url = reverse('api:center-detail', kwargs={'pk': center126[0].pk})
+        self.division_detail_url = reverse('api:division-detail', kwargs={'pk': division126_2_3[0].pk})
 
     def test_companies_list(self):
-        response = self.client.get(self.company_url)
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.companies_list_url)
         self.assertContains(response, 'НПОЛ')
         self.assertContains(response, 'НИЦ Планета')
         self.assertEqual(response.data["count"], 2)
 
+    def test_company_detail(self):
+        response = self.client.get(self.company_detail_url)
+        data = json.loads(response.content.decode())
+        data["logo"] = "/media/logos/no-logo.png"
+        self.assertEquals(data, self.serialized_company.data)
+
     def test_centers_list(self):
-        response = self.client.get(self.center_url)
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.centers_list_url)
         self.assertContains(response, 126)
         self.assertContains(response, 128)
         self.assertEqual(response.data["count"], 2)
 
+    def test_center_detail(self):
+        response = self.client.get(self.center_detail_url)
+        data = json.loads(response.content.decode())
+        self.assertEquals(data, self.serialized_center.data)
+
     def test_divisions_list(self):
-        response = self.client.get(self.division_url)
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.divisions_list_url)
         self.assertContains(response, "126-2-1")
         self.assertContains(response, "126-2-2")
         self.assertContains(response, "126-2-3")
         self.assertEqual(response.data["count"], 3)
+
+    def test_division_detail(self):
+        response = self.client.get(self.division_detail_url)
+        data = json.loads(response.content.decode())
+        self.assertEquals(data, self.serialized_division.data)
