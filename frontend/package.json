@@ -1,8 +1,8 @@
 {
   "version": "0.0.0",
   "private": true,
-  "name": "angular-material-datepicker",
-  "description": "Simple datepicker based on angular material framework",
+  "name": "phonebook",
+  "description": "Simple phonebook",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",

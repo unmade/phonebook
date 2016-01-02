@@ -1,40 +1,29 @@
 function getEmployeeDetail() {
     return {
-        "id": 11,
-        "firstname": "Александр",
-        "patronymic": "Викторович",
-        "surname": "Рождественский",
-        "position": "И.о. ректора",
+        "id": 15,
+        "firstname": "Владимир",
+        "patronymic": "Данилович",
+        "surname": "Проненко",
+        "position": "Доцент, к.т.н.",
         "company": {
+            "id": 6,
             "name": "НИУ \"МАИ\"",
-            "url": "/api/companies/6"
+            "logo": "http://localhost:8000/media/logos/no-logo.png"
         },
-        "center": null,
-        "division": null,
-        "phones": [
-            {
-                "id": 18,
-                "category": "Городской",
-                "number": "84991581343",
-                "comment": ""
-            },
-            {
-                "id": 19,
-                "category": "Городской",
-                "number": "84991581373",
-                "comment": ""
-            }
-        ],
-        "emails": [
-            {
-                "id": 6,
-                "category": "Электронная почта",
-                "email": "mai@mai.ru",
-                "comment": ""
-            }
-        ],
+        "center": {
+            "id": 6,
+            "number": "3",
+            "name": "Системы управления, информатика и электроэнергетика"
+        },
+        "division": {
+            "id": 5,
+            "number": "308",
+            "name": "Информационные технологии"
+        },
+        "phones": [],
+        "emails": [],
         "birthday": null,
-        "place": "238 ГАК",
+        "place": "",
         "comment": "",
         "boss": null
     }

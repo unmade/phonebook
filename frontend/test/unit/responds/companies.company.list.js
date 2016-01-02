@@ -9,22 +9,22 @@ function getCompanyList() {
                 "ceo": "Рождественский Александр Викторович",
                 "phones": [
                     {
-                        "id": 12,
-                        "category": "Факс",
-                        "number": "84991582977",
-                        "comment": ""
-                    },
-                    {
-                        "id": 13,
-                        "category": "Городской",
-                        "number": "84991584333",
-                        "comment": "Справочная"
-                    },
-                    {
                         "id": 14,
                         "category": "Городской",
                         "number": "158-58-70",
                         "comment": "Справочная"
+                    },
+                    {
+                        "id": 17,
+                        "category": "Городской",
+                        "number": "84991582571",
+                        "comment": "Отдел кадров"
+                    },
+                    {
+                        "id": 12,
+                        "category": "Факс",
+                        "number": "84991582977",
+                        "comment": ""
                     },
                     {
                         "id": 15,
@@ -33,16 +33,16 @@ function getCompanyList() {
                         "comment": "Приемная комиссия"
                     },
                     {
+                        "id": 13,
+                        "category": "Городской",
+                        "number": "84991584333",
+                        "comment": "Справочная"
+                    },
+                    {
                         "id": 16,
                         "category": "Городской",
                         "number": "84991589209",
                         "comment": "Общий отдел"
-                    },
-                    {
-                        "id": 17,
-                        "category": "Городской",
-                        "number": "84991582571",
-                        "comment": "Отдел кадров"
                     }
                 ],
                 "emails": [
@@ -63,18 +63,18 @@ function getCompanyList() {
             },
             {
                 "id": 7,
-                "ceo": null,
+                "ceo": "Садовничий Виктор Антонович",
                 "phones": [
-                    {
-                        "id": 27,
-                        "category": "Городской",
-                        "number": "84959391000",
-                        "comment": ""
-                    },
                     {
                         "id": 28,
                         "category": "Факс",
                         "number": "84959390126",
+                        "comment": ""
+                    },
+                    {
+                        "id": 27,
+                        "category": "Городской",
+                        "number": "84959391000",
                         "comment": ""
                     }
                 ],

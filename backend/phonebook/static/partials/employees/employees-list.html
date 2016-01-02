@@ -8,24 +8,25 @@
                 <span>Телефонный справочник</span>
             </h2>
 
-            <md-autocomplete flex="50"
-                             md-selected-item="ctrl.selectedItem"
-                             md-search-text="ctrl.searchText"
-                             md-items="item in ctrl.querySearch(ctrl.searchText)"
-                             md-item-text="ctrl.getEmployeeName(item)"
-                             md-min-length="0"
-                             placeholder="Поиск сотрудников"
-                             class="white-placeholder">
-                <md-item-template>
-                    <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
-                        {{ ctrl.getEmployeeName(item) }}
-                    </span>
-                </md-item-template>
-                <md-not-found>
-                    Сотрудник "{{ ctrl.searchText }}" не найден.
-                </md-not-found>
-            </md-autocomplete>
-
+            <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
+                <md-autocomplete md-selected-item="ctrl.selectedItem"
+                                 md-search-text="ctrl.searchText"
+                                 md-items="item in ctrl.employeeSearch(ctrl.searchText)"
+                                 md-item-text="ctrl.getEmployeeName(item)"
+                                 md-min-length="0"
+                                 md-delay="200"
+                                 placeholder="Поиск сотрудников"
+                                 class="white-placeholder">
+                    <md-item-template>
+                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
+                            {{ ctrl.getEmployeeName(item) }}
+                        </span>
+                    </md-item-template>
+                    <md-not-found>
+                        Сотрудник "{{ ctrl.searchText }}" не найден.
+                    </md-not-found>
+                </md-autocomplete>
+            </form>
             <span flex></span>
             <md-button class="md-icon-button" aria-label="More">
                 <md-icon>apps</md-icon>
@@ -74,7 +75,7 @@
 <section layout layout-align="center start">
     <md-content flex="66" class="employees-list md-whiteframe-2dp">
         <div class="employees-list_header">
-            <div layout="row">
+            <div layout="row" layout-align="center center">
                 <h3>Сотрудники</h3>
                 <span flex></span>
                 <md-button class="md-icon-button" aria-label="Settings">
@@ -90,6 +91,9 @@
             <div ng-repeat="employee in ctrl.employees.results">
                 <employees-list-item employee="employee"></employees-list-item>
                 <md-divider ng-if="!$last"></md-divider>
+            </div>
+            <div ng-show="!ctrl.employees.busy && !ctrl.employees.results.length" class="not-found">
+                <h3>По заданным критериям поиска сотрудников не найдено!</h3>
             </div>
         </div>
     </md-content>

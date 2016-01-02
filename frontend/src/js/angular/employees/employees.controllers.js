@@ -2,7 +2,8 @@
     'use strict';
     angular
         .module('pbApp.employees.controllers')
-        .controller('EmployeesListCtrl', ['$scope', '$q', 'Employee', 'EmployeeScroll', 'Company', 'Center', 'Division', EmployeesListCtrl]);
+        .controller('EmployeesListCtrl', ['$scope', '$q', 'Employee', 'EmployeeScroll',
+                                          'Company', 'Center', 'Division', EmployeesListCtrl]);
 
     function EmployeesListCtrl($scope, $q, Employee, EmployeeScroll, Company, Center, Division) {
         var self = this;
@@ -15,23 +16,41 @@
         self.selectedCenter = null;
         self.selectedDivision = null;
 
-        self.querySearch = querySearch;
+        self.employeeSearch = employeeSearch;
         self.getEmployeeName = getEmployeeName;
         self.loadCompanies = loadCompanies;
         self.loadCenters = loadCenters;
         self.loadDivisions = loadDivisions;
+        self.search = search;
 
         self.companyChanged = companyChanged;
         self.centerChanged = centerChanged;
         self.divisionChanged = divisionChanged;
 
-        function querySearch(query) {
+        self.openMenu = openMenu;
+
+        function openMenu($mdOpenMenu, ev) {
+          originatorEv = ev;
+          $mdOpenMenu(ev);
+        };
+
+        function employeeSearch(query) {
+            var limit = 4;
+            if (!query) return self.employees.results.slice(0, limit);
             var deferred = $q.defer();
-            Employee.query({search: query, limit: 10, offset: 0}, function(results, status) {
+            Employee.query({search: query, limit: limit, offset: 0}, function(results, status) {
                 deferred.resolve(results.results)
             });
 
             return deferred.promise
+        }
+
+        function search(query) {
+            self.selectedCompany = null;
+            self.selectedCenter = null;
+            self.selectedDivision = null;
+            self.employees = new EmployeeScroll({search: query});
+            self.employees.nextPage();
         }
 
         function loadCompanies() {
@@ -59,24 +78,35 @@
         function companyChanged() {
             self.selectedCenter = null;
             self.selectedDivision = null;
-            self.employees = new EmployeeScroll({company: self.selectedCompany});
+            self.employees = new EmployeeScroll({
+                company: self.selectedCompany,
+                search: self.searchText || null
+            });
             self.employees.nextPage();
         }
 
         function centerChanged() {
             self.selectedDivision = null;
-            self.employees = new EmployeeScroll({center: self.selectedCenter});
+            self.employees = new EmployeeScroll({
+                company: self.selectedCompany,
+                center: self.selectedCenter,
+                search: self.searchText || null
+            });
             self.employees.nextPage();
         }
 
         function divisionChanged() {
-            self.employees = new EmployeeScroll({division: self.selectedDivision});
+            self.employees = new EmployeeScroll({
+                company: self.selectedCompany,
+                center: self.selectedCenter,
+                division: self.selectedDivision,
+                search: self.searchText || null
+            });
             self.employees.nextPage();
         }
 
         function getEmployeeName(employee) {
             return employee.surname + ' ' + employee.firstname + ' ' + employee.patronymic;
         }
-
     }
 })();

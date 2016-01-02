@@ -3,13 +3,25 @@
         <h4>{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
         <p>{{ employee.position }}</p>
     </div>
-    <div layout="column" flex>
-        {{ employee.phones[0].number }}
+    <div flex>
+        <md-tooltip md-direction="left" ng-show="employee.phones.length > 1">
+            Eще {{ employee.phones.length }}
+        </md-tooltip>
+        {{ employee.phones[0].number | formatPhone }}
+        <md-icon ng-show="employee.phones.length > 1">expand_more</md-icon>
     </div>
-    <div layout="column" flex>
+    <div flex>
+        <md-tooltip md-direction="left" ng-show="employee.emails.length">
+            Eще {{ employee.emails.length }}
+        </md-tooltip>
         {{ employee.emails[0].email }}
+        <md-icon ng-show="employee.emails.length">expand_more</md-icon>
     </div>
-    <div layout="column" flex>
-        <p>{{ employee.company.name }}</p>
+    <div flex>
+        <p>{{ employee.company }}</p>
+        <div layout="row">
+        <p>{{ employee.center }}</p>
+        <p ng-show="employee.division">&nbsp/ {{ employee.division }}</p>
+        </div>
     </div>
 </div>

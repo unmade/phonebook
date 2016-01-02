@@ -31,6 +31,7 @@ var pathToSrc = 'src/',
             pathToSrc + 'js/angular/app.js',
             pathToSrc + 'js/angular/app.config.js',
             pathToSrc + 'js/angular/app.routes.js',
+            pathToSrc + 'js/angular/app.filters.js',
 
             pathToSrc + 'js/angular/employees/employees.module.js',
             pathToSrc + 'js/angular/employees/employees.controllers.js',
@@ -92,7 +93,7 @@ gulp.task('app-scripts', ['templates'], function() {
 
 gulp.task('watch', function() {
   gulp.watch(paths.partials, ['copy-partials']);
-  gulp.watch(paths.templates, ['copy-partials']);
+  gulp.watch(paths.templates, ['copy-to-static']);
   gulp.watch(paths.appScripts, ['copy-to-static']);
   gulp.watch(paths.appStyles, ['copy-to-static']);
 });

@@ -1,13 +1,16 @@
-angular
-    .module('pbApp', [
-        'ngRoute',
-        'ngResource',
-        'ngMaterial',
-        'infinite-scroll',
-        'pbApp.routes',
-        'pbApp.employees',
-        'pbApp.companies'
-    ]);
+(function() {
 
-// angular.module('pbApp.config', []);
-angular.module('pbApp.routes', []);
+    'use strict';
+    angular
+        .module('pbApp', [
+            'ngRoute',
+            'ngResource',
+            'ngMaterial',
+            'infinite-scroll',
+            'pbApp.routes',
+            'pbApp.employees',
+            'pbApp.companies'
+        ]);
+
+    angular.module('pbApp.routes', []);
+})();

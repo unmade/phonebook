@@ -1,12 +1,13 @@
 (function() {
     'use strict';
+    
     angular
         .module('pbApp.employees.services')
         .factory('Employee', ['$resource', Employee])
         .factory('EmployeeScroll', ['Employee', EmployeeScroll]);
 
     function Employee($resource) {
-        return $resource('api/employees/:id', {}, {
+        return $resource('api/employees/employee/:id', {}, {
             query: {method: 'GET', isArray: false}
         })
     };
@@ -16,8 +17,6 @@
         this.results = [];
         this.after = undefined;
         this.params = angular.copy(params) || {};
-        this.params.limit = 20;
-        this.params.offset = 0;
         this.busy = false;
       };
 

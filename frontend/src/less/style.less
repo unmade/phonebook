@@ -4,6 +4,7 @@
 @transparent-white: rgba(255, 255, 255, 0.25);
 @text-gray: rgba(0, 0, 0, 0.87);
 @pale-gray: gray;
+@red: rgb(255, 82, 82);
 
 
 html, body {
@@ -105,6 +106,7 @@ html, body {
     margin-top: -49px;
     margin-bottom: 20px;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .employees-list_header h3 {
@@ -113,12 +115,34 @@ html, body {
 
 
 .employees-list-item {
+    min-height: 62px;
+    &:hover {
+        background-color: rgb(250, 250, 250);
+    }
+
+    p {
+        margin: 0;
+    }
+
     div:first-of-type {
-        h4, p {
+        h4 {
             margin: 0;
         }
+
         p {
             color: @pale-gray;
         }
     }
+
+    md-icon {
+        font-size: 13px;
+        height: 13px;
+        width: 13px;
+    }
+}
+
+.not-found {
+    background-color: @red;
+    color: white;
+    padding-left: 8px;
 }
