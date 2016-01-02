@@ -13,14 +13,6 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
 
 
-class CompanyURLSerializer(serializers.ModelSerializer):
-    url = serializers.ReadOnlyField(source='get_absolute_api_url')
-
-    class Meta:
-        model = Company
-        fields = ('name', 'url')
-
-
 class CenterSerializer(serializers.ModelSerializer):
     head = serializers.StringRelatedField()
     phones = PhoneSerializer(many=True)
@@ -28,14 +20,6 @@ class CenterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Center
-
-
-class CenterURLSerializer(serializers.ModelSerializer):
-    url = serializers.ReadOnlyField(source='get_absolute_api_url')
-
-    class Meta:
-        model = Center
-        fields = ('number', 'name', 'url')
 
 
 class DivisionSerializer(serializers.ModelSerializer):
@@ -47,9 +31,19 @@ class DivisionSerializer(serializers.ModelSerializer):
         model = Division
 
 
-class DivisionURLSerializer(serializers.ModelSerializer):
-    url = serializers.ReadOnlyField(source='get_absolute_api_url')
+class CompanyShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ('id', 'name', 'logo')
 
+
+class CenterShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Center
+        fields = ('id', 'number', 'name')
+
+
+class DivisionShortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Division
-        fields = ('number', 'name', 'url')
+        fields = ('id', 'number', 'name')

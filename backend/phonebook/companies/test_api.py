@@ -55,9 +55,9 @@ class CompaniesTests(TestCase):
         self.serialized_center = CenterSerializer(center126[0])
         self.serialized_division = DivisionSerializer(division126_2_3[0])
 
-        self.companies_list_url = reverse('api:companies-list')
-        self.centers_list_url = reverse('api:centers-list')
-        self.divisions_list_url = reverse('api:divisions-list')
+        self.companies_list_url = reverse('api:company-list')
+        self.centers_list_url = reverse('api:center-list')
+        self.divisions_list_url = reverse('api:division-list')
 
         self.company_detail_url = reverse('api:company-detail', kwargs={'pk': npol[0].pk})
         self.center_detail_url = reverse('api:center-detail', kwargs={'pk': center126[0].pk})

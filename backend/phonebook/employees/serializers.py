@@ -1,19 +1,18 @@
 from rest_framework import serializers
 
 from contacts.serializers import PhoneSerializer, EmailSerializer
-from companies.serializers import CompanyURLSerializer, CenterURLSerializer, DivisionURLSerializer
-
+from companies.serializers import CompanyShortSerializer, CenterShortSerializer, DivisionShortSerializer
 from .models import Employee
 
 
-class EmployeeSerializer(serializers.ModelSerializer):
+class EmployeeDetailSerializer(serializers.ModelSerializer):
     firstname = serializers.StringRelatedField()
     patronymic = serializers.StringRelatedField()
     surname = serializers.StringRelatedField()
     position = serializers.StringRelatedField()
-    company = CompanyURLSerializer()
-    center = CenterURLSerializer()
-    division = DivisionURLSerializer()
+    company = CompanyShortSerializer()
+    center = CenterShortSerializer()
+    division = DivisionShortSerializer()
     phones = PhoneSerializer(many=True)
     emails = EmailSerializer(many=True)
 
@@ -21,12 +20,18 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = Employee
 
 
-class EmployeeURLSerializer(serializers.ModelSerializer):
+class EmployeeListSerializer(serializers.ModelSerializer):
     firstname = serializers.StringRelatedField()
     patronymic = serializers.StringRelatedField()
     surname = serializers.StringRelatedField()
-    url = serializers.ReadOnlyField(source='get_absolute_api_url')
+    position = serializers.StringRelatedField()
+    company = serializers.StringRelatedField()
+    center = serializers.SlugRelatedField(slug_field='number', read_only=True)
+    division = serializers.SlugRelatedField(slug_field='number', read_only=True)
+    phones = PhoneSerializer(many=True)
+    emails = EmailSerializer(many=True)
 
     class Meta:
         model = Employee
-        fields = ('firstname', 'patronymic', 'surname', 'url')
+        fields = ('id', 'firstname', 'patronymic', 'surname', 'position',
+                  'company', 'center', 'division', 'phones', 'emails')
