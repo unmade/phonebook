@@ -29,5 +29,5 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('surname', 'firstname', 'company', 'center', 'division')
     list_filter = ('company', 'center', 'division')
     list_select_related = ('surname', 'firstname', 'company', 'center', 'division')
-    search_fields = ('surname', 'firstname')
+    search_fields = ('surname__name', 'firstname__name')
     ordering = ('surname', 'firstname')

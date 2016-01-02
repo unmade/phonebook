@@ -17,11 +17,13 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
 import django.views.defaults
+from django.views import generic
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^api/', include('core.api', namespace='api'))
+    url(r'^api/', include('core.api', namespace='api')),
+    url(r'^$', generic.TemplateView.as_view(template_name='index.html'))
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html ng-app="pbApp" ng-cloak>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Телефонный справочник</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,500italic,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/dependencies.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div ng-view></div>
+
+    <script type="application/javascript" src="{% static 'js/dependencies.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/pb-app.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/pb-app.tmpl.js' %}"></script>
+
+</body>
+</html>

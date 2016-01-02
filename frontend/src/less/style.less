@@ -1,0 +1,124 @@
+@background-gray: #e5e5e5;
+@blue: #4688f1;
+@pale-white: rgba(255, 255, 255, 0.87);
+@transparent-white: rgba(255, 255, 255, 0.25);
+@text-gray: rgba(0, 0, 0, 0.87);
+@pale-gray: gray;
+
+
+html, body {
+    font: normal 13px Roboto, arial, sans-serif;
+    background-color: @background-gray;
+}
+
+.employee-header {
+    background-color: @blue;
+    padding-bottom: 50px;
+
+    .md-tall {
+        background-color: transparent;
+    }
+
+    md-select {
+        font-size: 13px;
+
+        span, .md-select-value {
+            color: @pale-white;
+        }
+
+        &:not([disabled]):focus {
+            .md-select-value {
+                color: white;
+            }
+        }
+    }
+
+    md-autocomplete {
+        background-color: @transparent-white;
+
+        md-icon {
+            svg {
+                path {
+                    fill: #fff;
+                }
+            }
+        }
+        input {
+            color: white;
+        }
+
+        &:not([disabled]):focus {
+            background-color: white;
+        }
+
+        .md-menu-showing {
+            background-color: white;
+
+            input {
+                color: @text-gray;
+            }
+
+            md-icon {
+                svg {
+                    path {
+                        fill: @pale-gray;
+                    }
+                }
+            }
+
+            ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+                color:    @pale-gray;
+            }
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+               color:    @pale-gray;
+               opacity:  1;
+            }
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+               color:    @pale-gray;
+               opacity:  1;
+            }
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+               color:    @pale-gray;
+            }
+        }
+    }
+}
+
+.white-placeholder {
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color:    #fff;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color:    #fff;
+       opacity:  1;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color:    #fff;
+       opacity:  1;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color:    #fff;
+    }
+}
+
+.employees-list {
+    margin-top: -49px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+.employees-list_header h3 {
+    padding-left: 8px;
+}
+
+
+.employees-list-item {
+    div:first-of-type {
+        h4, p {
+            margin: 0;
+        }
+        p {
+            color: @pale-gray;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<div layout="row" layout-padding layout-align="start center" class="employees-list-item">
+    <div flex="30">
+        <h4>{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
+        <p>{{ employee.position }}</p>
+    </div>
+    <div layout="column" flex>
+        {{ employee.phones[0].number }}
+    </div>
+    <div layout="column" flex>
+        {{ employee.emails[0].email }}
+    </div>
+    <div layout="column" flex>
+        <p>{{ employee.company.name }}</p>
+    </div>
+</div>
