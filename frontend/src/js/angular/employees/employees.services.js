@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    
+
     angular
         .module('pbApp.employees.services')
         .factory('Employee', ['$resource', Employee])
@@ -17,6 +17,8 @@
         this.results = [];
         this.after = undefined;
         this.params = angular.copy(params) || {};
+        this.params.offset = 0;
+        this.params.limit = 20;
         this.busy = false;
       };
 

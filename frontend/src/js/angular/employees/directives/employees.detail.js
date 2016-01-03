@@ -8,7 +8,7 @@
     function EmployeeDetail() {
         return {
             restrict: 'AE',
-            templateUrl: 'employees/templates/employee-detail.html',
+            templateUrl: 'employees/directives/templates/employee-detail.html',
             scope: {
                 employee: "=employee"
             }

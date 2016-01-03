@@ -1,27 +1,40 @@
 <div layout="row" layout-padding layout-align="start center" class="employees-list-item">
-    <div flex="30">
-        <h4>{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
-        <p>{{ employee.position }}</p>
+    <div flex="33">
+        <h4 class="md-subhead">{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
+        <p class="md-caption pb-text-muted">{{ employee.position }}</p>
     </div>
-    <div flex>
-        <md-tooltip md-direction="left" ng-show="employee.phones.length > 1">
-            Eще {{ employee.phones.length }}
+    <div layout="row" class="employee-list-item_contacts" flex="40">
+        <md-list flex>
+            <md-list-item ng-repeat="phone in employee.phones" ng-show="$even">
+                <md-tooltip md-direction="left">{{ phone.category }}</md-tooltip>
+                <p>{{ phone.number | formatPhone }}</p>
+            </md-list-item>
+        </md-list>
+        <md-list flex>
+            <md-list-item ng-repeat="phone in employee.phones" ng-show="$odd">
+                <md-tooltip md-direction="left">{{ phone.category }}</md-tooltip>
+                <p>{{ phone.number | formatPhone }}</p>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div class="employee-list-item_contacts">
+        <md-list>
+            <md-list-item ng-repeat="email in employee.emails">
+                <md-tooltip md-direction="left">{{ email.category }}</md-tooltip>
+                <p>{{ email.email }}</p>
+            </md-list-item>
+        </md-list>
+    </div>
+    <span flex></span>
+    <div class="employee-list-item_company" ng-show="employee.company">
+        <md-tooltip>
+            {{ employee.company.name }}
         </md-tooltip>
-        {{ employee.phones[0].number | formatPhone }}
-        <md-icon ng-show="employee.phones.length > 1">expand_more</md-icon>
-    </div>
-    <div flex>
-        <md-tooltip md-direction="left" ng-show="employee.emails.length">
-            Eще {{ employee.emails.length }}
-        </md-tooltip>
-        {{ employee.emails[0].email }}
-        <md-icon ng-show="employee.emails.length">expand_more</md-icon>
-    </div>
-    <div flex>
-        <p>{{ employee.company }}</p>
-        <div layout="row">
-        <p>{{ employee.center }}</p>
-        <p ng-show="employee.division">&nbsp/ {{ employee.division }}</p>
-        </div>
+        <img ng-src="{{ employee.company.logo }}" alt="{{ employee.company.name }}" />
+        <p class="pb-text-muted">
+            {{ employee.center.number }}
+            <md-icon ng-show="employee.division">chevron_right</md-icon>
+            {{ employee.division.number }}
+        </p>
     </div>
 </div>

@@ -1,0 +1,54 @@
+<div layout="row" class="md-dialog-content employee-detail">
+    <div layout="column" layout-align="center center" class="employee-detail_name" layout-padding>
+        <md-icon>account_circle</md-icon>
+        <h3 class="md-headline">{{ employee.surname }}</h3>
+        <p class="md-title">{{ employee.firstname }} {{ employee.patronymic }}</p>
+        <span class="md-caption">{{ employee.birthday | date:'dd.MM.yyyy' }}</span>
+    </div>
+    <div layout="column" layout-padding layout-margin class="employee-detail_info">
+        <div class="md-whiteframe-2dp" ng-if="employee.phones.length || employee.emails.length">
+            <div class="employee-detail_contacts">
+                <h2 class="md-title">Контактные данные</h2>
+                <md-list>
+                    <md-list-item class="md-1-line" ng-repeat="phone in employee.phones">
+                        <md-icon ng-if="$first">phone</md-icon>
+                        <p ng-class="{'pb-offset': !$first}">{{ phone.number | formatPhone }}</p>
+                        <p class="md-secondary pb-text-muted">{{ phone.category }}</p>
+                    </md-list-item>
+                    <md-list-item class="md-1-line" ng-repeat="email in employee.emails">
+                        <md-icon ng-if="$first">email</md-icon>
+                        <p ng-class="{'pb-offset': !$first}">{{ email.email }}</p>
+                        <p class="md-secondary pb-text-muted">{{ email.category }} </p>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+
+        <div class="md-whiteframe-2dp" ng-if="employee.company">
+            <h2 class="md-title">Место работы</h2>
+            <md-list ng-if="employee.company">
+                <md-list-item class="md-2-line">
+                    <md-icon>work</md-icon>
+                    <div class="md-list-item-text">
+                        <h4>{{ employee.position }}</h4>
+                        <p>
+                            {{ employee.company.name }}
+                            <md-icon ng-show="employee.center.name">chevron_right</md-icon>
+
+                            {{ employee.center.number }}
+                            <span ng-show="employee.center.number && employee.center.name">&nbsp-&nbsp</span>
+                            {{ employee.center.name }}
+
+                            <md-icon ng-show="employee.division.name">chevron_right</md-icon>
+
+                            {{ employee.division.number }}
+                            <span ng-show="employee.division.number && employee.division.name">&nbsp-&nbsp</span>
+                            {{ employee.division.name }}
+                            &nbsp
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+</div>

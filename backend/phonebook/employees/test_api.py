@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from .models import FirstName, Patronymic, Surname, Employee
-from .serializers import EmployeeDetailSerializer
+from .serializers import EmployeeSerializer
 
 
 class EmployeeTests(TestCase):
@@ -23,7 +23,7 @@ class EmployeeTests(TestCase):
             patronymic = patronymic[0],
             surname = surname[0]
         )
-        self.serialized_employee = EmployeeDetailSerializer(employee1[0])
+        self.serialized_employee = EmployeeSerializer(employee1[0])
 
         self.list_url = reverse('api:employee-list')
         self.detail_url = reverse('api:employee-detail', kwargs={'pk': employee1[0].pk})

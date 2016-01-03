@@ -2,10 +2,10 @@
     'use strict';
     angular
         .module('pbApp.employees.controllers')
-        .controller('EmployeesListCtrl', ['$scope', '$q', 'Employee', 'EmployeeScroll',
+        .controller('EmployeesListCtrl', ['$scope', '$q', '$mdDialog', 'Employee', 'EmployeeScroll',
                                           'Company', 'Center', 'Division', EmployeesListCtrl]);
 
-    function EmployeesListCtrl($scope, $q, Employee, EmployeeScroll, Company, Center, Division) {
+    function EmployeesListCtrl($scope, $q, $mdDialog, Employee, EmployeeScroll, Company, Center, Division) {
         var self = this;
 
         self.employees = new EmployeeScroll();
@@ -27,12 +27,32 @@
         self.centerChanged = centerChanged;
         self.divisionChanged = divisionChanged;
 
-        self.openMenu = openMenu;
+        self.showEmployeeDetail = showEmployeeDetail;
 
-        function openMenu($mdOpenMenu, ev) {
-          originatorEv = ev;
-          $mdOpenMenu(ev);
-        };
+        function showEmployeeDetail(ev, employee) {
+            $mdDialog.show({
+                controller: ['$scope' , 'employee', EmployeeDetailDialogCtrl],
+                templateUrl: 'employee-detail.dialog.tmpl.html',
+                parent: angular.element(document.body),
+                locals: {employee: employee},
+                targetEvent: ev,
+                clickOutsideToClose:true
+            });
+
+            function EmployeeDetailDialogCtrl($scope, employee) {
+                $scope.employee = employee;
+                
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                }
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                }
+                $scope.answer = function(answer) {
+                    $mdDialog.hide(answer);
+                }
+            }
+        }
 
         function employeeSearch(query) {
             var limit = 4;

@@ -13,8 +13,9 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
 from django.conf import settings
+from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 import django.views.defaults
 from django.views import generic
@@ -25,6 +26,8 @@ urlpatterns = [
     url(r'^api/', include('core.api', namespace='api')),
     url(r'^$', generic.TemplateView.as_view(template_name='index.html'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
