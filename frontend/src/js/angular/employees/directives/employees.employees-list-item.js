@@ -1,14 +1,14 @@
 (function() {
     'use strict';
-    
+
     angular
         .module('pbApp.employees.directives')
-        .directive('employeesListItem', EmployeesListItem);
+        .directive('employeeListItem', EmployeeListItem);
 
-    function EmployeesListItem() {
+    function EmployeeListItem() {
         return {
             restrict: 'AE',
-            templateUrl: 'employees/directives/templates/employees-list-item.html',
+            templateUrl: 'employees/directives/templates/employee-list-item.html',
             scope: {
                 'employee': '=employee'
             }

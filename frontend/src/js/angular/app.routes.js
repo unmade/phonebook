@@ -6,8 +6,8 @@
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider.
                 when('/employees', {
-                    templateUrl: '/static/partials/employees/employees-list.html',
-                    controller: 'EmployeesListCtrl',
+                    templateUrl: '/static/partials/employees/employee-list.html',
+                    controller: 'EmployeeListCtrl',
                     controllerAs: 'ctrl'
                 })
                 .otherwise({

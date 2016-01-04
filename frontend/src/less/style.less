@@ -1,18 +1,9 @@
-@background-gray: #e5e5e5;
-@blue: #4688f1;
-@pale-white: rgba(255, 255, 255, 0.87);
-@transparent-white: rgba(255, 255, 255, 0.25);
-@text-gray: rgba(0, 0, 0, 0.87);
-@pale-gray: gray;
-@red: rgb(255, 82, 82);
-
-
 html, body {
     font: normal 13px Roboto, arial, sans-serif;
-    background-color: @background-gray;
+    background-color: @pale-gray;
 }
 
-.employee-header {
+.pb-header {
     background-color: @blue;
     padding-bottom: 50px;
 
@@ -24,12 +15,12 @@ html, body {
         font-size: 13px;
 
         span, .md-select-value {
-            color: @pale-white;
+            color: @text-pale-white;
         }
 
         &:not([disabled]):focus {
             .md-select-value {
-                color: white;
+                color: @text-white;
             }
         }
     }
@@ -40,52 +31,52 @@ html, body {
         md-icon {
             svg {
                 path {
-                    fill: #fff;
+                    fill: @text-white;
                 }
             }
         }
         input {
-            color: white;
+            color: #fff;
         }
 
         &:not([disabled]):focus {
-            background-color: white;
+            background-color: #fff;
         }
 
         .md-menu-showing {
-            background-color: white;
+            background-color: #fff;
 
             input {
-                color: @text-gray;
+                color: @text-black;
             }
 
             md-icon {
                 svg {
                     path {
-                        fill: @pale-gray;
+                        fill: @text-gray;
                     }
                 }
             }
 
             ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-                color:    @pale-gray;
+                color:    @text-black;
             }
             :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-               color:    @pale-gray;
+               color:    @text-black;
                opacity:  1;
             }
             ::-moz-placeholder { /* Mozilla Firefox 19+ */
-               color:    @pale-gray;
+               color:    @text-black;
                opacity:  1;
             }
             :-ms-input-placeholder { /* Internet Explorer 10-11 */
-               color:    @pale-gray;
+               color:    @text-black;
             }
         }
     }
 }
 
-.white-placeholder {
+.pb-white-placeholder {
     ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
         color:    #fff;
     }
@@ -102,114 +93,13 @@ html, body {
     }
 }
 
-.employees-list {
-    margin-top: -49px;
-    margin-bottom: 20px;
-    border-radius: 3px;
-    cursor: pointer;
-}
 
-.employees-list_header h3 {
-    padding-left: 8px;
-}
-
-
-.employees-list-item {
-    min-height: 100px;
-    &:hover {
-        background-color: rgb(250, 250, 250);
-    }
-
-    p {
-        margin: 0;
-    }
-
-    div:first-of-type {
-        h4 {
-            margin: 0;
-        }
-    }
-
-    md-icon {
-        font-size: 13px;
-        height: 13px;
-        width: 13px;
-    }
-}
-
-.employee-list-item_contacts {
-    padding: 0;
-    md-list {
-        padding: 0;
-    }
-    md-list-item {
-        min-height: 20px;
-        height: 20px;
-    }
-}
-
-.employee-list-item_company {
-    text-align: right;
-    img {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-.employee-list_progress_circular {
-    margin: 0 auto;
-}
-
-.not-found {
+.pb-not-found {
     background-color: @red;
-    color: white;
+    color: #fff;
     padding-left: 8px;
 }
 
-.employee-detail {
-    background-color: rgb(250, 250, 250);
-}
-
-.employee-detail_name {
-    min-width: 260px;
-
-    h3, p {
-        margin: 0;
-    }
-
-    md-icon {
-        margin: 0;
-        padding: 0;
-        height: 112px;
-        width: 112px;
-        font-size: 112px;
-
-    }
-
-    span {
-        color: @text-gray;
-    }
-}
-
-.employee-detail_info {
-    min-width: 400px;
-
-    div {
-        background-color: white;
-    }
-}
-
-.employee-detail_contacts {
-    md-list-item {
-        min-height: 30px;
-        height: 30px;
-    }
-
-    .pb-offset {
-        padding-left: 56px;
-    }
-}
-
-.pb-text-muted {
-    color: gray;
+.pb-progress_circular {
+    margin: 0 auto;
 }

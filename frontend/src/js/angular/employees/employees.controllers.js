@@ -2,10 +2,10 @@
     'use strict';
     angular
         .module('pbApp.employees.controllers')
-        .controller('EmployeesListCtrl', ['$scope', '$q', '$mdDialog', 'Employee', 'EmployeeScroll',
-                                          'Company', 'Center', 'Division', EmployeesListCtrl]);
+        .controller('EmployeeListCtrl', ['$scope', '$q', '$mdDialog', 'Employee', 'EmployeeScroll',
+                                          'Company', 'Center', 'Division', EmployeeListCtrl]);
 
-    function EmployeesListCtrl($scope, $q, $mdDialog, Employee, EmployeeScroll, Company, Center, Division) {
+    function EmployeeListCtrl($scope, $q, $mdDialog, Employee, EmployeeScroll, Company, Center, Division) {
         var self = this;
 
         self.employees = new EmployeeScroll();
@@ -30,6 +30,7 @@
         self.showEmployeeDetail = showEmployeeDetail;
 
         function showEmployeeDetail(ev, employee) {
+            if (!employee) return;
             $mdDialog.show({
                 controller: ['$scope' , 'employee', EmployeeDetailDialogCtrl],
                 templateUrl: 'employee-detail.dialog.tmpl.html',
@@ -41,7 +42,7 @@
 
             function EmployeeDetailDialogCtrl($scope, employee) {
                 $scope.employee = employee;
-                
+
                 $scope.hide = function() {
                     $mdDialog.hide();
                 }

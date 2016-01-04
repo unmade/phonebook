@@ -9,6 +9,7 @@ var gulp = require('gulp'),
 var pathToSrc = 'src/',
     pathToBuild = 'build/',
     pathToStatic = '../backend/phonebook/static/',
+    pathToLess = pathToSrc + 'less/**/*.less'
     paths = {
         dependenciesCss: [
             'bower_components/angular-material/angular-material.min.css'
@@ -24,7 +25,7 @@ var pathToSrc = 'src/',
             'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js'
         ],
         appStyles: [
-            pathToSrc + 'less/*.less'
+            pathToSrc + 'less/main.less'
         ],
         appScripts: [
             pathToSrc + 'js/*.js',
@@ -65,6 +66,7 @@ gulp.task('app-less', function () {
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
+    .pipe(concat('pb-app.min.css'))
     .pipe(minifyCss())
     .pipe(gulp.dest('build/css'));
 });
@@ -95,7 +97,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.partials, ['copy-partials']);
   gulp.watch(paths.templates, ['copy-to-static']);
   gulp.watch(paths.appScripts, ['copy-to-static']);
-  gulp.watch(paths.appStyles, ['copy-to-static']);
+  gulp.watch(pathToLess, ['copy-to-static']);
 });
 
 

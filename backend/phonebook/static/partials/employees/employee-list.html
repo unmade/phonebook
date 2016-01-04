@@ -1,4 +1,4 @@
-<header class="employee-header md-whiteframe-2dp">
+<header class="pb-header md-whiteframe-2dp">
     <md-toolbar class="md-tall">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Settings">
@@ -17,7 +17,7 @@
                                  md-min-length="0"
                                  md-delay="200"
                                  placeholder="Поиск сотрудников"
-                                 class="white-placeholder">
+                                 class="pb-white-placeholder">
                     <md-item-template>
                         <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
                             {{ ctrl.getEmployeeName(item) }}
@@ -74,8 +74,8 @@
 
 
 <section layout layout-align="center start">
-    <md-content flex="66" class="employees-list md-whiteframe-2dp">
-        <div class="employees-list_header">
+    <md-content flex="66" class="employee-list md-whiteframe-2dp">
+        <div class="employee-list_header">
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Сотрудники</h3>
                 <span flex></span>
@@ -90,19 +90,19 @@
              infinite-scroll-distance='1'
              layout="column" >
             <div ng-repeat="employee in ctrl.employees.results">
-                <employees-list-item employee="employee"
+                <employee-list-item employee="employee"
                                      ng-click="ctrl.showEmployeeDetail($event, employee)">
-                </employees-list-item>
+                </employee-list-item>
                 <md-divider ng-if="!$last"></md-divider>
             </div>
-            <div ng-show="!ctrl.employees.busy && !ctrl.employees.results.length" class="not-found">
-                <h3>По заданным критериям поиска сотрудников не найдено!</h3>
+            <div ng-show="!ctrl.employees.busy && !ctrl.employees.results.length" class="pb-not-found">
+                <h3 class="md-title">По заданным критериям поиска сотрудников не найдено!</h3>
             </div>
         </div>
     </md-content>
 </section>
 
-<md-progress-circular class="md-accent md-hue-1 employee-list_progress_circular"
+<md-progress-circular class="md-accent md-hue-1 pb-progress_circular"
                       md-mode="indeterminate"
                       md-diameter="60"
                       ng-show="ctrl.employees.busy">
@@ -111,14 +111,6 @@
 
 <script type="text/ng-template" id="employee-detail.dialog.tmpl.html">
     <md-dialog aria-label="Employee Detail" style="max-width: 800px;">
-        <!-- <md-toolbar>
-          <div class="md-toolbar-tools">
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-              <md-icon aria-label="Close dialog">close</md-icon>
-            </md-button>
-          </div>
-        </md-toolbar> -->
         <md-dialog-content>
             <employee-detail employee="employee"></employee-detail>
         </md-dialog-content>

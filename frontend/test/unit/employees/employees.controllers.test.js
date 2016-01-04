@@ -21,10 +21,11 @@ describe('Employees controllers', function() {
     beforeEach(module('pbApp.employees.services'));
     beforeEach(module('pbApp.companies.services'));
 
-    describe('EmployeesListCtrl Test', function() {
+    describe('EmployeeListCtrl Test', function() {
         var scope, $httpBackend, ctrl,
             employeeRespond = {
-                employees: {results: getEmployeeList().results},
+                employees: {results: getEmployeeList().results.slice(0, 20)},
+                employeesNext: {results: getEmployeeList().results.slice(20, 40)},
                 filteredByCompany: {results: getEmployeeList().results.slice(0, 2)},
                 filteredByCompanyAndCenter: {results: getEmployeeList().results.slice(0, 3)},
                 filteredByCompanyAndCenterAndDivision: {results: getEmployeeList().results.slice(0, 4)},
@@ -41,6 +42,8 @@ describe('Employees controllers', function() {
             $httpBackend = _$httpBackend_;
             $httpBackend.whenGET('api/employees/employee?limit=20&offset=0')
                         .respond(employeeRespond.employees);
+            $httpBackend.whenGET('api/employees/employee?limit=20&offset=20')
+                        .respond(employeeRespond.employeesNext);
             $httpBackend.whenGET('api/employees/employee?company=1&limit=20&offset=0')
                         .respond(employeeRespond.filteredByCompany);
             $httpBackend.whenGET('api/employees/employee?center=1&company=1&limit=20&offset=0')
@@ -55,7 +58,7 @@ describe('Employees controllers', function() {
             $httpBackend.whenGET('api/companies/center?company=1').respond(companiesRespond.centerList);
             $httpBackend.whenGET('api/companies/division?center=1').respond(companiesRespond.divisionList);
             scope = $rootScope.$new();
-            ctrl = $controller('EmployeesListCtrl', {$scope: scope});
+            ctrl = $controller('EmployeeListCtrl', {$scope: scope});
         }));
 
         it('should fetch employees', function() {
@@ -66,8 +69,13 @@ describe('Employees controllers', function() {
                 busy: false
             });
             ctrl.employees.nextPage();
+            expect(ctrl.employees.busy).toBe(true);
             $httpBackend.flush();
             expect(ctrl.employees.results).toEqualData(employeeRespond.employees.results);
+            expect(ctrl.employees.params.limit).toEqual(20);
+            expect(ctrl.employees.params.offset).toEqual(20);
+            expect(ctrl.employees.next).toBe(undefined);
+            expect(ctrl.employees.busy).toBe(false);
         });
 
         it('should return results for autocomplete search query', function() {
