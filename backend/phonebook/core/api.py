@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from companies import views as companies_views
 from employees import views as employees_views
+from feedback import views as feedback_views
 
 
 urlpatterns = [
@@ -13,5 +14,8 @@ urlpatterns = [
     url(r'^companies/division/(?P<pk>\d+)$', companies_views.DivisionRetrieveAPIView.as_view(), name='division-detail'),
 
     url(r'^employees/employee/$', employees_views.EmployeeListAPIView.as_view(), name='employee-list'),
-    url(r'^employees/employee/(?P<pk>\d+)/$', employees_views.EmployeeRetrieveAPIView.as_view(), name='employee-detail')
+    url(r'^employees/employee/(?P<pk>\d+)/$', employees_views.EmployeeRetrieveAPIView.as_view(), name='employee-detail'),
+
+    url(r'^feedback/feedback/$', feedback_views.FeedbackListAPIView.as_view(), name='feedback-list'),
+    url(r'^feedback/feedback/add/$', feedback_views.FeedbackCreateAPIView.as_view(), name='feedback-add'),
 ]
