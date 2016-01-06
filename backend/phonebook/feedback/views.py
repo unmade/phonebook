@@ -7,9 +7,10 @@ from .models import Feedback
 from .serializers import FeedbackSerializer
 
 
-class FeedbackListAPIView(generics.ListAPIView):
+class FeedbackListAPIView(generics.ListCreateAPIView):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+    permission_classes = (AllowAny,)
 
 
 class FeedbackCreateAPIView(generics.CreateAPIView):

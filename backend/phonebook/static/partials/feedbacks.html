@@ -1,0 +1,69 @@
+<header class="pb-header md-whiteframe-2dp">
+    <md-toolbar class="md-tall">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings">
+                <md-icon>menu</md-icon>
+            </md-button>
+            <h2 flex>
+                <span>Телефонный справочник</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="More">
+                <md-icon>apps</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+</header>
+
+
+<section layout layout-align="center start">
+    <md-content flex="66" class="pb-main-list md-whiteframe-2dp">
+        <div class="pb-main-list_header">
+            <div layout="row" layout-align="center center">
+                <h3 class="md-body-1">Замечания и предложения</h3>
+                <span flex></span>
+            </div>
+            <md-divider></md-divider>
+        </div>
+        <div layout="column">
+            <md-list>
+                <md-list-item ng-repeat="feedback in ctrl.feedbacks.results"
+                              class="md-3-line">
+                    <div class="md-list-item-text md-long-text">
+                        <h4>{{ feedback.sender }}</h4>
+                        <p>{{ feedback.created_at | date:'dd.MM.yyyy' }}</p>
+                        <p class="pb-pre-wrap">{{ feedback.text }}</p>
+                    </div>
+                    <div class="md-secondary" flex>
+                        <p class="pb-label" ng-class="{'pb-label-primary': feedback.status == 'NW',
+                                                       'pb-label-success': feedback.status == 'SL',
+                                                       'pb-label-danger': feedback.status == 'RJ',
+                                                       'pb-label-warning': feedback.status == 'PR'}">
+                            {{ feedback.status | getStatusName }}
+                        </p>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+
+            <div ng-show="!ctrl.feedbacks.results.length" class="pb-not-found">
+                <h3 class="md-title">Нет текущих отзывов и предложений</h3>
+            </div>
+        </div>
+    </md-content>
+
+    <md-button class="md-fab md-accent pb-fab-bottom-right" aria-label="Add"
+               ng-click="ctrl.showNewFeedbackDialog($event)">
+        <md-icon>create</md-icon>
+        <md-tooltip>Новое сообщение</md-tooltip>
+    </md-button>
+
+</section>
+
+<script type="text/ng-template" id="new-feedback-dialog.tmpl.html">
+    <md-dialog aria-label="New Feedback" style="max-width: 800px;">
+        <md-dialog-content>
+            <new-feedback on-send="dialog.hide()"></new-feedback>
+        </md-dialog-content>
+    </md-dialog>
+</script>

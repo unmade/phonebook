@@ -28,22 +28,16 @@ var pathToSrc = 'src/',
             pathToSrc + 'less/main.less'
         ],
         appScripts: [
-            pathToSrc + 'js/*.js',
-            pathToSrc + 'js/angular/app.js',
-            pathToSrc + 'js/angular/app.config.js',
-            pathToSrc + 'js/angular/app.routes.js',
-            pathToSrc + 'js/angular/app.filters.js',
-
-            pathToSrc + 'js/angular/employees/employees.module.js',
-            pathToSrc + 'js/angular/employees/employees.controllers.js',
-            pathToSrc + 'js/angular/employees/employees.services.js',
-            pathToSrc + 'js/angular/employees/directives/*.js',
-            //
-            pathToSrc + 'js/angular/companies/companies.module.js',
-            pathToSrc + 'js/angular/companies/companies.services.js'
+            pathToSrc + 'js/angular/**/*.module.js',
+            pathToSrc + 'js/angular/**/*js',
+            pathToBuild + 'js/templates/*.js'
         ],
-        partials: [pathToSrc + 'js/angular/partials/**/*.html'],
-        templates: [pathToSrc + 'js/angular/**/templates/*.html']
+        partials: [
+            pathToSrc + 'js/angular/partials/**/*.html',
+            pathToSrc + 'js/angular/feedback/*.html'
+        ],
+        employeesTemplates: [pathToSrc + 'js/angular/employees/**/templates/*.directive.html'],
+        feedbackTemplates: [pathToSrc + 'js/angular/feedback/**/*.directive.html']
     };
 
 
@@ -78,14 +72,20 @@ gulp.task('copy-partials', function () {
 });
 
 
-gulp.task('templates', function () {
-  return gulp.src(paths.templates)
-    .pipe(templateCache('pb-app.tmpl.js', {module:'pbApp.employees.directives'}))
-    .pipe(gulp.dest('build/js'));
+gulp.task('employees-templates', function () {
+  return gulp.src(paths.employeesTemplates)
+    .pipe(templateCache('pb-app.employees.tmpl.js', {module:'pbApp.employees.directives'}))
+    .pipe(gulp.dest('build/js/templates'));
+});
+
+gulp.task('feedback-templates', function () {
+  return gulp.src(paths.feedbackTemplates)
+    .pipe(templateCache('pb-app.feedback.tmpl.js', {module:'pbApp.feedback'}))
+    .pipe(gulp.dest('build/js/templates'));
 });
 
 
-gulp.task('app-scripts', ['templates'], function() {
+gulp.task('app-scripts', ['employees-templates', 'feedback-templates'], function() {
   return gulp.src(paths.appScripts)
     .pipe(uglify())
     .pipe(concat('pb-app.min.js'))

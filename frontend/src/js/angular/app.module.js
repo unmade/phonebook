@@ -9,7 +9,8 @@
             'infinite-scroll',
             'pbApp.routes',
             'pbApp.employees',
-            'pbApp.companies'
+            'pbApp.companies',
+            'pbApp.feedback'
         ]);
 
     angular.module('pbApp.routes', []);

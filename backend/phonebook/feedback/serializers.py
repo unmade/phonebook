@@ -4,7 +4,6 @@ from .models import Feedback
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
-    sender = serializers.CharField()
 
     class Meta:
         model = Feedback
