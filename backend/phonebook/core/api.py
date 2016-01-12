@@ -17,5 +17,4 @@ urlpatterns = [
     url(r'^employees/employee/(?P<pk>\d+)/$', employees_views.EmployeeRetrieveAPIView.as_view(), name='employee-detail'),
 
     url(r'^feedback/feedback/$', feedback_views.FeedbackListAPIView.as_view(), name='feedback-list'),
-    url(r'^feedback/feedback/add/$', feedback_views.FeedbackCreateAPIView.as_view(), name='feedback-add'),
 ]

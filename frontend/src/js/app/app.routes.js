@@ -10,12 +10,12 @@
     function config($routeProvider) {
         $routeProvider.
             when('/employees', {
-                templateUrl: '/static/partials/employees/employee-list.html',
+                templateUrl: '/static/partials/employees/employees.html',
                 controller: 'EmployeeListCtrl',
                 controllerAs: 'ctrl'
             }).
             when('/feedback', {
-                templateUrl: '/static/partials/feedbacks.html',
+                templateUrl: '/static/partials/feedback/feedbacks.html',
                 controller: 'FeedbackListCtrl',
                 controllerAs: 'ctrl'
             }).

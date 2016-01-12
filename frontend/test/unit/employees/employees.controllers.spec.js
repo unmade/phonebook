@@ -17,9 +17,6 @@ describe('Employees controllers', function() {
     beforeEach(module('pbApp'));
     beforeEach(module('pbApp.companies'));
     beforeEach(module('pbApp.employees'));
-    beforeEach(module('pbApp.employees.controllers'));
-    beforeEach(module('pbApp.employees.services'));
-    beforeEach(module('pbApp.companies.services'));
 
     describe('EmployeeListCtrl Test', function() {
         var scope, $httpBackend, ctrl,

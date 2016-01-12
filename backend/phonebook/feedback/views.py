@@ -11,8 +11,3 @@ class FeedbackListAPIView(generics.ListCreateAPIView):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
     permission_classes = (AllowAny,)
-
-
-class FeedbackCreateAPIView(generics.CreateAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = FeedbackSerializer

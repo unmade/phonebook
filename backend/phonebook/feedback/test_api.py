@@ -14,7 +14,6 @@ class FeedbackTest(TestCase):
         Feedback.objects.get_or_create(sender='John Doe', text='Nice job, again!')
 
         self.list_url = reverse('api:feedback-list')
-        self.create_url = reverse('api:feedback-add')
 
     def test_list(self):
         response = self.client.get(self.list_url)
@@ -25,7 +24,7 @@ class FeedbackTest(TestCase):
 
     def test_create(self):
         feedback = {"sender": 'Nuwanda', "text":'Add DPS members, please!'}
-        response = self.client.post(self.create_url, feedback, format='json')
+        response = self.client.post(self.list_url, feedback, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Feedback.objects.count(), 4)
         self.assertEqual(Feedback.objects.get(pk=4).sender, 'Nuwanda')

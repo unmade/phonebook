@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('pbApp.employees.directives')
+        .module('pbApp.employees')
         .directive('employeeDetail', EmployeeDetail);
 
     function EmployeeDetail() {
         return {
             restrict: 'AE',
-            templateUrl: 'employees/directives/templates/employee-detail.html',
+            templateUrl: 'directives/employee-detail.directive.html',
             scope: {
                 employee: "=employee"
             }
