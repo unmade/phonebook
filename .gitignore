@@ -47,3 +47,5 @@ node_modules
 
 # Contacts
 media
+initial_data.json
+phonebook_db.sql
