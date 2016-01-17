@@ -54,13 +54,14 @@ MIDDLEWARE_CLASSES = (
 )
 
 THIRD_PARTY_APPS = (
+    'autocomplete_light',
     'rest_framework',
 )
 
 LOCAL_APPS = (
-    'core',
     'companies',
     'contacts',
+    'core',
     'employees',
     'feedback',
 )

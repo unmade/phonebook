@@ -23,6 +23,8 @@ from django.views import generic
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
+
     url(r'^api/', include('core.api', namespace='api')),
     url(r'^$', generic.TemplateView.as_view(template_name='index.html'))
 ]
