@@ -1,0 +1,48 @@
+<md-content layout="column">
+    <div>
+        <img ng-src="{{ ctrl.company.logo }}" />
+    </div>
+
+    <div>
+        <h3>
+            {{ ctrl.company.name }}
+            <md-tooltip md-position="bottom" ng-show="ctrl.company.full_name">
+                {{ ctrl.company.full_name }}
+            </md-tooltip>
+        </h3>
+        <p class="md-caption" ng-show="ctrl.company.ceo">Директор: {{ ctrl.company.ceo }}</p>
+    </div>
+
+    <div class="md-whiteframe-4dp">
+        <md-list>
+            <md-list-item class="md-1-line" ng-show="ctrl.company.address">
+                <md-icon>place</md-icon>
+                <p>{{ ctrl.company.address }}</p>
+            </md-list-item>
+            <md-list-item class="md-2-line"
+                          ng-repeat="phone in ctrl.company.phones">
+                <md-icon ng-if="$first">phone</md-icon>
+                <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
+                    <h3>{{ phone.number }}</h3>
+                    <p>{{ phone.category }}</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line"
+                          ng-repeat="email in ctrl.company.emails">
+                <md-icon ng-if="$first">email</md-icon>
+                <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
+                    <h3>{{ email.email }}</h3>
+                    <p>{{ email.category }}</p>
+                </div>
+            </md-list-item>
+
+            <md-divider ng-show="ctrl.company.comment"></md-divider>
+
+            <md-list-item class="md-1-line" ng-show="ctrl.company.comment">
+                <md-icon>info</md-icon>
+                <p>{{ ctrl.company.comment }}</p>
+            </md-list-item>
+        </md-list>
+
+    </div>
+</md-content>

@@ -41,15 +41,15 @@ describe('Employees controllers', function() {
                         .respond(employeeRespond.employees);
             $httpBackend.whenGET('api/employees/employee/?limit=20&offset=20')
                         .respond(employeeRespond.employeesNext);
-            $httpBackend.whenGET('api/employees/employee/?company=1&limit=20&offset=0')
+            $httpBackend.whenGET('api/employees/employee/?company=1')
                         .respond(employeeRespond.filteredByCompany);
-            $httpBackend.whenGET('api/employees/employee/?center=1&company=1&limit=20&offset=0')
+            $httpBackend.whenGET('api/employees/employee/?center=1&company=1')
                         .respond(employeeRespond.filteredByCompanyAndCenter);
-            $httpBackend.whenGET('api/employees/employee/?center=1&company=1&division=1&limit=20&offset=0')
+            $httpBackend.whenGET('api/employees/employee/?center=1&company=1&division=1')
                         .respond(employeeRespond.filteredByCompanyAndCenterAndDivision);
             $httpBackend.whenGET('api/employees/employee/?limit=4&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.employeeSearch);
-            $httpBackend.whenGET('api/employees/employee/?limit=20&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
+            $httpBackend.whenGET('api/employees/employee/?search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.search);
             $httpBackend.whenGET('api/companies/company/').respond(companiesRespond.companyList);
             $httpBackend.whenGET('api/companies/center/?company=1').respond(companiesRespond.centerList);
@@ -71,7 +71,7 @@ describe('Employees controllers', function() {
             expect(ctrl.employees.results).toEqualData(employeeRespond.employees.results);
             expect(ctrl.employees.params.limit).toEqual(20);
             expect(ctrl.employees.params.offset).toEqual(20);
-            expect(ctrl.employees.next).toBe(undefined);
+            expect(ctrl.employees.after).toBe(undefined);
             expect(ctrl.employees.busy).toBe(false);
         });
 

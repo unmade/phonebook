@@ -2,13 +2,13 @@
     'use strict';
 
     angular
-        .module('pbApp.employees')
-        .factory('EmployeeScroll', EmployeeScroll);
+        .module('pbApp.companies')
+        .factory('companyScroll', companyScroll);
 
-    EmployeeScroll.$inject = ['employeeService'];
+    companyScroll.$inject = ['companyService'];
 
-    function EmployeeScroll(employeeService) {
-        var EmployeeScroll = function(params) {
+    function companyScroll(companyService) {
+        var CompanyScroll = function(params) {
             this.results = [];
             this.after = undefined;
             this.params = angular.copy(params) || {};
@@ -22,14 +22,14 @@
             }
 
             this.busy = false;
-        };
+        }
 
-        EmployeeScroll.prototype.nextPage = function() {
+        CompanyScroll.prototype.nextPage = function() {
             if (this.busy) return;
             if (this.after === null) return;
             this.busy = true;
 
-            employeeService.query(this.params, function(data) {
+            companyService.query(this.params, function(data) {
                 this.results = this.results.concat(data.results);
                 this.params.offset += this.params.limit;
                 this.after = data.next;
@@ -37,7 +37,6 @@
             }.bind(this));
         };
 
-        return EmployeeScroll;
-    };
-
+        return CompanyScroll;
+    }
 })();

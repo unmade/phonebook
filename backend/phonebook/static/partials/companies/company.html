@@ -1,0 +1,52 @@
+<header class="pb-header md-whiteframe-2dp">
+    <md-toolbar class="md-tall">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings">
+                <md-icon>menu</md-icon>
+            </md-button>
+            <h2 flex>
+                <span>Телефонный справочник</span>
+            </h2>
+
+            <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
+                <md-autocomplete md-selected-item="ctrl.selectedItem"
+                                 md-search-text="ctrl.searchText"
+                                 md-items="item in ctrl.companySearch(ctrl.searchText)"
+                                 md-item-text="item.name"
+                                 md-min-length="0"
+                                 md-delay="200"
+                                 placeholder="Поиск сотрудников"
+                                 class="pb-white-placeholder">
+                    <md-item-template>
+                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
+                            {{ item.name}}
+                        </span>
+                    </md-item-template>
+                    <md-not-found>
+                        Предприятие "{{ ctrl.searchText }}" не найден.
+                    </md-not-found>
+                </md-autocomplete>
+            </form>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="More">
+                <md-icon>apps</md-icon>
+            </md-button>
+        </div>
+        <div class="md-toolbar-tools md-toolbar-tools-bottom" layout layout-align="center">
+        </div>
+    </md-toolbar>
+</header>
+
+
+<md-content>
+    <md-grid-list
+        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px">
+    <md-grid-tile class="gray" ng-repeat="company in ctrl.companies">
+        <img ng-src="{{ company.logo }}" alt="Логотип" />
+        <md-grid-tile-footer>
+            <h3>{{ company.name }}</h3>
+        </md-grid-tile-footer>
+    </md-grid-tile>
+</md-content>

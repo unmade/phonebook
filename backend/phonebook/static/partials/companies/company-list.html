@@ -1,0 +1,88 @@
+<md-content>
+    <header class="pb-header md-whiteframe-2dp">
+        <md-toolbar class="md-tall">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Settings">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <h2 flex>
+                    <span>Телефонный справочник</span>
+                </h2>
+
+                <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
+                    <md-autocomplete md-selected-item="ctrl.selectedItem"
+                                     md-selected-item-change="ctrl.showCompanyDetail(ctrl.selectedItem)"
+                                     md-search-text="ctrl.searchText"
+                                     md-items="item in ctrl.companySearch(ctrl.searchText)"
+                                     md-item-text="item.name"
+                                     md-min-length="0"
+                                     md-delay="200"
+                                     placeholder="Поиск организации"
+                                     class="pb-white-placeholder">
+                        <md-item-template>
+                            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
+                                {{ item.name}}
+                            </span>
+                        </md-item-template>
+                        <md-not-found>
+                            Организация "{{ ctrl.searchText }}" не найдена.
+                        </md-not-found>
+                    </md-autocomplete>
+                </form>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="More">
+                    <md-icon>apps</md-icon>
+                </md-button>
+            </div>
+            <div class="md-toolbar-tools md-toolbar-tools-bottom" layout layout-align="center">
+            </div>
+        </md-toolbar>
+    </header>
+
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 company-list_sidenav"
+                md-component-id="company-detail-right">
+          <company-detail company="ctrl.company"></company-detail>
+    </md-sidenav>
+
+
+    <section layout layout-align="center start">
+        <md-content flex="66" class="employee-list md-whiteframe-2dp">
+            <div class="employee-list_header">
+                <div layout="row" layout-align="center center">
+                    <h3 class="md-body-1">Организации</h3>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <md-icon>more_vert</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+            </div>
+
+            <md-grid-list
+                md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
+                md-row-height-gt-md="1:1" md-row-height="2:2"
+                md-gutter="12px" md-gutter-gt-sm="8px"
+                infinite-scroll='ctrl.companies.nextPage()'
+                infinite-scroll-disabled='ctrl.companies.busy'
+                infinite-scroll-distance='1'>
+                <md-grid-tile ng-repeat="company in ctrl.companies.results"
+                              ng-click="ctrl.showCompanyDetail(company)"
+                              class="gray">
+                    <img ng-src="{{ company.logo }}" alt="Логотип" class="company-list_grid-logo"/>
+                    <md-grid-tile-footer>
+                        <h3>{{ company.name }}</h3>
+                    </md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+
+        </md-content>
+    </section>
+
+    <md-progress-circular class="md-accent md-hue-1 pb-progress_circular"
+                          md-mode="indeterminate"
+                          md-diameter="60"
+                          ng-show="ctrl.companies.busy">
+    </md-progress-circular>
+
+</md-content>

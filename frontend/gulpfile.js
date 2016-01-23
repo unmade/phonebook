@@ -36,6 +36,7 @@ var pathToSrc = 'src/',
             pathToSrc + 'js/app/**/*.html',
             '!' + pathToSrc + 'js/app/**/*.directive.html'
         ],
+        companiesTemplates: [pathToSrc + 'js/app/companies/**/*.directive.html'],
         employeesTemplates: [pathToSrc + 'js/app/employees/**/*.directive.html'],
         feedbackTemplates: [pathToSrc + 'js/app/feedback/**/*.directive.html']
     };
@@ -72,6 +73,13 @@ gulp.task('copy-partials', function () {
 });
 
 
+gulp.task('companies-templates', function () {
+  return gulp.src(paths.companiesTemplates)
+    .pipe(templateCache('pb-app.companies.tmpl.js', {module:'pbApp.companies'}))
+    .pipe(gulp.dest('build/js/templates'));
+});
+
+
 gulp.task('employees-templates', function () {
   return gulp.src(paths.employeesTemplates)
     .pipe(templateCache('pb-app.employees.tmpl.js', {module:'pbApp.employees'}))
@@ -85,7 +93,7 @@ gulp.task('feedback-templates', function () {
 });
 
 
-gulp.task('app-scripts', ['employees-templates', 'feedback-templates'], function() {
+gulp.task('app-scripts', ['companies-templates', 'employees-templates', 'feedback-templates'], function() {
   return gulp.src(paths.appScripts)
     .pipe(uglify())
     .pipe(concat('pb-app.min.js'))
@@ -95,7 +103,7 @@ gulp.task('app-scripts', ['employees-templates', 'feedback-templates'], function
 
 gulp.task('watch', function() {
   gulp.watch(paths.partials, ['copy-partials']);
-  gulp.watch(paths.templates, ['copy-to-static']);
+  gulp.watch([paths.companiesTemplates, paths.employeesTemplates, paths.feedbackTemplates], ['copy-to-static']);
   gulp.watch(paths.appScripts, ['copy-to-static']);
   gulp.watch(pathToLess, ['copy-to-static']);
 });

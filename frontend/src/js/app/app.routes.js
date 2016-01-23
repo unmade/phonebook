@@ -9,6 +9,11 @@
 
     function config($routeProvider) {
         $routeProvider.
+            when('/companies', {
+                templateUrl: '/static/partials/companies/company-list.html',
+                controller: 'CompanyListCtrl',
+                controllerAs: 'ctrl'
+            }).
             when('/employees', {
                 templateUrl: '/static/partials/employees/employees.html',
                 controller: 'EmployeeListCtrl',
