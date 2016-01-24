@@ -5,10 +5,10 @@
         .module('pbApp.employees')
         .controller('EmployeeListCtrl',  EmployeeListCtrl);
 
-    EmployeeListCtrl.$inject = ['$q', '$mdDialog', 'employeeService', 'EmployeeScroll',
+    EmployeeListCtrl.$inject = ['$q', '$mdSidenav', 'employeeService', 'EmployeeScroll',
                                 'companyService', 'centerService', 'divisionService'];
 
-    function EmployeeListCtrl($q, $mdDialog, employeeService, EmployeeScroll,
+    function EmployeeListCtrl($q, $mdSidenav, employeeService, EmployeeScroll,
                               companyService, centerService, divisionService) {
         var self = this;
 
@@ -32,17 +32,10 @@
 
         self.showEmployeeDetail = showEmployeeDetail;
 
-        function showEmployeeDetail(ev, employee) {
+        function showEmployeeDetail(employee) {
             if (!employee) return;
-            $mdDialog.show({
-                controller: ['employee', EmployeeDetailDialogCtrl],
-                controllerAs: 'dialog',
-                templateUrl: 'employee-detail.dialog.tmpl.html',
-                parent: angular.element(document.body),
-                locals: {employee: employee},
-                targetEvent: ev,
-                clickOutsideToClose: true
-            });
+            self.employee = employee;
+            $mdSidenav('employee-detail-right').toggle();
         }
 
         function EmployeeDetailDialogCtrl(employee) {

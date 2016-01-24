@@ -5,6 +5,16 @@ from companies.serializers import CompanyShortSerializer, CenterShortSerializer,
 from .models import Employee
 
 
+class EmployeeShortSerializer(serializers.ModelSerializer):
+    firstname = serializers.StringRelatedField()
+    patronymic = serializers.StringRelatedField()
+    surname = serializers.StringRelatedField()
+
+    class Meta:
+        model = Employee
+        fields = ('id', 'firstname', 'patronymic', 'surname')
+
+
 class EmployeeSerializer(serializers.ModelSerializer):
     firstname = serializers.StringRelatedField()
     patronymic = serializers.StringRelatedField()
@@ -13,8 +23,12 @@ class EmployeeSerializer(serializers.ModelSerializer):
     company = CompanyShortSerializer()
     center = CenterShortSerializer()
     division = DivisionShortSerializer()
+    secretary = EmployeeShortSerializer(many=True)
     phones = PhoneSerializer(many=True)
     emails = EmailSerializer(many=True)
 
     class Meta:
         model = Employee
+        fields = ('firstname', 'patronymic', 'surname', 'position',
+                  'company', 'center', 'division', 'secretary',
+                  'phones', 'emails')

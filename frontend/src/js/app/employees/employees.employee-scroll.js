@@ -12,15 +12,8 @@
             this.results = [];
             this.after = undefined;
             this.params = angular.copy(params) || {};
-            if (params) {
-                this.params.offset = params.offset;
-                this.params.limit = params.limit;
-            }
-            else {
-                this.params.offset = 0;
-                this.params.limit = 20;
-            }
-
+            this.params.offset = (params && params.offset) ? params.offset : 0;
+            this.params.limit = (params && params.limit) ? params.limit : 20;
             this.busy = false;
         };
 

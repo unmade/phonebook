@@ -3,7 +3,7 @@
         <h4 class="md-subhead">{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
         <p class="md-caption pb-text-muted">{{ employee.position }}</p>
     </div>
-    <div layout="row" class="employee-list-item_contacts" flex="40">
+    <div layout="row" class="employee-list-item_contacts" flex="35">
         <md-list flex>
             <md-list-item ng-repeat="phone in employee.phones" ng-show="$even">
                 <md-tooltip md-direction="left">{{ phone.category }}</md-tooltip>

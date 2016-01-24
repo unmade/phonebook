@@ -1,58 +1,76 @@
+<md-content layout="column">
+    <div layout="row" layout-align="center center" class="employee-detail_name" layout-padding>
+        <div layout="column" layout-align="start start" layout-padding>
+            <h3 class="md-headline">
+                {{ employee.surname }}
+                <span class="md-title">{{ employee.firstname }} {{ employee.patronymic }}</span>
+            </h3>
+            <p class="md-body-1">{{ employee.position }}</p>
+            <div>
+                <p class="md-caption">
+                    {{ employee.company.name }}
+                    <md-icon ng-show="employee.center.name" class="pb-text-pale-white">chevron_right</md-icon>
 
-<div layout="row" layout-align="center center" class="employee-detail_name" layout-padding>
-    <div layout="column" layout-align="center center" layout-margin>
-        <md-icon class="pb-avatar-icon">account_circle</md-icon>
-        <p class="md-caption">{{ employee.birthday | date:'dd.MM.yyyy' }}</p>
-    </div>
-    <div layout="column" layout-align="start start" layout-padding>
-        <h3 class="md-headline">
-            {{ employee.surname }}
-            <span class="md-title">{{ employee.firstname }} {{ employee.patronymic }}</span>
-        </h3>
-        <p class="md-body-1">{{ employee.position }}</p>
-        <div layout="column">
-            <p class="md-caption">
-                {{ employee.company.name }}
-                <md-icon ng-show="employee.center.name" class="pb-text-pale-white">chevron_right</md-icon>
+                    {{ employee.center.number }}
+                    <span ng-show="employee.center.number && employee.center.name">&nbsp-&nbsp</span>
+                    {{ employee.center.name }}
 
-                {{ employee.center.number }}
-                <span ng-show="employee.center.number && employee.center.name">&nbsp-&nbsp</span>
-                {{ employee.center.name }}
+                    <md-icon ng-show="employee.division.name" class="pb-text-pale-white">chevron_right</md-icon>
 
-                <md-icon ng-show="employee.division.name" class="pb-text-pale-white">chevron_right</md-icon>
-
-                {{ employee.division.number }}
-                <span ng-show="employee.division.number && employee.division.name">&nbsp-&nbsp</span>
-                {{ employee.division.name }}
-                &nbsp
-            </p>
-            <md-divider ng-if="employee.place"></md-divier>
-            <p>{{ employee.place }}</p>
+                    {{ employee.division.number }}
+                    <span ng-show="employee.division.number && employee.division.name">&nbsp-&nbsp</span>
+                    {{ employee.division.name }}
+                    &nbsp
+                </p>
+                <md-divider ng-if="employee.place"></md-divier>
+                <p>{{ employee.place }}</p>
+            </div>
         </div>
-
-        <p class="md-caption">{{ employee.comment }}</p>
     </div>
-</div>
 
-<div layout="row" layout-padding class="md-whiteframe-z2"
-     ng-if="employee.phones.length || employee.emails.length">
-    <md-list flex>
-        <md-list-item class="md-2-line" ng-repeat="phone in employee.phones">
-            <md-icon ng-if="$first">phone</md-icon>
-            <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
-                <h4 >{{ phone.number | formatPhone }}</h4>
-                <p>{{ phone.category }}</p>
-            </div>
-        </md-list-item>
-    </md-list>
+    <div layout-padding class="md-whiteframe-z2"
+         ng-if="employee.phones.length || employee.emails.length">
+        <md-list>
+            <md-list-item class="md-2-line" ng-repeat="phone in employee.phones">
+                <md-icon ng-if="$first">phone</md-icon>
+                <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
+                    <h4 >{{ phone.number | formatPhone }}</h4>
+                    <p>{{ phone.category }}</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" ng-repeat="email in employee.emails">
+                <md-icon ng-if="$first">email</md-icon>
+                <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
+                    <h4 >{{ email.email }}</h4>
+                    <p>{{ email.category }}</p>
+                </div>
+            </md-list-item>
+        </md-list>
 
-    <md-list flex>
-        <md-list-item class="md-2-line" ng-repeat="email in employee.emails">
-            <md-icon ng-if="$first">email</md-icon>
-            <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
-                <h4 >{{ email.email }}</h4>
-                <p>{{ email.category }}</p>
-            </div>
-        </md-list-item>
-    </md-list>
-</div>
+        <md-divider ng-show="employee.birthday || employee.secretary.length || employee.comment"></md-divider>
+
+        <md-list>
+            <md-list-item class="md-1-line" ng-show="employee.birthday">
+                <md-icon class="pb-avatar-icon">cake</md-icon>
+                <p>{{ employee.birthday | date:'dd.MM.yyyy' }}</p>
+            </md-list-item>
+
+            <md-list-item class="md-1-line"
+                          ng-repeat="secretary in employee.secretary"
+                          ng-show="employee.secretary.length">
+                <md-icon>assistant</md-icon>
+                <p>
+                    {{ secretary.surname }}
+                    {{ secretary.firstname }}
+                    {{ secretary.patronymic }}
+                </p>
+            </md-list-item>
+
+            <md-list-item class="md-1-line" ng-show="employee.comment">
+                <md-icon>info</md-icon>
+                <p>{{ employee.comment }}</p>
+            </md-list-item>
+        </md-list>
+
+    </div>
+</md-content>

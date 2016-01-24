@@ -15,7 +15,7 @@
                 controllerAs: 'ctrl'
             }).
             when('/employees', {
-                templateUrl: '/static/partials/employees/employees.html',
+                templateUrl: '/static/partials/employees/employee-list.html',
                 controller: 'EmployeeListCtrl',
                 controllerAs: 'ctrl'
             }).
