@@ -1,20 +1,21 @@
 <header class="pb-header md-whiteframe-2dp">
     <md-toolbar class="md-tall">
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Settings">
-                <md-icon>menu</md-icon>
-            </md-button>
+            <main-menu></main-menu>
+
             <h2 flex>
                 <span>Телефонный справочник</span>
             </h2>
 
             <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
-                <md-autocomplete md-selected-item="ctrl.selectedItem"
+                <md-autocomplete md-autoselect
+                                 md-autofocus
+                                 md-selected-item="ctrl.selectedItem"
                                  md-selected-item-change="ctrl.showCompanyDetail(ctrl.selectedItem)"
                                  md-search-text="ctrl.searchText"
                                  md-items="item in ctrl.companySearch(ctrl.searchText)"
                                  md-item-text="item.name"
-                                 md-min-length="0"
+                                 md-min-length="1"
                                  md-delay="200"
                                  placeholder="Поиск организации"
                                  class="pb-white-placeholder">
@@ -29,9 +30,6 @@
                 </md-autocomplete>
             </form>
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="More">
-                <md-icon>apps</md-icon>
-            </md-button>
         </div>
         <div class="md-toolbar-tools md-toolbar-tools-bottom" layout layout-align="center">
         </div>
@@ -51,9 +49,6 @@
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Организации</h3>
                 <span flex></span>
-                <md-button class="md-icon-button" aria-label="Settings">
-                    <md-icon>more_vert</md-icon>
-                </md-button>
             </div>
             <md-divider></md-divider>
         </div>

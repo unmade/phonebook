@@ -8,6 +8,7 @@
             'ngMaterial',
             'infinite-scroll',
             'pbApp.routes',
+            'pbApp.layout',
             'pbApp.employees',
             'pbApp.companies',
             'pbApp.feedback'

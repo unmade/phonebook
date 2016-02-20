@@ -1,26 +1,40 @@
 <header class="pb-header md-whiteframe-2dp">
     <md-toolbar class="md-tall">
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Settings">
-                <md-icon>menu</md-icon>
-            </md-button>
+            <main-menu></main-menu>
+
             <h2 flex>
                 <span>Телефонный справочник</span>
             </h2>
 
             <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
-                <md-autocomplete md-selected-item="ctrl.selectedItem"
+                <md-autocomplete md-autoselect
+                                 md-autofocus
+                                 md-selected-item="ctrl.selectedItem"
                                  md-selected-item-change="ctrl.showEmployeeDetail(ctrl.selectedItem)"
                                  md-search-text="ctrl.searchText"
                                  md-items="item in ctrl.employeeSearch(ctrl.searchText)"
                                  md-item-text="ctrl.getEmployeeName(item)"
-                                 md-min-length="0"
+                                 md-min-length="1"
                                  md-delay="200"
                                  placeholder="Поиск сотрудников"
-                                 class="pb-white-placeholder">
+                                 class="pb-white-placeholder"
+                                 md-menu-class="autocomplete-custom-template">
                     <md-item-template>
-                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
-                            {{ ctrl.getEmployeeName(item) }}
+                        <span class="pb-float-left">
+                            <span class="item-title">
+                                <span>{{ ctrl.getEmployeeName(item) }}</span>
+                            </span>
+                            <span class="item-metadata">
+                                <span class="item-metastat pb-text-muted">
+                                    {{ item.position }}
+                                </span>
+                            </span>
+                        </span>
+                        <span class="pb-float-right">
+                            <span class="item-company-logo">
+                                <img ng-src="{{item.company.logo}}"/>
+                            </span>
                         </span>
                     </md-item-template>
                     <md-not-found>
@@ -29,9 +43,6 @@
                 </md-autocomplete>
             </form>
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="More">
-                <md-icon>apps</md-icon>
-            </md-button>
         </div>
         <div class="md-toolbar-tools md-toolbar-tools-bottom" layout layout-align="center">
             <div flex="66" layout="row" layout-align="end">
@@ -85,9 +96,6 @@
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Сотрудники</h3>
                 <span flex></span>
-                <md-button class="md-icon-button" aria-label="Settings">
-                    <md-icon>more_vert</md-icon>
-                </md-button>
             </div>
             <md-divider></md-divider>
         </div>

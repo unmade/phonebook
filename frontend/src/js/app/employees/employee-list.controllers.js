@@ -29,6 +29,9 @@
         self.loadCenters = loadCenters;
         self.loadDivisions = loadDivisions;
         self.search = search;
+        self.openSidenav = function() {
+            $mdSidenav('left').toggle();
+        }
 
         self.showEmployeeDetail = showEmployeeDetail;
 
@@ -79,7 +82,7 @@
         }
 
         function employeeSearch(query) {
-            var limit = 4;
+            var limit = 8;
             if (!query) return self.employees.results.slice(0, limit);
             var deferred = $q.defer();
             employeeService.query({

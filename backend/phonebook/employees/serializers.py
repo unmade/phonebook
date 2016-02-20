@@ -31,4 +31,4 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = Employee
         fields = ('firstname', 'patronymic', 'surname', 'position',
                   'company', 'center', 'division', 'secretary',
-                  'phones', 'emails')
+                  'phones', 'emails', 'birthday')

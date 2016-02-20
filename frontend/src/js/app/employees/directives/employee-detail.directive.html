@@ -28,9 +28,8 @@
         </div>
     </div>
 
-    <div layout-padding class="md-whiteframe-z2"
-         ng-if="employee.phones.length || employee.emails.length">
-        <md-list>
+    <div layout-padding class="md-whiteframe-z2">
+        <md-list ng-if="employee.phones.length || employee.emails.length">
             <md-list-item class="md-2-line" ng-repeat="phone in employee.phones">
                 <md-icon ng-if="$first">phone</md-icon>
                 <div class="md-list-item-text" ng-class="{'md-offset': !$first}">

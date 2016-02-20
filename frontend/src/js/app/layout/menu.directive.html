@@ -1,0 +1,32 @@
+<div>
+    <md-button class="md-icon-button" aria-label="Settings" ng-click="menu.openMenu()">
+        <md-icon>menu</md-icon>
+    </md-button>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2 pb-fixed"
+                md-component-id="left-menu">
+        <div layout="column">
+            <div layout="row" layout-padding>
+                <h3 class="pb-text-muted">Меню</h3>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="menu.closeMenu()">
+                    <md-icon>keyboard_arrow_left</md-icon>
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+            <md-content>
+                <md-list>
+                    <md-list-item ng-repeat="page in menu.pages"
+                                  ng-href="/#/{{ page.url }}">
+                        <md-icon class="pb-text-muted" style="color: grey;">{{ page.icon }}</md-icon>
+                        <p class="md-body-1 pb-text-muted">{{ page.name }}</p>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+
+            <div class="pb-menu-copyright">
+                <p class="md-caption pb-text-muted">Алексей Маслаков, 2016</p>
+            </div>
+        </div>
+    </md-sidenav>
+</div>

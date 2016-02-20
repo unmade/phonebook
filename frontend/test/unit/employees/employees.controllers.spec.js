@@ -25,7 +25,7 @@ describe('Employees controllers', function() {
                 employeesNext: {results: getEmployeeList().results.slice(20, 40)},
                 filteredByCompany: {results: getEmployeeList().results.slice(0, 2)},
                 filteredByCompanyAndCenter: {results: getEmployeeList().results.slice(0, 3)},
-                filteredByCompanyAndCenterAndDivision: {results: getEmployeeList().results.slice(0, 4)},
+                filteredByCompanyAndCenterAndDivision: {results: getEmployeeList().results.slice(0, 8)},
                 employeeSearch: {results: getEmployeeList().results.slice(0, 5)},
                 search: {results: getEmployeeList().results.slice(0, 6)}
             },
@@ -47,7 +47,7 @@ describe('Employees controllers', function() {
                         .respond(employeeRespond.filteredByCompanyAndCenter);
             $httpBackend.whenGET('api/employees/employee/?center=1&company=1&division=1&limit=20&offset=0')
                         .respond(employeeRespond.filteredByCompanyAndCenterAndDivision);
-            $httpBackend.whenGET('api/employees/employee/?limit=4&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
+            $httpBackend.whenGET('api/employees/employee/?limit=8&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.employeeSearch);
             $httpBackend.whenGET('api/employees/employee/?limit=20&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.search);

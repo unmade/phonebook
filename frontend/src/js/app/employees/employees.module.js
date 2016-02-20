@@ -3,7 +3,8 @@
 
     angular
         .module('pbApp.employees', [
-            'ngResource'
+            'ngResource',
+            'pbApp.layout'
         ]);
 
 })();
