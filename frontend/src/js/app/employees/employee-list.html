@@ -8,13 +8,12 @@
             </h2>
 
             <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
-                <md-autocomplete md-autoselect
-                                 md-autofocus
+                <md-autocomplete md-autofocus
                                  md-selected-item="ctrl.selectedItem"
                                  md-selected-item-change="ctrl.showEmployeeDetail(ctrl.selectedItem)"
                                  md-search-text="ctrl.searchText"
                                  md-items="item in ctrl.employeeSearch(ctrl.searchText)"
-                                 md-item-text="ctrl.getEmployeeName(item)"
+                                 md-item-text="item | toFullname "
                                  md-min-length="1"
                                  md-delay="200"
                                  placeholder="Поиск сотрудников"
@@ -23,7 +22,7 @@
                     <md-item-template>
                         <span class="pb-float-left">
                             <span class="item-title">
-                                <span>{{ ctrl.getEmployeeName(item) }}</span>
+                                <span>{{ item | toFullname }}</span>
                             </span>
                             <span class="item-metadata">
                                 <span class="item-metastat pb-text-muted">
@@ -34,7 +33,7 @@
                         <span class="pb-float-right">
                             <span class="item-company-logo">
                                 <span class="helper"></span>
-                                <img ng-src="{{item.company.logo}}"/>
+                                <img ng-src="{{ item.company.logo }}"/>
                             </span>
                         </span>
                     </md-item-template>
@@ -97,6 +96,7 @@
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Сотрудники</h3>
                 <span flex></span>
+                <print-employees></print-employees>
             </div>
             <md-divider></md-divider>
         </div>

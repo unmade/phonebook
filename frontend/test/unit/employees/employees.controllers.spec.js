@@ -149,24 +149,5 @@ describe('Employees controllers', function() {
             $httpBackend.flush();
             expect(ctrl.employees.results).toEqualData(employeeRespond.filteredByCompanyAndCenterAndDivision.results);
         });
-
-        it('should get employee full name (as a string)', function() {
-            var employee1 = {
-                surname: 'Smith',
-                firstname: 'GE',
-                patronymic: '.'
-            },
-            employee2 = {
-                surname: 'Smith',
-                firstname: 'GE',
-                patronymic: null
-            };
-
-            var fullname1 = ctrl.getEmployeeName(employee1);
-            var fullname2 = ctrl.getEmployeeName(employee2);
-
-            expect(fullname1).toEqual('Smith GE .');
-            expect(fullname2).toEqual('Smith GE');
-        });
     });
 });

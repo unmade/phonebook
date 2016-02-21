@@ -1,0 +1,93 @@
+<div>
+
+<md-button class="md-button md-icon-button">
+    <md-icon ng-click="printCtrl.showPrintDialog($event)">print</md-icon>
+</md-button>
+
+<script type="text/ng-template" id="print-employee-dialog.tmpl.html">
+
+    <md-dialog>
+        <div layout="row" layout-padding>
+            <h1 class="md-title">Печать сотрудников</h1>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="printDialogCtrl.hide()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+        <md-dialog-content class="pb-print-dialog" layout="column">
+            <h2 class="md-subhead">Каких сотрудников вывести на печать?</h2>
+
+            <div class="pb-print-dialog_type">
+                <md-radio-group ng-model="printDialogCtrl.type">
+                      <md-radio-button value="all">Всех</md-radio-button>
+                      <md-radio-button value="custom">Выбрать вручную</md-radio-button>
+                      <md-radio-button value="by_company">По предриятию</md-radio-button>
+                </md-radio-group>
+            </div>
+
+            <div ng-show="printDialogCtrl.type === 'custom'">
+                <h2 class="md-subhead">Выберите сотрудников</h2>
+                <md-chips ng-model="printDialogCtrl.selectedEmployees" md-autocomplete-snap
+                          md-require-match="true" class="pb-print-dialog_search">
+                  <md-autocomplete
+                      md-autofocus
+                      md-selected-item="printDialogCtrl.selectedItem"
+                      md-search-text="printDialogCtrl.searchText"
+                      md-items="item in printDialogCtrl.employeeSearch(printDialogCtrl.searchText)"
+                      placeholder="Поиск сотрудников"
+                      md-menu-class="autocomplete-custom-template">
+                      <md-item-template >
+                          <span class="pb-float-left" style="width: 400px;">
+                              <span class="item-title">
+                                  <span>{{ item | toFullname }}</span>
+                              </span>
+                              <span class="item-metadata">
+                                  <span class="item-metastat pb-text-muted">
+                                      {{ item.position }}
+                                  </span>
+                              </span>
+                          </span>
+                      </md-item-template>
+                      <md-not-found>
+                          Сотрудник "{{ printDialogCtrl.searchText }}" не найден.
+                      </md-not-found>
+                  </md-autocomplete>
+                  <md-chip-template>
+                    <span>
+                      <strong>{{ $chip.surname }}</strong>
+                    </span>
+                  </md-chip-template>
+                </md-chips>
+            </div>
+
+            <div ng-show="printDialogCtrl.type === 'by_company'">
+                <h2 class="md-subhead">Предприятия</h2>
+                <md-select ng-model="printDialogCtrl.selectedCompany" placeholder="Предприятия"
+                           class="pb-print-dialog_search">
+                    <md-option ng-repeat="company in printDialogCtrl.companies.results" value="{{ company.id }}">
+                        {{ company.name }}
+                    </md-option>
+                </md-select>
+            </div>
+
+            <span flex></span>
+
+            <div>
+                <md-button class="md-raised md-primary"
+                           ng-click="printDialogCtrl.print()"
+                           ng-hide="printDialogCtrl.busy"
+                           ng-disabled="printDialogCtrl.type === 'custom' && !printDialogCtrl.selectedEmployees.length
+                                        || printDialogCtrl.type === 'by_company' && !printDialogCtrl.selectedCompany">
+                    Печать
+                </md-button>
+                 <md-progress-circular md-mode="indeterminate" ng-show="printDialogCtrl.busy">
+                 </md-progress-circular>
+            </div>
+
+        </md-dialog-content>
+
+    </md-dialog>
+
+</script>
+
+</div>

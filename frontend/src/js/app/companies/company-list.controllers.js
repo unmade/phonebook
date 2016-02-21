@@ -5,9 +5,9 @@
         .module('pbApp.companies')
         .controller('CompanyListCtrl', CompanyListCtrl);
 
-    CompanyListCtrl.$inject = ['$q', '$mdSidenav', 'companyService', 'companyScroll'];
+    CompanyListCtrl.$inject = ['$q', '$filter', '$mdSidenav', 'companyService', 'companyScroll'];
 
-    function CompanyListCtrl($q, $mdSidenav, companyService, companyScroll) {
+    function CompanyListCtrl($q, $filter, $mdSidenav, companyService, companyScroll) {
         var self = this;
 
         self.companies = new companyScroll({limit: 40, offset: 0});
@@ -24,9 +24,10 @@
         function companySearch(query) {
             var limit = 4;
             if (!query) return self.companies.results.slice(0, limit);
-            var deferred = $q.defer();
+            var deferred = $q.defer(),
+                translated = $filter('englishCharsToRussian')(query);
             companyService.query({
-                search: query,
+                search: translated,
                 limit: limit,
                 offset: 0
             }, function(results, status) {

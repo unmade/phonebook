@@ -24,31 +24,17 @@
         self.centerChanged = centerChanged;
         self.divisionChanged = divisionChanged;
         self.employeeSearch = employeeSearch;
-        self.getEmployeeName = getEmployeeName;
         self.loadCompanies = loadCompanies;
         self.loadCenters = loadCenters;
         self.loadDivisions = loadDivisions;
+        self.openSidenav = openSidenav;
         self.search = search;
-        self.openSidenav = function() {
-            $mdSidenav('left').toggle();
-        }
-
         self.showEmployeeDetail = showEmployeeDetail;
 
         function showEmployeeDetail(employee) {
             if (!employee) return;
             self.employee = employee;
             $mdSidenav('employee-detail-right').toggle();
-        }
-
-        function EmployeeDetailDialogCtrl(employee) {
-            var dialog = this;
-            dialog.employee = employee;
-            dialog.hide = hide;
-
-            function hide() {
-                $mdDialog.hide();
-            }
         }
 
         function companyChanged() {
@@ -84,8 +70,8 @@
         function employeeSearch(query) {
             var limit = 8;
             if (!query) return self.employees.results.slice(0, limit);
-            var deferred = $q.defer();
-            var translated = $filter('englishCharsToRussian')(query);
+            var deferred = $q.defer(),
+                translated = $filter('englishCharsToRussian')(query);
             employeeService.query({
                 search: translated,
                 limit: limit,
@@ -95,15 +81,6 @@
             });
 
             return deferred.promise
-        }
-
-        function getEmployeeName(employee) {
-            var strOrEmpty = function(str) {
-                return (str) ? str : "";
-            }
-            return (strOrEmpty(employee.surname) + ' ' +
-                    strOrEmpty(employee.firstname) + ' ' +
-                    strOrEmpty(employee.patronymic)).trim();
         }
 
         function loadCompanies() {
@@ -128,6 +105,10 @@
             });
         }
 
+        function openSidenav() {
+            $mdSidenav('left').toggle();
+        }
+
         function search(query) {
             self.selectedCompany = null;
             self.selectedCenter = null;
@@ -135,6 +116,5 @@
             self.employees = new EmployeeScroll({search: query});
             self.employees.nextPage();
         }
-
     }
 })();

@@ -1,0 +1,107 @@
+<style>
+    small {
+        color: #ccc;
+    }
+    ul {
+        list-style: none;
+    }
+    .contact {
+        padding-bottom: 25px;
+    }
+    .info {
+        float: left;
+        padding-right: 50px;
+        width: 350px;
+        max-width: 350px;
+    }
+    #contact br {
+        clear: both;
+    }
+    .page-break {
+        page-break-inside: avoid;
+    }
+</style>
+
+
+<div ng-if="companies.length">
+    <h2>Предприятия</h2>
+    <hr />
+    <div ng-repeat="company in companies | orderBy: 'name'" class="page-break">
+        <h3>{{ company.name }}</h3>
+        <p ng-show="company.address"><b>Адрес: </b>{{ company.address }}</p>
+        <p ng-show="company.comment"><small>Доп. инф: </small>{{ company.comment }}</p>
+
+        <div>
+            <div ng-if="company.phones[0]">
+                <p><small>Телефоны:</small></p>
+                <p ng-repeat="phone in company.phones | orderBy: 'category'">
+                    <span class="text-muted">{{ phone.category }}:</span> {{ phone.number }}
+                </p>
+            </div>
+            <div ng-if="company.emails[0]">
+                <p><small>Электронные адреса:</small></p>
+                <p ng-repeat="email in company.emails">
+                    <span class="text-muted">{{ email.category }}:</span> {{ email.email }}
+                </p>
+            </div>
+        </div>
+        <br /><br />
+    </div>
+    <br/ ><p style="page-break-after: always;"> </p>
+</div>
+
+
+<h2 ng-if="employees.length > 0">Сотрудники</h2>
+<hr />
+<div ng-repeat="employee in employees | orderBy: 'surname'" class="page-break contact">
+    <h3>{{ employee.surname }}
+        <small>{{ employee.firstname }} {{ employee.patronymic }}</small>
+    </h3>
+
+    <div class="info">
+        <p ng-if="employee.birthday">
+            <small>День рождения:</small> {{ employee.birthday | date:'dd.MM.yyyy' }}
+        </p>
+
+        <p ng-if"employee.position"><small>Должность:</small> {{ employee.position }}</p>
+
+        <div><small>Место работы: </small>
+            <table>
+                <tr ng-if="employee.company">
+                    <td><small>Предприятие:</small></td>
+                    <td>{{ employee.company.name }}</td>
+                </tr>
+                <tr ng-if="employee.center">
+                    <td><small>Центр:</small></td>
+                    <td>{{ employee.center.number }} - {{ employee.center.name }}</td>
+                </tr>
+                <tr ng-if="employee.division">
+                    <td><small>Отдел:<small></td>
+                    <td>{{ employee.division.number }} - {{ employee.division.name }}</td>
+                </tr>
+                <tr ng-if="employee.place">
+                    <td><small>Рабочее место:<small></td>
+                    <td>{{ employee.place }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <p ng-if="employee.comment"><small>Доп. инф: </small>{{ employee.comment }}</p>
+    </div>
+
+    <div>
+        <div ng-if="employee.phones[0]">
+            <p><small>Телефоны:</small></p>
+            <p ng-repeat="phone in employee.phones | orderBy: 'category'">
+                <span class="text-muted">{{ phone.category }}:</span> {{ phone.number }}
+            </p>
+        </div>
+        <div ng-if="employee.emails[0]">
+            <p><small>Электронные адреса:</small></p>
+            <p ng-repeat="email in employee.emails">
+                <span class="text-muted">{{ email.category }}:</span> {{ email.email }}
+            </p>
+        </div>
+    </div>
+    <br />
+</div>
