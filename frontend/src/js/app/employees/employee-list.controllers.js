@@ -5,10 +5,10 @@
         .module('pbApp.employees')
         .controller('EmployeeListCtrl',  EmployeeListCtrl);
 
-    EmployeeListCtrl.$inject = ['$q', '$mdSidenav', 'employeeService', 'EmployeeScroll',
+    EmployeeListCtrl.$inject = ['$q', '$filter', '$mdSidenav', 'employeeService', 'EmployeeScroll',
                                 'companyService', 'centerService', 'divisionService'];
 
-    function EmployeeListCtrl($q, $mdSidenav, employeeService, EmployeeScroll,
+    function EmployeeListCtrl($q, $filter, $mdSidenav, employeeService, EmployeeScroll,
                               companyService, centerService, divisionService) {
         var self = this;
 
@@ -85,8 +85,9 @@
             var limit = 8;
             if (!query) return self.employees.results.slice(0, limit);
             var deferred = $q.defer();
+            var translated = $filter('englishCharsToRussian')(query);
             employeeService.query({
-                search: query,
+                search: translated,
                 limit: limit,
                 offset: 0
             }, function(results, status) {
@@ -97,7 +98,12 @@
         }
 
         function getEmployeeName(employee) {
-            return employee.surname + ' ' + employee.firstname + ' ' + employee.patronymic;
+            var strOrEmpty = function(str) {
+                return (str) ? str : "";
+            }
+            return (strOrEmpty(employee.surname) + ' ' +
+                    strOrEmpty(employee.firstname) + ' ' +
+                    strOrEmpty(employee.patronymic)).trim();
         }
 
         function loadCompanies() {

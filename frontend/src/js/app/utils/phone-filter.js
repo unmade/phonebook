@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('pbApp')
+        .module('pbApp.utils')
         .filter('formatPhone', formatPhone);
 
     function formatPhone() {

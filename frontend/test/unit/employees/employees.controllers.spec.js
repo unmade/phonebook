@@ -47,7 +47,7 @@ describe('Employees controllers', function() {
                         .respond(employeeRespond.filteredByCompanyAndCenter);
             $httpBackend.whenGET('api/employees/employee/?center=1&company=1&division=1&limit=20&offset=0')
                         .respond(employeeRespond.filteredByCompanyAndCenterAndDivision);
-            $httpBackend.whenGET('api/employees/employee/?limit=8&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
+            $httpBackend.whenGET('api/employees/employee/?limit=8&offset=0&search=%D0%BC%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.employeeSearch);
             $httpBackend.whenGET('api/employees/employee/?limit=20&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.search);
@@ -148,6 +148,25 @@ describe('Employees controllers', function() {
             ctrl.divisionChanged();
             $httpBackend.flush();
             expect(ctrl.employees.results).toEqualData(employeeRespond.filteredByCompanyAndCenterAndDivision.results);
+        });
+
+        it('should get employee full name (as a string)', function() {
+            var employee1 = {
+                surname: 'Smith',
+                firstname: 'GE',
+                patronymic: '.'
+            },
+            employee2 = {
+                surname: 'Smith',
+                firstname: 'GE',
+                patronymic: null
+            };
+
+            var fullname1 = ctrl.getEmployeeName(employee1);
+            var fullname2 = ctrl.getEmployeeName(employee2);
+
+            expect(fullname1).toEqual('Smith GE .');
+            expect(fullname2).toEqual('Smith GE');
         });
     });
 });

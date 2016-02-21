@@ -11,7 +11,8 @@
             'pbApp.layout',
             'pbApp.employees',
             'pbApp.companies',
-            'pbApp.feedback'
+            'pbApp.feedback',
+            'pbApp.utils'
         ]);
 
     angular.module('pbApp.routes', []);

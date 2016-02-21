@@ -23,10 +23,19 @@
     .item-metadata {
       display: block;
       line-height: 2;
+      max-width: 600px;
     }
 
-    .item-company-logo img {
-        height: 40px;
-        width: 40px;
+    .item-company-logo {
+        .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        img {
+            width: 40px;
+            vertical-align: middle;
+        }
     }
 }
