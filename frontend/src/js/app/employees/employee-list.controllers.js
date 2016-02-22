@@ -22,20 +22,14 @@
 
         self.companyChanged = companyChanged;
         self.centerChanged = centerChanged;
+        self.closeEmployeeDetail = closeEmployeeDetail;
         self.divisionChanged = divisionChanged;
         self.employeeSearch = employeeSearch;
         self.loadCompanies = loadCompanies;
         self.loadCenters = loadCenters;
         self.loadDivisions = loadDivisions;
-        self.openSidenav = openSidenav;
+        self.openEmployeeDetail = openEmployeeDetail;
         self.search = search;
-        self.showEmployeeDetail = showEmployeeDetail;
-
-        function showEmployeeDetail(employee) {
-            if (!employee) return;
-            self.employee = employee;
-            $mdSidenav('employee-detail-right').toggle();
-        }
 
         function companyChanged() {
             self.selectedCenter = null;
@@ -55,6 +49,10 @@
                 search: self.searchText || null
             });
             self.employees.nextPage();
+        }
+
+        function closeEmployeeDetail() {
+            $mdSidenav('employee-detail-right').close();
         }
 
         function divisionChanged() {
@@ -105,8 +103,10 @@
             });
         }
 
-        function openSidenav() {
-            $mdSidenav('left').toggle();
+        function openEmployeeDetail(employee) {
+            if (!employee) return;
+            self.employee = employee;
+            $mdSidenav('employee-detail-right').toggle();
         }
 
         function search(query) {

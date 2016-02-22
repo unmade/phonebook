@@ -3,11 +3,12 @@
         <div class="md-toolbar-tools">
             <main-menu></main-menu>
 
-            <h2 flex>
+            <h2 flex hide-xs hide-sm>
                 <span>Телефонный справочник</span>
             </h2>
+            <span flex hide-gt-sm></span>
 
-            <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
+            <form ng-submit="ctrl.search(ctrl.searchText)" flex="50" flex-xs="70" flex-sm="60">
                 <md-autocomplete md-autofocus
                                  md-selected-item="ctrl.selectedItem"
                                  md-selected-item-change="ctrl.showCompanyDetail(ctrl.selectedItem)"
@@ -37,13 +38,18 @@
 
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 pb-detail-sidenav"
-            md-component-id="company-detail-right">
-      <company-detail company="ctrl.company"></company-detail>
+            md-component-id="company-detail-right" flex-xs="100">
+        <div hide-gt-xs>
+            <md-button class="md-icon-button" ng-click="ctrl.closeCompanyDetail()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+        <company-detail company="ctrl.company"></company-detail>
 </md-sidenav>
 
 
 <section layout layout-align="center start">
-    <md-content flex="66" class="employee-list md-whiteframe-2dp">
+    <md-content flex-sm="80" flex-gt-md="70" flex="100" class="employee-list md-whiteframe-2dp">
         <div class="employee-list_header">
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Организации</h3>
@@ -60,7 +66,7 @@
             infinite-scroll-disabled='ctrl.companies.busy'
             infinite-scroll-distance='1'>
             <md-grid-tile ng-repeat="company in ctrl.companies.results"
-                          ng-click="ctrl.showCompanyDetail(company)"
+                          ng-click="ctrl.openCompanyDetail(company)"
                           class="gray">
                 <img ng-src="{{ company.logo }}" alt="Логотип" class="company-list_grid-logo"/>
                 <md-grid-tile-footer>

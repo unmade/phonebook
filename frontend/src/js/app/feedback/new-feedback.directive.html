@@ -1,38 +1,69 @@
-<form name="newFeedbackForm" layout="column" layout-padding style="min-width:640px;min-height:480px;">
-    <md-input-container class="md-block">
-        <label>Представьтесь</label>
-        <input ng-model="newFeedback.sender"
-               name="sender"
-               md-maxlength="50"
-               required
-               autofocus="true">
-        <div ng-messages="NewFeedbackForm.sender.$error">
-            <div ng-message="required">Необходимо указать <b>своё</b> ФИО.</div>
-            <div ng-message="md-maxlength">Убедитесь, что в этом поле не больше 50 символов</div>
-        </div>
-    </md-input-container>
+<div>
 
-    <md-input-container class="md-block" flex>
-        <label>Текст</label>
-        <textarea ng-model="newFeedback.text"
-                  columns="1"
-                  md-maxlength="500"
-                  rows="6"
-                  name="text"
-                  required>
-        </textarea>
-        <div ng-messages="NewFeedbackForm.text.$error">
-            <div ng-message="required">Поле не может быть пустым!</div>
-            <div ng-message="md-maxlength">Убедитесь, что в этом поле не больше 500 символов</div>
-        </div>
-    </md-input-container>
-    <div layout="row">
-        <span flex></span>
-        <md-button ng-click="newFeedback.add()"
-                   ng-disabled="!(newFeedback.sender && newFeedback.text)"
-                   class="md-fab md-primary md-mini"
-                   aria-label="Sent">
-            <md-icon>send</md-icon>
-        </md-button>
-    </div>
-</form>
+<md-button class="{{ newFeedback.buttonClass }}" aria-label="Add"
+           ng-click="newFeedback.showNewFeedbackDialog($event)">
+    <md-icon>create</md-icon>
+    <md-tooltip>Новое сообщение</md-tooltip>
+</md-button>
+
+<script type="text/ng-template" id="new-feedback-dialog.tmpl.html">
+    <md-dialog aria-label="New Feedback" layout="column" class="pb-feedback-dialog">
+        <md-dialog-content flex>
+            <form name="newFeedbackForm" layout="column" layout-padding>
+                <div layout="row" layout-padding>
+                    <h1 class="md-title">Обратная связь</h1>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="nfdCtrl.cancel()">
+                        <md-icon>close</md-icon>
+                    </md-button>
+                </div>
+
+                <md-input-container class="md-block">
+                    <label>Представьтесь</label>
+                    <input ng-model="nfdCtrl.feedback.sender"
+                           name="sender"
+                           md-maxlength="50"
+                           required
+                           autofocus="true">
+                    <div class="pb-input-hint">Введите Вашу фамилию и инициалы</div>
+                    <div ng-messages="newFeedbackForm.sender.$error">
+                        <div ng-message="required">Необходимо указать <b>свою</b> фамилию.</div>
+                        <div ng-message="md-maxlength">Убедитесь, что в этом поле не больше 50 символов</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex>
+                    <label>Текст</label>
+                    <textarea ng-model="nfdCtrl.feedback.text"
+                              columns="1"
+                              md-maxlength="500"
+                              rows="6"
+                              name="text"
+                              required>
+                    </textarea>
+                    <div class="pb-input-hint">Введите Ваше сообщение</div>
+                    <div ng-messages="newFeedbackForm.text.$error">
+                        <div ng-message="required">Поле не может быть пустым!</div>
+                        <div ng-message="md-maxlength">Убедитесь, что в этом поле не больше 500 символов</div>
+                    </div>
+                </md-input-container>
+            </form>
+        </md-dialog-content>
+
+        <md-dialog-actions>
+            <md-button ng-click="nfdCtrl.cancel()"
+                       class="md-raised"
+                       aria-label="Send">
+                Отмена
+            </md-button>
+            <md-button ng-click="nfdCtrl.send()"
+                       ng-disabled="!(nfdCtrl.feedback.sender && nfdCtrl.feedback.text)"
+                       class="md-raised md-primary"
+                       aria-label="Send">
+                Отправить
+            </md-button>
+        </md-dialog-action>
+    </md-dialog>
+</script>
+
+</div>

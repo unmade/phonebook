@@ -6,17 +6,17 @@
 
 <script type="text/ng-template" id="print-employee-dialog.tmpl.html">
 
-    <md-dialog>
-        <div layout="row" layout-padding>
-            <h1 class="md-title">Печать сотрудников</h1>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="printDialogCtrl.hide()">
-                <md-icon>close</md-icon>
-            </md-button>
-        </div>
-        <md-dialog-content class="pb-print-dialog" layout="column">
-            <h2 class="md-subhead">Каких сотрудников вывести на печать?</h2>
+    <md-dialog aria-label="Print Employees" layout="column" class="pb-print-dialog">
+        <md-dialog-content flex>
+            <div layout="row">
+                <h1 class="md-title">Печать сотрудников</h1>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="printDialogCtrl.hide()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
 
+            <h2 class="md-subhead">Каких сотрудников вывести на печать?</h2>
             <div class="pb-print-dialog_type">
                 <md-radio-group ng-model="printDialogCtrl.type">
                       <md-radio-button value="all">Всех</md-radio-button>
@@ -34,7 +34,8 @@
                       md-selected-item="printDialogCtrl.selectedItem"
                       md-search-text="printDialogCtrl.searchText"
                       md-items="item in printDialogCtrl.employeeSearch(printDialogCtrl.searchText)"
-                      placeholder="Поиск сотрудников"
+                      placeholder="Имя сотрудника"
+                      secondary-placeholder="+Сотрудник"
                       md-menu-class="autocomplete-custom-template">
                       <md-item-template >
                           <span class="pb-float-left" style="width: 400px;">
@@ -69,22 +70,22 @@
                     </md-option>
                 </md-select>
             </div>
-
-            <span flex></span>
-
-            <div>
-                <md-button class="md-raised md-primary"
-                           ng-click="printDialogCtrl.print()"
-                           ng-hide="printDialogCtrl.busy"
-                           ng-disabled="printDialogCtrl.type === 'custom' && !printDialogCtrl.selectedEmployees.length
-                                        || printDialogCtrl.type === 'by_company' && !printDialogCtrl.selectedCompany">
-                    Печать
-                </md-button>
-                 <md-progress-circular md-mode="indeterminate" ng-show="printDialogCtrl.busy">
-                 </md-progress-circular>
-            </div>
-
         </md-dialog-content>
+
+        <md-dialog-actions>
+            <md-button ng-click="printDialogCtrl.hide()"
+                       class="md-raised"
+                       aria-label="Send">
+                Отмена
+            </md-button>
+            <md-button class="md-raised md-primary"
+                       ng-click="printDialogCtrl.print()"
+                       ng-hide="printDialogCtrl.busy"
+                       ng-disabled="printDialogCtrl.type === 'custom' && !printDialogCtrl.selectedEmployees.length
+                                    || printDialogCtrl.type === 'by_company' && !printDialogCtrl.selectedCompany">
+                Печать
+            </md-button>
+        </md-dialog-action>
 
     </md-dialog>
 

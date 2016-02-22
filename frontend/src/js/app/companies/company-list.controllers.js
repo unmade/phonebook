@@ -10,16 +10,11 @@
     function CompanyListCtrl($q, $filter, $mdSidenav, companyService, companyScroll) {
         var self = this;
 
-        self.companies = new companyScroll({limit: 40, offset: 0});
+        self.companies = new companyScroll({limit: 100, offset: 0});
 
-        self.showCompanyDetail = showCompanyDetail;
         self.companySearch = companySearch;
-
-        function showCompanyDetail(company) {
-            if (!company) return;
-            self.company = company;
-            $mdSidenav('company-detail-right').toggle();
-        }
+        self.closeCompanyDetail = closeCompanyDetail;
+        self.openCompanyDetail = openCompanyDetail;
 
         function companySearch(query) {
             var limit = 4;
@@ -35,6 +30,16 @@
             });
 
             return deferred.promise
+        }
+
+        function closeCompanyDetail() {
+            $mdSidenav('company-detail-right').close();
+        }
+
+        function openCompanyDetail(company) {
+            if (!company) return;
+            self.company = company;
+            $mdSidenav('company-detail-right').toggle();
         }
     }
 })();

@@ -26,7 +26,7 @@ describe('Companies controllers', function() {
 
         beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenGET('api/companies/company/?limit=40&offset=0')
+            $httpBackend.whenGET('api/companies/company/?limit=100&offset=0')
                         .respond(companyRespond.companies);
             $httpBackend.whenGET('api/companies/company/?limit=4&offset=0&search=%D0%BD%D0%BF%D0%BE%D0%BB')
                         .respond(companyRespond.companySearch);
@@ -36,18 +36,19 @@ describe('Companies controllers', function() {
 
 
         it('should fetch companies', function() {
+            var limit = 100;
             expect(ctrl.companies).toEqualData({
                 results: [],
                 after: undefined,
-                params: {limit: 40, offset: 0},
+                params: {limit: limit, offset: 0},
                 busy: false
             });
             ctrl.companies.nextPage();
             expect(ctrl.companies.busy).toBe(true);
             $httpBackend.flush();
             expect(ctrl.companies.results).toEqualData(companyRespond.companies.results);
-            expect(ctrl.companies.params.limit).toEqual(40);
-            expect(ctrl.companies.params.offset).toEqual(40);
+            expect(ctrl.companies.params.limit).toEqual(limit);
+            expect(ctrl.companies.params.offset).toEqual(limit);
             expect(ctrl.companies.after).toBe(undefined);
             expect(ctrl.companies.busy).toBe(false);
         });
@@ -64,7 +65,7 @@ describe('Companies controllers', function() {
         it('should set ctrl.company to company', function() {
             expect(ctrl.company).toBeUndefined();
             var company = companyRespond.companies.results[0];
-            ctrl.showCompanyDetail(company);
+            ctrl.openCompanyDetail(company);
             expect(ctrl.company).toEqual(company);
         });
     });

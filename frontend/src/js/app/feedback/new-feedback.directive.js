@@ -8,38 +8,43 @@
     function newFeedback() {
         return {
             bindToController: true,
-            controller: NewFeedbackCtrl,
+            controller: newFeedbackCtrl,
             controllerAs: 'newFeedback',
             replace: true,
             restrict: 'AE',
             scope: {
-                onSend: '&'
+                'buttonClass': '@buttonClass'
             },
             templateUrl: 'new-feedback.directive.html',
         }
     }
 
-    NewFeedbackCtrl.$inject = ['$scope', '$mdDialog', '$mdToast', 'feedbackService'];
+    newFeedbackCtrl.$inject = ['$scope', '$mdDialog', '$mdToast', 'feedbackService'];
 
-    function NewFeedbackCtrl($scope, $mdDialog, $mdToast, feedbackService) {
+    function newFeedbackCtrl($scope, $mdDialog, $mdToast, feedbackService) {
         var self = this;
-        self.add = add;
-        self.showSuccessToast = showSuccessToast;
-        self.showFailedToast = showFailedToast;
 
-        function add() {
-            if (!self.sender || !self.text) return;
+        self.showNewFeedbackDialog = showNewFeedbackDialog;
+
+        function add(feedback) {
+            if (!feedback.sender || !feedback.text) return;
             feedbackService.save({
-                sender: self.sender,
-                text: self.text
+                sender: feedback.sender,
+                text: feedback.text
             }, function(response) {
-                self.status = '';
-                if (self.onSend) self.onSend();
-                self.showSuccessToast();
+                showSuccessToast();
             }, function(error) {
-                self.status = 'Error';
-                self.showFailedToast();
+                showFailedToast();
             });
+        }
+
+        function showFailedToast() {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('Отправка не удалась!')
+                    .position('top right')
+                    .hideDelay(3000)
+            );
         }
 
         function showSuccessToast() {
@@ -51,13 +56,36 @@
             );
         }
 
-        function showFailedToast() {
-            $mdToast.show(
-                $mdToast.simple()
-                    .textContent('Отправка не удалась!')
-                    .position('top right')
-                    .hideDelay(3000)
-            );
+        function showNewFeedbackDialog(ev) {
+            $mdDialog.show({
+                templateUrl: 'new-feedback-dialog.tmpl.html',
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                controller: newFeedbackDialogCtrl,
+                controllerAs: 'nfdCtrl',
+                fullscreen: true
+            }).then(function(feedback) {
+                add(feedback);
+            });
+        }
+    }
+
+    newFeedbackDialogCtrl.$inject = ['$mdDialog'];
+
+    function newFeedbackDialogCtrl($mdDialog) {
+        var self = this;
+
+        self.feedback = {sender: null, text: null};
+
+        self.cancel = cancel;
+        self.send = send;
+
+        function cancel() {
+            $mdDialog.cancel();
+        }
+
+        function send() {
+            $mdDialog.hide(self.feedback);
         }
     }
 })();

@@ -27,7 +27,8 @@
                 templateUrl: 'print-employee-dialog.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
-                clickOutsideToClose: true
+                clickOutsideToClose: true,
+                fullscreen: true
             });
         }
     }

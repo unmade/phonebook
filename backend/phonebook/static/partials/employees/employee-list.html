@@ -3,11 +3,12 @@
         <div class="md-toolbar-tools">
             <main-menu></main-menu>
 
-            <h2 flex>
+            <h2 flex hide-xs hide-sm>
                 <span>Телефонный справочник</span>
             </h2>
+            <span flex hide-gt-sm></span>
 
-            <form ng-submit="ctrl.search(ctrl.searchText)" flex="50">
+            <form ng-submit="ctrl.search(ctrl.searchText)" flex="50" flex-xs="70" flex-sm="60">
                 <md-autocomplete md-autofocus
                                  md-selected-item="ctrl.selectedItem"
                                  md-selected-item-change="ctrl.showEmployeeDetail(ctrl.selectedItem)"
@@ -45,12 +46,12 @@
             <span flex></span>
         </div>
         <div class="md-toolbar-tools md-toolbar-tools-bottom" layout layout-align="center">
-            <div flex="66" layout="row" layout-align="end">
+            <div flex="66" flex-xs="100" flex-sm="80" layout="row" layout-align="end">
                 <md-input-container>
                     <md-select ng-model="ctrl.selectedCompany"
                                md-on-open="ctrl.loadCompanies()"
                                ng-change="ctrl.companyChanged()">
-                        <md-option ng-value="null">Выберите предприятие</md-option>
+                        <md-option ng-value="null">Предприятие</md-option>
                         <md-option ng-repeat="company in ctrl.companies.results" value="{{ company.id }}">
                             {{ company.name }}
                         </md-option>
@@ -61,7 +62,7 @@
                                ng-disabled="!ctrl.selectedCompany"
                                md-on-open="ctrl.loadCenters()"
                                ng-change="ctrl.centerChanged()">
-                        <md-option ng-value="null">Выберите центр</md-option>
+                        <md-option ng-value="null">Центр</md-option>
                         <md-option ng-repeat="center in ctrl.centers.results" value="{{ center.id }}">
                             {{ center.number }} - {{ center.name }}
                         </md-option>
@@ -72,7 +73,7 @@
                                ng-disabled="!ctrl.selectedCenter"
                                md-on-open="ctrl.loadDivisions()"
                                ng-change="ctrl.divisionChanged()">
-                               <md-option ng-value="null">Выберите отделение/отдел</md-option>
+                               <md-option ng-value="null">Отделение/отдел</md-option>
                         <md-option ng-repeat="division in ctrl.divisions.results" value="{{ division.id }}">
                             {{ division.number }} - {{ division.name }}
                         </md-option>
@@ -85,13 +86,18 @@
 
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 pb-detail-sidenav"
-            md-component-id="employee-detail-right">
-      <employee-detail employee="ctrl.employee"></employee-detail>
+            md-component-id="employee-detail-right" flex-xs="100">
+        <div class="pb-detail-sidenav_close" hide-gt-xs>
+            <md-button class="md-icon-button" ng-click="ctrl.closeEmployeeDetail()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+        <employee-detail employee="ctrl.employee"></employee-detail>
 </md-sidenav>
 
 
 <div layout layout-align="center start">
-    <md-content flex="70" class="employee-list md-whiteframe-2dp">
+    <md-content flex-gt-md="70" class="employee-list md-whiteframe-2dp">
         <div class="employee-list_header">
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Сотрудники</h3>
@@ -105,7 +111,7 @@
              infinite-scroll-distance='2'>
             <div ng-repeat="employee in ctrl.employees.results">
                 <employee-list-item employee="employee"
-                                     ng-click="ctrl.showEmployeeDetail(employee)">
+                                     ng-click="ctrl.openEmployeeDetail(employee)">
                 </employee-list-item>
                 <md-divider ng-if="!$last"></md-divider>
             </div>
