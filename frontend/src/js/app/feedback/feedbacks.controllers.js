@@ -5,12 +5,12 @@
         .module('pbApp.feedback')
         .controller('FeedbackListCtrl', FeedbackListCtrl);
 
-    FeedbackListCtrl.$inject = ['FeedbackScroll'];
+    FeedbackListCtrl.$inject = ['Scroll', 'feedbackService'];
 
-    function FeedbackListCtrl(FeedbackScroll) {
+    function FeedbackListCtrl(Scroll, feedbackService) {
         var self = this;
 
-        self.feedbacks = new FeedbackScroll();
+        self.feedbacks = new Scroll(feedbackService);
     }
 
 })();

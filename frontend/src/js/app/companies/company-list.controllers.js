@@ -5,12 +5,12 @@
         .module('pbApp.companies')
         .controller('CompanyListCtrl', CompanyListCtrl);
 
-    CompanyListCtrl.$inject = ['$q', '$filter', '$mdSidenav', 'companyService', 'companyScroll'];
+    CompanyListCtrl.$inject = ['$q', '$filter', '$mdSidenav', 'Scroll', 'companyService'];
 
-    function CompanyListCtrl($q, $filter, $mdSidenav, companyService, companyScroll) {
+    function CompanyListCtrl($q, $filter, $mdSidenav, Scroll, companyService) {
         var self = this;
 
-        self.companies = new companyScroll({limit: 40, offset: 0});
+        self.companies = new Scroll(companyService, {limit: 40, offset: 0});
 
         self.companySearch = companySearch;
         self.closeCompanyDetail = closeCompanyDetail;

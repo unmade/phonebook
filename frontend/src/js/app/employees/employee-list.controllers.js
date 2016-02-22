@@ -5,14 +5,14 @@
         .module('pbApp.employees')
         .controller('EmployeeListCtrl',  EmployeeListCtrl);
 
-    EmployeeListCtrl.$inject = ['$q', '$filter', '$mdSidenav', 'employeeService', 'EmployeeScroll',
+    EmployeeListCtrl.$inject = ['$q', '$filter', '$mdSidenav', 'employeeService', 'Scroll',
                                 'companyService', 'centerService', 'divisionService'];
 
-    function EmployeeListCtrl($q, $filter, $mdSidenav, employeeService, EmployeeScroll,
+    function EmployeeListCtrl($q, $filter, $mdSidenav, employeeService, Scroll,
                               companyService, centerService, divisionService) {
         var self = this;
 
-        self.employees = new EmployeeScroll();
+        self.employees = new Scroll(employeeService);
         self.companies = null;
         self.centers = null;
         self.divisions = null;
@@ -34,7 +34,7 @@
         function companyChanged() {
             self.selectedCenter = null;
             self.selectedDivision = null;
-            self.employees = new EmployeeScroll({
+            self.employees = new Scroll(employeeService, {
                 company: self.selectedCompany,
                 search: self.searchText || null
             });
@@ -43,7 +43,7 @@
 
         function centerChanged() {
             self.selectedDivision = null;
-            self.employees = new EmployeeScroll({
+            self.employees = new Scroll(employeeService, {
                 company: self.selectedCompany,
                 center: self.selectedCenter,
                 search: self.searchText || null
@@ -56,7 +56,7 @@
         }
 
         function divisionChanged() {
-            self.employees = new EmployeeScroll({
+            self.employees = new Scroll(employeeService, {
                 company: self.selectedCompany,
                 center: self.selectedCenter,
                 division: self.selectedDivision,
@@ -113,7 +113,7 @@
             self.selectedCompany = null;
             self.selectedCenter = null;
             self.selectedDivision = null;
-            self.employees = new EmployeeScroll({search: query});
+            self.employees = new Scroll(employeeService, {search: query});
             self.employees.nextPage();
         }
     }
