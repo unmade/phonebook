@@ -5,11 +5,12 @@
         .module('pbApp.feedback')
         .controller('FeedbackListCtrl', FeedbackListCtrl);
 
-    FeedbackListCtrl.$inject = ['$mdDialog', '$mdToast', 'feedbackService'];
+    FeedbackListCtrl.$inject = ['FeedbackScroll'];
 
-    function FeedbackListCtrl($mdDialog, $mdToast, feedbackService) {
+    function FeedbackListCtrl(FeedbackScroll) {
         var self = this;
-        self.feedbacks = feedbackService.query({limit: 50, offset: 0});
 
+        self.feedbacks = new FeedbackScroll();
     }
+
 })();

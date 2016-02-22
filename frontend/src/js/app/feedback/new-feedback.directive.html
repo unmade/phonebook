@@ -7,7 +7,7 @@
 </md-button>
 
 <script type="text/ng-template" id="new-feedback-dialog.tmpl.html">
-    <md-dialog aria-label="New Feedback" layout="column" class="pb-feedback-dialog">
+    <md-dialog aria-label="New Feedback" layout="column" class="pb-dialog">
         <md-dialog-content flex>
             <form name="newFeedbackForm" layout="column" layout-padding>
                 <div layout="row" layout-padding>
@@ -50,7 +50,7 @@
             </form>
         </md-dialog-content>
 
-        <md-dialog-actions>
+        <md-dialog-actions layout-padding>
             <md-button ng-click="nfdCtrl.cancel()"
                        class="md-raised"
                        aria-label="Send">

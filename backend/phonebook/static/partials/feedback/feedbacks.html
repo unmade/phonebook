@@ -12,7 +12,7 @@
 
 
 <section layout layout-align="center start">
-    <md-content flex-gt-sm="70" class="pb-main-list md-whiteframe-2dp">
+    <md-content flex-gt-md="70" class="pb-main-list md-whiteframe-2dp">
         <div class="pb-main-list_header">
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Замечания и предложения</h3>
@@ -21,13 +21,15 @@
             <md-divider></md-divider>
         </div>
         <div layout="column">
-            <md-list>
+            <md-list infinite-scroll='ctrl.feedbacks.nextPage()'
+                     infinite-scroll-disabled='ctrl.feedbacks.busy'
+                     infinite-scroll-distance='1'>
                 <md-list-item ng-repeat="feedback in ctrl.feedbacks.results"
                               class="md-3-line">
                     <div class="md-list-item-text md-long-text">
                         <h4>{{ feedback.sender }}</h4>
                         <p>{{ feedback.created_at | date:'dd.MM.yyyy' }}</p>
-                        <p class="pb-pre-wrap" flex-xs="70" flex-sm="80" flex-gt-sm="90">{{ feedback.text }}</p>
+                        <p class="pb-pre-wrap" flex-xs="70" flex-sm="75" flex-gt-sm="85">{{ feedback.text }}</p>
                     </div>
                     <div class="md-secondary" flex>
                         <p class="pb-label" ng-class="{'pb-label-primary': feedback.status == 'NW',
@@ -50,3 +52,9 @@
     <new-feedback button-class="md-fab md-accent pb-fab-bottom-right"></new-feedback>
 
 </section>
+
+<md-progress-circular class="md-accent md-hue-1 pb-progress_circular"
+                      md-mode="indeterminate"
+                      md-diameter="60"
+                      ng-show="ctrl.feedbacks.busy">
+</md-progress-circular>

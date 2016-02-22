@@ -11,7 +11,7 @@
             <form ng-submit="ctrl.search(ctrl.searchText)" flex="50" flex-xs="70" flex-sm="60">
                 <md-autocomplete md-autofocus
                                  md-selected-item="ctrl.selectedItem"
-                                 md-selected-item-change="ctrl.showCompanyDetail(ctrl.selectedItem)"
+                                 md-selected-item-change="ctrl.openCompanyDetail(ctrl.selectedItem)"
                                  md-search-text="ctrl.searchText"
                                  md-items="item in ctrl.companySearch(ctrl.searchText)"
                                  md-item-text="item.name"
@@ -49,8 +49,8 @@
 
 
 <section layout layout-align="center start">
-    <md-content flex-sm="80" flex-gt-md="70" flex="100" class="employee-list md-whiteframe-2dp">
-        <div class="employee-list_header">
+    <md-content flex-sm="80" flex-gt-md="70" flex="100" class="pb-main-list md-whiteframe-2dp">
+        <div class="pb-main-list_header">
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Организации</h3>
                 <span flex></span>
@@ -67,7 +67,7 @@
             infinite-scroll-distance='1'>
             <md-grid-tile ng-repeat="company in ctrl.companies.results"
                           ng-click="ctrl.openCompanyDetail(company)"
-                          class="gray">
+                          class="pb-cursor-pointer">
                 <img ng-src="{{ company.logo }}" alt="Логотип" class="company-list_grid-logo"/>
                 <md-grid-tile-footer>
                     <h3>{{ company.name }}</h3>

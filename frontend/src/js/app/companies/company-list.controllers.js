@@ -10,7 +10,7 @@
     function CompanyListCtrl($q, $filter, $mdSidenav, companyService, companyScroll) {
         var self = this;
 
-        self.companies = new companyScroll({limit: 100, offset: 0});
+        self.companies = new companyScroll({limit: 40, offset: 0});
 
         self.companySearch = companySearch;
         self.closeCompanyDetail = closeCompanyDetail;

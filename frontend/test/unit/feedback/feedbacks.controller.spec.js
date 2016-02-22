@@ -26,15 +26,16 @@ describe('feedbacks.controllers', function() {
     describe('FeedbackListCtrl', function() {
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenGET('api/feedback/feedback/?limit=50&offset=0')
+            $httpBackend.whenGET('api/feedback/feedback/?limit=20&offset=0')
                         .respond(feedbackRespond.feedbacks);
             scope = $rootScope.$new();
             ctrl = $controller('FeedbackListCtrl', {$scope: scope});
         }));
 
         it('should fetch feedbacks list', function() {
+            ctrl.feedbacks.nextPage();
             $httpBackend.flush();
-            expect(ctrl.feedbacks).toEqualData(feedbackRespond.feedbacks);
+            expect(ctrl.feedbacks.results).toEqualData(feedbackRespond.feedbacks.results);
         });
     });
 

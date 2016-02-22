@@ -11,7 +11,7 @@
             <form ng-submit="ctrl.search(ctrl.searchText)" flex="50" flex-xs="70" flex-sm="60">
                 <md-autocomplete md-autofocus
                                  md-selected-item="ctrl.selectedItem"
-                                 md-selected-item-change="ctrl.showEmployeeDetail(ctrl.selectedItem)"
+                                 md-selected-item-change="ctrl.openEmployeeDetail(ctrl.selectedItem)"
                                  md-search-text="ctrl.searchText"
                                  md-items="item in ctrl.employeeSearch(ctrl.searchText)"
                                  md-item-text="item | toFullname "
@@ -97,8 +97,8 @@
 
 
 <div layout layout-align="center start">
-    <md-content flex-gt-md="70" class="employee-list md-whiteframe-2dp">
-        <div class="employee-list_header">
+    <md-content flex-gt-md="70" class="pb-main-list md-whiteframe-2dp">
+        <div class="pb-main-list_header">
             <div layout="row" layout-align="center center">
                 <h3 class="md-body-1">Сотрудники</h3>
                 <span flex></span>
@@ -119,7 +119,6 @@
                 <h3 class="md-title">По заданным критериям поиска сотрудников не найдено!</h3>
             </div>
         </div>
-
     </md-content>
 </div>
 

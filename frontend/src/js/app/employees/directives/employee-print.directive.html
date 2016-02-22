@@ -6,8 +6,8 @@
 
 <script type="text/ng-template" id="print-employee-dialog.tmpl.html">
 
-    <md-dialog aria-label="Print Employees" layout="column" class="pb-print-dialog">
-        <md-dialog-content flex>
+    <md-dialog aria-label="Print Employees" layout="column" class="pb-dialog">
+        <md-dialog-content flex layout-padding>
             <div layout="row">
                 <h1 class="md-title">Печать сотрудников</h1>
                 <span flex></span>
@@ -72,7 +72,7 @@
             </div>
         </md-dialog-content>
 
-        <md-dialog-actions>
+        <md-dialog-actions layout-padding>
             <md-button ng-click="printDialogCtrl.hide()"
                        class="md-raised"
                        aria-label="Send">
