@@ -19,7 +19,10 @@
                 <md-icon ng-if="$first">phone</md-icon>
                 <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
                     <h3>{{ phone.number }}</h3>
-                    <p>{{ phone.category }}</p>
+                    <p>
+                        {{ phone.category }}
+                        <span ng-show="phone.comment"> ({{ phone.comment }})</span>
+                    </p>
                 </div>
             </md-list-item>
             <md-list-item class="md-2-line"
@@ -27,7 +30,10 @@
                 <md-icon ng-if="$first">email</md-icon>
                 <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
                     <h3>{{ email.email }}</h3>
-                    <p>{{ email.category }}</p>
+                    <p>
+                        {{ email.category }}
+                        <span ng-show="email.comment"> ({{ email.comment }})</span>
+                    </p>
                 </div>
             </md-list-item>
         </md-list>

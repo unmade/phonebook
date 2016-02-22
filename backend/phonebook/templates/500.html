@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+    <title>Телефонный справочник</title>
+    <style>
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: #4688f1;
+            font: normal 16px Roboto, arial, sans-serif;
+        }
+
+        button {
+            -webkit-appearance: none;
+            -moz-appearance:    none;
+            appearance:         none;
+            border:             none;
+        }
+
+        .container {
+            height: 100%;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .container:before {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            width: 0;
+            /* adjust for white space between pseudo element and next sibling */
+            margin-right: -.25em;
+            /* stretch line height */
+            height: 100%;
+        }
+
+        .content {
+            display: inline-block;
+            vertical-align: middle;
+            white-space: normal;
+            text-align: center;
+        }
+
+        .content h1 {
+            color: rgba(255, 255, 255, 0.87);
+            font-size: 128pt;
+            padding: 0;
+            margin: 0;
+            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.27);
+        }
+
+        .content h2 {
+            color: rgba(255, 255, 255, 0.87);
+            margin-bottom: 100px;
+        }
+
+        .content img {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .content a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            line-height: 46px;
+            width: 156px;
+            height: 46px;
+            border: 1px solid #4285f4;
+            font-weight: bold;
+            outline: none;
+            background: #4285f4;
+            background: -webkit-linear-gradient(top, #4387fd, #4683ea);
+            background: linear-gradient(top, #4387fd, #4683ea);
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#4387fd, endColorstr=#4683ea, GradientType=0)
+        }
+
+        .content a:hover {
+            box-shadow: 0 2px 0 rgba(0, 0, 0, .15)
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>5 0 0</h1>
+            <h2>В работе приложения произошел сбой. Сообщите об этом разработчику</h2>
+            <a href="/">На главную</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

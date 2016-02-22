@@ -34,14 +34,20 @@
                 <md-icon ng-if="$first">phone</md-icon>
                 <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
                     <h4 >{{ phone.number | formatPhone }}</h4>
-                    <p>{{ phone.category }}</p>
+                    <p>
+                        {{ phone.category }}
+                        <span ng-show="phone.comment"> ({{ phone.comment }})</span>
+                    </p>
                 </div>
             </md-list-item>
             <md-list-item class="md-2-line" ng-repeat="email in employee.emails">
                 <md-icon ng-if="$first">email</md-icon>
                 <div class="md-list-item-text" ng-class="{'md-offset': !$first}">
                     <h4 >{{ email.email }}</h4>
-                    <p>{{ email.category }}</p>
+                    <p>
+                        {{ email.category }}
+                        <span ng-show="email.comment"> ({{ email.comment }})</span>
+                    </p>
                 </div>
             </md-list-item>
         </md-list>
