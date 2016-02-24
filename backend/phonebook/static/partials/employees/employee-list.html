@@ -50,7 +50,8 @@
                 <md-input-container>
                     <md-select ng-model="ctrl.selectedCompany"
                                md-on-open="ctrl.loadCompanies()"
-                               ng-change="ctrl.companyChanged()">
+                               ng-change="ctrl.companyChanged()"
+                               aria-label="Select Company">
                         <md-option ng-value="null">Предприятие</md-option>
                         <md-option ng-repeat="company in ctrl.companies.results" value="{{ company.id }}">
                             {{ company.name }}
@@ -61,7 +62,8 @@
                     <md-select ng-model="ctrl.selectedCenter"
                                ng-disabled="!ctrl.selectedCompany"
                                md-on-open="ctrl.loadCenters()"
-                               ng-change="ctrl.centerChanged()">
+                               ng-change="ctrl.centerChanged()"
+                               aria-label="Select Center">
                         <md-option ng-value="null">Центр</md-option>
                         <md-option ng-repeat="center in ctrl.centers.results" value="{{ center.id }}">
                             {{ center.number }} - {{ center.name }}
@@ -72,7 +74,8 @@
                     <md-select ng-model="ctrl.selectedDivision"
                                ng-disabled="!ctrl.selectedCenter"
                                md-on-open="ctrl.loadDivisions()"
-                               ng-change="ctrl.divisionChanged()">
+                               ng-change="ctrl.divisionChanged()"
+                               aria-label="Select Division">
                                <md-option ng-value="null">Отделение/отдел</md-option>
                         <md-option ng-repeat="division in ctrl.divisions.results" value="{{ division.id }}">
                             {{ division.number }} - {{ division.name }}
