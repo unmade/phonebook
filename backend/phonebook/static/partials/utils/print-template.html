@@ -1,107 +1,77 @@
-<style>
-    small {
-        color: #ccc;
-    }
-    ul {
-        list-style: none;
-    }
-    .contact {
-        padding-bottom: 25px;
-    }
-    .info {
-        float: left;
-        padding-right: 50px;
-        width: 350px;
-        max-width: 350px;
-    }
-    #contact br {
-        clear: both;
-    }
-    .page-break {
-        page-break-inside: avoid;
-    }
-</style>
+<!doctype html>
+<html ng-app="pbApp" ng-cloak>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Телефонный справочник</title>
 
+    <link href="/static/css/dependencies.min.css" rel="stylesheet" />
+    <link href="/static/css/pb-app.min.css" rel="stylesheet" />
 
-<div ng-if="companies.length">
-    <h2>Предприятия</h2>
-    <hr />
-    <div ng-repeat="company in companies | orderBy: 'name'" class="page-break">
-        <h3>{{ company.name }}</h3>
-        <p ng-show="company.address"><b>Адрес: </b>{{ company.address }}</p>
-        <p ng-show="company.comment"><small>Доп. инф: </small>{{ company.comment }}</p>
+    <style>
+        .page-break {
+            page-break-inside: avoid;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <md-content flex-gt-md="70" class="pb-main-list md-whiteframe-2dp">
+        <div class="pb-main-list_header">
+            <div layout="row" layout-align="center center">
+                <h3 class="md-body-1">Сотрудники</h3>
+                <span flex></span>
+            </div>
+            <md-divider></md-divider>
+        </div>
 
         <div>
-            <div ng-if="company.phones[0]">
-                <p><small>Телефоны:</small></p>
-                <p ng-repeat="phone in company.phones | orderBy: 'category'">
-                    <span class="text-muted">{{ phone.category }}:</span> {{ phone.number }}
-                </p>
+
+            <div ng-repeat="employee in employees" class="page-break">
+                <div layout="row" layout-padding layout-align="start center" class="employee-list-item">
+                    <div flex="33">
+                        <h4 class="md-subhead">{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
+                        <p class="md-caption pb-text-muted">{{ employee.position }}</p>
+                    </div>
+
+                    <div layout="row" layout-xs="column" class="employee-list-item_contacts" flex="35">
+                        <md-list flex>
+                            <md-list-item ng-repeat="phone in employee.phones | orderBy: 'category'">
+                                <md-tooltip md-direction="left">{{ phone.category }}</md-tooltip>
+                                <p>{{ phone.category }}: {{ phone.number | formatPhone }}</p>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+
+                    <div class="employee-list-item_contacts" >
+                        <md-list>
+                            <md-list-item ng-repeat="email in employee.emails">
+                                <md-tooltip md-direction="left">{{ email.category }}</md-tooltip>
+                                <p>{{ email.email }}</p>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                    <span flex></span>
+
+                    <div class="employee-list-item_company" ng-show="employee.company">
+                        <md-tooltip>
+                            {{ employee.company.name }}
+                        </md-tooltip>
+                        <img ng-src="{{ employee.company.logo }}" alt="{{ employee.company.name }}" />
+                        <p class="pb-text-muted" hide-xs hide-sm>
+                            {{ employee.center.number }}
+                            <md-icon ng-show="employee.division">chevron_right</md-icon>
+                            {{ employee.division.number }}
+                        </p>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
             </div>
-            <div ng-if="company.emails[0]">
-                <p><small>Электронные адреса:</small></p>
-                <p ng-repeat="email in company.emails">
-                    <span class="text-muted">{{ email.category }}:</span> {{ email.email }}
-                </p>
-            </div>
+
         </div>
-        <br /><br />
-    </div>
-    <br/ ><p style="page-break-after: always;"> </p>
-</div>
+    </md-content>
 
-
-<h2 ng-if="employees.length > 0">Сотрудники</h2>
-<hr />
-<div ng-repeat="employee in employees | orderBy: 'surname'" class="page-break contact">
-    <h3>{{ employee.surname }}
-        <small>{{ employee.firstname }} {{ employee.patronymic }}</small>
-    </h3>
-
-    <div class="info">
-        <p ng-if="employee.birthday">
-            <small>День рождения:</small> {{ employee.birthday | date:'dd.MM.yyyy' }}
-        </p>
-
-        <p ng-if"employee.position"><small>Должность:</small> {{ employee.position }}</p>
-
-        <div><small>Место работы: </small>
-            <table>
-                <tr ng-if="employee.company">
-                    <td><small>Предприятие:</small></td>
-                    <td>{{ employee.company.name }}</td>
-                </tr>
-                <tr ng-if="employee.center">
-                    <td><small>Центр:</small></td>
-                    <td>{{ employee.center.number }} - {{ employee.center.name }}</td>
-                </tr>
-                <tr ng-if="employee.division">
-                    <td><small>Отдел:<small></td>
-                    <td>{{ employee.division.number }} - {{ employee.division.name }}</td>
-                </tr>
-                <tr ng-if="employee.place">
-                    <td><small>Рабочее место:<small></td>
-                    <td>{{ employee.place }}</td>
-                </tr>
-            </table>
-        </div>
-
-        <p ng-if="employee.comment"><small>Доп. инф: </small>{{ employee.comment }}</p>
-    </div>
-
-    <div>
-        <div ng-if="employee.phones[0]">
-            <p><small>Телефоны:</small></p>
-            <p ng-repeat="phone in employee.phones | orderBy: 'category'">
-                <span class="text-muted">{{ phone.category }}:</span> {{ phone.number }}
-            </p>
-        </div>
-        <div ng-if="employee.emails[0]">
-            <p><small>Электронные адреса:</small></p>
-            <p ng-repeat="email in employee.emails">
-                <span class="text-muted">{{ email.category }}:</span> {{ email.email }}
-            </p>
-        </div>
-    </div>
-    <br />
-</div>
+</body>
+</html>

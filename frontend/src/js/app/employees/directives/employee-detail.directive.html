@@ -57,7 +57,10 @@
         <md-list>
             <md-list-item class="md-1-line" ng-show="employee.birthday">
                 <md-icon class="pb-avatar-icon">cake</md-icon>
-                <p>{{ employee.birthday | date:'dd.MM.yyyy' }}</p>
+                <p>
+                    {{ employee.birthday | date:'dd.MM.yyyy' }}
+                    ({{ employee.birthday | age | agePlural }})
+                </p>
             </md-list-item>
 
             <md-list-item class="md-1-line"

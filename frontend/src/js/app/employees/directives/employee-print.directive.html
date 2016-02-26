@@ -73,7 +73,12 @@
         </md-dialog-content>
 
         <md-dialog-actions layout-padding>
+            <md-progress-circular md-mode="indeterminate"
+                                  md-diameter="40"
+                                  ng-show="printDialogCtrl.busy">
+            </md-progress-circular>
             <md-button ng-click="printDialogCtrl.hide()"
+                       ng-disabled="printDialogCtrl.busy"
                        class="md-raised"
                        aria-label="Cancel">
                 Отмена
@@ -81,9 +86,9 @@
             <md-button class="md-raised md-primary"
                        aria-label="Print"
                        ng-click="printDialogCtrl.print()"
-                       ng-hide="printDialogCtrl.busy"
                        ng-disabled="printDialogCtrl.type === 'custom' && !printDialogCtrl.selectedEmployees.length
-                                    || printDialogCtrl.type === 'by_company' && !printDialogCtrl.selectedCompany">
+                                    || printDialogCtrl.type === 'by_company' && !printDialogCtrl.selectedCompany
+                                    || printDialogCtrl.busy">
                 Печать
             </md-button>
         </md-dialog-action>
