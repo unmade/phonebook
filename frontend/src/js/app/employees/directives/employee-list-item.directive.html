@@ -1,7 +1,10 @@
 <div layout="row" layout-padding layout-align="start center" class="employee-list-item">
     <div flex="33" flex-xs="40" flex-sm="25">
         <h4 class="md-subhead">{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
-        <p class="md-caption pb-text-muted">{{ employee.position }}</p>
+        <p class="md-caption pb-text-muted" ng-hide="employee.is_retired">{{ employee.position }}</p>
+        <p class="md-caption pb-text-muted" ng-show="employee.is_retired">
+            Уволился (На момент увольнения: {{ employee.position }})
+        </p>
     </div>
 
     <div layout="row" layout-xs="column" class="employee-list-item_contacts" flex="35" flex-xs="55" flex-sm="50">

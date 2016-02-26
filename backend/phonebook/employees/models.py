@@ -75,7 +75,8 @@ class Employee(models.Model):
     phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')
     emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name='Эл. адреса')
     boss = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL,
-                             related_name='secretary', verbose_name='Руководитель')
+                             related_name='secretary', verbose_name='Является секретарем у')
+    is_retired = models.BooleanField(default=False, verbose_name="Числится уволеным")
     objects = models.Manager()
     related_objects = EmployeeManager()
 

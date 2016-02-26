@@ -32,7 +32,7 @@ class EmployeeAdmin(admin.ModelAdmin):
             'fields': ('surname', 'firstname', 'patronymic', 'birthday', 'comment')
         }),
         ('Место работы', {
-            'fields': ('company', 'center', 'division', 'position', 'place', 'boss')
+            'fields': ('company', 'center', 'division', 'position', 'place', 'boss', 'is_retired')
         }),
         ('Контакты', {
             'classes': ('admin-short-label', ),
@@ -42,7 +42,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     filter_vertical = ('phones', 'emails')
     form = autocomplete_light.modelform_factory(Employee, exclude=[])
     list_display = ('surname', 'firstname', 'company', 'center', 'division')
-    list_filter = ('company', 'center', 'division')
+    list_filter = ('is_retired', 'company', 'center', 'division')
     list_select_related = ('surname', 'firstname', 'company', 'center', 'division')
     search_fields = ('surname__name', 'firstname__name')
     ordering = ('surname', 'firstname')

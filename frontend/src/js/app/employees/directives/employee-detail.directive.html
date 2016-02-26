@@ -5,7 +5,10 @@
                 {{ employee.surname }}
                 <span class="md-title">{{ employee.firstname }} {{ employee.patronymic }}</span>
             </h3>
-            <p class="md-body-1">{{ employee.position }}</p>
+            <p class="md-body-1" ng-hide="employee.is_retired">{{ employee.position }}</p>
+            <p class="md-body-1" ng-show="employee.is_retired">
+                Уволился (На момент увольнения: {{ employee.position }})
+            </p>
             <div>
                 <p class="md-caption">
                     {{ employee.company.name }}
