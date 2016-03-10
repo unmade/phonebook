@@ -7,7 +7,7 @@ from contacts.models import Email, Phone
 class CompanyManager(models.Manager):
     def get_queryset(self):
         queryset = super(CompanyManager, self).get_queryset()
-        return queryset.select_related('ceo__surname', 'ceo__firstname', 'ceo__patronymic')\
+        return queryset.select_related('ceo__surname', 'ceo__firstname', 'ceo__patronymic', 'ceo__position')\
                        .prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
 
 

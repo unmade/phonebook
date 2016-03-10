@@ -29,9 +29,9 @@
 
         <div>
 
-            <div ng-repeat="employee in employees" class="page-break">
+            <div ng-repeat="employee in employees | orderBy: sortBy" class="page-break">
                 <div layout="row" layout-padding layout-align="start center" class="employee-list-item">
-                    <div flex="33">
+                    <div flex="25">
                         <h4 class="md-subhead">{{ employee.surname }} {{ employee.firstname }} {{ employee.patronymic }}</h4>
                         <p class="md-caption pb-text-muted">{{ employee.position }}</p>
                     </div>
@@ -45,7 +45,7 @@
                         </md-list>
                     </div>
 
-                    <div class="employee-list-item_contacts" >
+                    <div class="employee-list-item_contacts">
                         <md-list>
                             <md-list-item ng-repeat="email in employee.emails">
                                 <md-tooltip md-direction="left">{{ email.category }}</md-tooltip>
@@ -56,16 +56,14 @@
                     <span flex></span>
 
                     <div class="employee-list-item_company" ng-show="employee.company">
-                        <md-tooltip>
-                            {{ employee.company.name }}
-                        </md-tooltip>
                         <img ng-src="{{ employee.company.logo }}" alt="{{ employee.company.name }}" />
-                        <p class="pb-text-muted" hide-xs hide-sm>
-                            {{ employee.center.number }}
-                            <md-icon ng-show="employee.division">chevron_right</md-icon>
-                            {{ employee.division.number }}
-                        </p>
+                        <p class="pb-text-muted" ng-show="employee.place">{{ employee.place }}</p>
                     </div>
+                </div>
+                <div ng-if="employee.comment.length">
+                    <p class="pb-text-muted">
+                        Примечание: {{ employee.comment }}
+                    </p>
                 </div>
                 <md-divider ng-if="!$last"></md-divider>
             </div>

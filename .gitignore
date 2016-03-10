@@ -45,7 +45,9 @@ Desktop.ini
 bower_components
 node_modules
 
-# Contacts
+# Phonebook
 media
 initial_data.json
 phonebook_db.sql
+phonebook_local_20160305.sql
+secrets.json

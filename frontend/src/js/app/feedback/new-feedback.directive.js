@@ -60,7 +60,7 @@
             $mdDialog.show({
                 templateUrl: 'new-feedback-dialog.tmpl.html',
                 targetEvent: ev,
-                clickOutsideToClose: true,
+                clickOutsideToClose: false,
                 controller: newFeedbackDialogCtrl,
                 controllerAs: 'nfdCtrl',
                 fullscreen: true

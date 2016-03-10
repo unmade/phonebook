@@ -1,11 +1,23 @@
 from rest_framework import serializers
 
 from contacts.serializers import PhoneSerializer, EmailSerializer
+from employees.models import Employee
 from .models import Company, Center, Division
 
 
+class EmployeeShortSerializer(serializers.ModelSerializer):
+    firstname = serializers.StringRelatedField()
+    patronymic = serializers.StringRelatedField()
+    surname = serializers.StringRelatedField()
+    position = serializers.StringRelatedField()
+
+    class Meta:
+        model = Employee
+        fields = ('id', 'firstname', 'patronymic', 'surname', 'position')
+
+
 class CompanySerializer(serializers.ModelSerializer):
-    ceo = serializers.StringRelatedField()
+    ceo = EmployeeShortSerializer()
     phones = PhoneSerializer(many=True)
     emails = EmailSerializer(many=True)
 

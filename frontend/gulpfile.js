@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     less = require('gulp-less'),
     minifyCss = require('gulp-minify-css'),
+    sourcemaps = require('gulp-sourcemaps'),
     templateCache = require('gulp-angular-templatecache'),
     uglify = require('gulp-uglify'),
     path = require('path');
@@ -108,8 +109,10 @@ gulp.task('app-scripts', [
     'layout-templates'
 ], function() {
   return gulp.src(paths.appScripts)
-    .pipe(uglify())
-    .pipe(concat('pb-app.min.js'))
+    .pipe(sourcemaps.init())
+      .pipe(uglify())
+      .pipe(concat('pb-app.min.js'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/js'));
 });
 

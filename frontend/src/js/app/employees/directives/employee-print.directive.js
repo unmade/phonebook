@@ -27,7 +27,7 @@
                 templateUrl: 'print-employee-dialog.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
-                clickOutsideToClose: true,
+                clickOutsideToClose: false,
                 fullscreen: true
             });
         }
@@ -46,6 +46,21 @@
         self.selectedCompany = null;
         self.selectedItem = null;
         self.searchText = null;
+        self.sortBy = null;
+        self.sortOptions = [
+            {
+                name: 'По фамилии',
+                value: 'surname, firstname, patronymic'
+            },
+            {
+                name: 'По организации',
+                value: 'company.name'
+            },
+            {
+                name: 'По организации, затем по фамилии',
+                value: 'company.name, surname'
+            }
+        ];
 
         self.employeeSearch = employeeSearch;
         self.hide = hide;
@@ -80,7 +95,8 @@
                     printerService.print(
                         '/static/partials/utils/print-template.html',
                         {
-                            employees: employees
+                            employees: employees,
+                            sortBy: self.sortBy.split(',')
                         }
                     );
                     self.busy = false;

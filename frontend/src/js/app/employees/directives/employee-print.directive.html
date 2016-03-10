@@ -25,6 +25,18 @@
                 </md-radio-group>
             </div>
 
+
+            <div>
+                <h2 class="md-subhead">Выберите порядок сортировки</h2>
+                <md-select ng-model="printDialogCtrl.sortBy" placeholder="Порядок сортировки"
+                           class="pb-print-dialog_search" aria-label="Select Order">
+                    <md-option ng-repeat="sortOption in printDialogCtrl.sortOptions"
+                               value="{{ sortOption.value }}" selected="sortOption.selected">
+                        {{ sortOption.name }}
+                    </md-option>
+                </md-select>
+            </div>
+
             <div ng-show="printDialogCtrl.type === 'custom'">
                 <h2 class="md-subhead">Выберите сотрудников</h2>
                 <md-chips ng-model="printDialogCtrl.selectedEmployees" md-autocomplete-snap
