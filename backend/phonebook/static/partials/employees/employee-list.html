@@ -23,7 +23,9 @@
                     <md-item-template>
                         <span class="pb-float-left">
                             <span class="item-title">
-                                <span>{{ item | toFullname }}</span>
+                                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
+                                    {{ item | toFullname }}
+                                </span>
                             </span>
                             <span class="item-metadata">
                                 <span class="item-metastat pb-text-muted">
