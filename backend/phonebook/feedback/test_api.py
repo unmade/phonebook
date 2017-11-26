@@ -1,10 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-
 from rest_framework import status
 
 from .models import Feedback
-from .serializers import FeedbackSerializer
 
 
 class FeedbackTest(TestCase):

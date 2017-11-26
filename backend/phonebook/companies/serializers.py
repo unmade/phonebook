@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from contacts.serializers import PhoneSerializer, EmailSerializer
+from contacts.serializers import EmailSerializer, PhoneSerializer
 from employees.models import Employee
-from .models import Company, Center, Division
+from .models import Center, Company, Division
 
 
 class EmployeeShortSerializer(serializers.ModelSerializer):
@@ -23,6 +23,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
+        fields = serializers.ALL_FIELDS
 
 
 class CenterSerializer(serializers.ModelSerializer):
@@ -32,6 +33,7 @@ class CenterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Center
+        fields = serializers.ALL_FIELDS
 
 
 class DivisionSerializer(serializers.ModelSerializer):
@@ -41,21 +43,25 @@ class DivisionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Division
+        fields = serializers.ALL_FIELDS
 
 
 class CompanyShortSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Company
         fields = ('id', 'name', 'logo')
 
 
 class CenterShortSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Center
         fields = ('id', 'number', 'name')
 
 
 class DivisionShortSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Division
         fields = ('id', 'number', 'name')

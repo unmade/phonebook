@@ -4,6 +4,7 @@ from autocomplete_light import shortcuts as autocomplete_light
 
 from .models import FirstName, Patronymic, Surname, Position, Employee
 
+
 # Register your models here.
 @admin.register(FirstName)
 class FirstNameAdmin(admin.ModelAdmin):

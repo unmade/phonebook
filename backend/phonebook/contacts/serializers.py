@@ -8,6 +8,7 @@ class PhoneSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Phone
+        fields = serializers.ALL_FIELDS
 
 
 class EmailSerializer(serializers.ModelSerializer):
@@ -15,3 +16,4 @@ class EmailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Email
+        fields = serializers.ALL_FIELDS

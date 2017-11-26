@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 
-from contacts.models import Email, Phone
 
 # Create your models here.
 class CompanyManager(models.Manager):

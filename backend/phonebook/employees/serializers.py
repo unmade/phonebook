@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
-from contacts.serializers import PhoneSerializer, EmailSerializer
-from companies.serializers import CompanyShortSerializer, CenterShortSerializer,\
-                                  DivisionShortSerializer, EmployeeShortSerializer
+from companies.serializers import (
+    CenterShortSerializer, CompanyShortSerializer, DivisionShortSerializer, EmployeeShortSerializer
+)
+from contacts.serializers import EmailSerializer, PhoneSerializer
 from .models import Employee
 
 
