@@ -1,0 +1,45 @@
+version: "3.3"
+
+services:
+
+  backend:
+    restart: always
+    build: ./backend
+    expose:
+      - "8000"
+    links:
+      - db:db
+    env_file:
+      - ./secrets/django.env
+      - ./secrets/db.env
+    volumes:
+      - ./backend:/home/phonebook/backend
+    depends_on:
+      - db
+    entrypoint: /home/phonebook/backend/entrypoint.sh
+
+  db:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./backups/postresql:/backup
+      - dbdata:/var/lib/postgresql
+    env_file:
+      - ./secrets/db.env
+    expose:
+      - "5432"
+
+  nginx:
+    restart: always
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend:/home/phonebook/backend
+      - ./nginx:/etc/nginx/conf.d/
+    links:
+      - backend:backend
+
+volumes:
+  dbdata:

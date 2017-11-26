@@ -8,7 +8,6 @@ STATICFILES_DIRS = (
     os.path.normpath(os.path.join(SITE_ROOT, 'static')),
 )
 
-######### TOOLBAR CONFIGURATION
 # See: http://django-debug-toolbar.readthedocs.org/en/latest/installation.html#explicit-setup
 INSTALLED_APPS += (
     'debug_toolbar',
@@ -26,4 +25,4 @@ DEBUG_TOOLBAR_CONFIG = {
 
 # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
 INTERNAL_IPS = ('127.0.0.1',)
-########## END TOOLBAR CONFIGURATION
+
