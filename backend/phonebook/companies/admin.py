@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CompanyCategory, Company, Center, Division
+from .models import Center, Company, CompanyCategory, Division
 
 
 @admin.register(Company)

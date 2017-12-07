@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import FirstName, Patronymic, Surname, Position, Employee
+from .models import Employee, FirstName, Patronymic, Position, Surname
 
 
 # Register your models here.

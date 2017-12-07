@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from .models import Company, Center, Division
-from .serializers import CompanySerializer, CenterSerializer, DivisionSerializer
+from .models import Center, Company, Division
+from .serializers import CenterSerializer, CompanySerializer, DivisionSerializer
 
 
 class CompanyListAPIView(generics.ListAPIView):

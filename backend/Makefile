@@ -1,8 +1,14 @@
+PROJECT_NAME = phonebook
+
+
 runserver:
-	python phonebook/manage.py runserver --settings=phonebook.settings.local
+	python $(PROJECT_NAME)/manage.py runserver --settings=$(PROJECT_NAME).settings.local
 
 test:
-	python phonebook/manage.py test phonebook --settings=phonebook.settings.local
+	python $(PROJECT_NAME)/manage.py test $(PROJECT_NAME) --settings=$(PROJECT_NAME).settings.local
 
 lint:
-	pylint phonebook/* --rcfile=.pylintrc --disable=C0111 --load-plugins=pylint_django
+	pylint $(PROJECT_NAME)/*
+
+isort:
+	isort -r $(PROJECT_NAME)

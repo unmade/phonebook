@@ -1,9 +1,9 @@
 import json
 
-from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
 
-from .models import FirstName, Patronymic, Surname, Employee
+from .models import Employee, FirstName, Patronymic, Surname
 from .serializers import EmployeeSerializer
 
 

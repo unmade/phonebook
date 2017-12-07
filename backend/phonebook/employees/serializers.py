@@ -4,6 +4,7 @@ from companies.serializers import (
     CenterShortSerializer, CompanyShortSerializer, DivisionShortSerializer, EmployeeShortSerializer
 )
 from contacts.serializers import EmailSerializer, PhoneSerializer
+
 from .models import Employee
 
 
