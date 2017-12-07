@@ -1,5 +1,5 @@
-from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
 from rest_framework import status
 
 from .models import Feedback
@@ -11,7 +11,7 @@ class FeedbackTest(TestCase):
         Feedback.objects.get_or_create(sender='Adam Smith', text='Please, add something new!', status='DF')
         Feedback.objects.get_or_create(sender='John Doe', text='Nice job, again!')
 
-        self.list_url = reverse('api:feedback-list')
+        self.list_url = reverse('feedback:api:feedback-list')
 
     def test_list(self):
         response = self.client.get(self.list_url)

@@ -59,7 +59,6 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'companies',
     'contacts',
-    'core',
     'employees',
     'feedback',
 )
@@ -73,7 +72,7 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(SITE_ROOT, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -13,7 +13,6 @@ class CompanyAdmin(admin.ModelAdmin):
             'fields': ('full_name', 'short_name', 'logo', 'comment',)
         }),
         ('Контакты', {
-            'classes': ('admin-short-label', ),
             'fields': ('address', ('phones', 'emails'))
         })
     )
@@ -30,7 +29,6 @@ class CenterAdmin(admin.ModelAdmin):
             'fields': ('number', 'name', 'head', 'company', 'comment')
         }),
         ('Контакты', {
-            'classes': ('admin-short-label', ),
             'fields': (('phones', 'emails'), )
         })
     )
@@ -50,7 +48,6 @@ class DivisionAdmin(admin.ModelAdmin):
             'fields': ('number', 'name', 'head', 'center', 'comment')
         }),
         ('Контакты', {
-            'classes': ('admin-short-label', ),
             'fields': (('phones', 'emails'), )
         })
     )

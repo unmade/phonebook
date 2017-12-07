@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from .base import *
+from .base import *  # pylint: disable=wildcard-import,unused-wildcard-import
 
 DEBUG = True
 
@@ -25,4 +25,3 @@ DEBUG_TOOLBAR_CONFIG = {
 
 # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
 INTERNAL_IPS = ('127.0.0.1',)
-

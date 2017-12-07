@@ -8,7 +8,9 @@ from django.views import generic
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^api/', include('core.api', namespace='api')),
+    url(r'^companies/', include('companies.urls', namespace='companies')),
+    url(r'^feedback/', include('feedback.urls', namespace='feedback')),
+    url(r'^employees/', include('employees.urls', namespace='employees')),
     url(r'^$', generic.TemplateView.as_view(template_name='index.html'))
 ]
 

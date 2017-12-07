@@ -2,7 +2,6 @@ from django.urls import reverse
 from django.db import models
 
 
-# Create your models here.
 class FirstName(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name='Имя')
 
@@ -75,7 +74,9 @@ class Employee(models.Model):
     division = models.ForeignKey(
         'companies.Division', null=True, blank=True, verbose_name='Отделение/Отдел', on_delete=models.SET_NULL
     )
-    position = models.ForeignKey('Position', null=True, blank=True, verbose_name='Должность', on_delete=models.SET_NULL)
+    position = models.ForeignKey(
+        'Position', null=True, blank=True, verbose_name='Должность', on_delete=models.SET_NULL
+    )
     place = models.CharField(max_length=255, blank=True, verbose_name='Рабочее место')
     comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
     phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')
