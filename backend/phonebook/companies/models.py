@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-# Create your models here.
 class CompanyManager(models.Manager):
     def get_queryset(self):
         queryset = super(CompanyManager, self).get_queryset()

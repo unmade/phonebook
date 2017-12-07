@@ -5,7 +5,7 @@ runserver:
 	python $(PROJECT_NAME)/manage.py runserver --settings=$(PROJECT_NAME).settings.local
 
 test:
-	python $(PROJECT_NAME)/manage.py test $(PROJECT_NAME) --settings=$(PROJECT_NAME).settings.local
+	pytest $(PROJECT_NAME)
 
 lint:
 	pylint $(PROJECT_NAME)/*
