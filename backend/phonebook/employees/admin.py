@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from autocomplete_light import shortcuts as autocomplete_light
-
 from .models import FirstName, Patronymic, Surname, Position, Employee
 
 
@@ -41,9 +39,9 @@ class EmployeeAdmin(admin.ModelAdmin):
         })
     )
     filter_vertical = ('phones', 'emails')
-    form = autocomplete_light.modelform_factory(Employee, exclude=[])
     list_display = ('surname', 'firstname', 'company', 'center', 'division')
     list_filter = ('is_retired', 'company', 'center', 'division')
     list_select_related = ('surname', 'firstname', 'company', 'center', 'division')
+    autocomplete_fields = ['surname', 'firstname', 'patronymic', 'company', 'center', 'division', 'boss', 'position']
     search_fields = ('surname__name', 'firstname__name')
     ordering = ('surname', 'firstname')

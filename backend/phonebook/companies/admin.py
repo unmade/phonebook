@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from autocomplete_light import shortcuts as autocomplete_light
-
 from .models import CompanyCategory, Company, Center, Division
 
 
@@ -20,9 +18,9 @@ class CompanyAdmin(admin.ModelAdmin):
         })
     )
     filter_vertical = ('phones', 'emails')
-    form = autocomplete_light.modelform_factory(Company, exclude=[])
     list_display = ('name', 'ceo')
     search_fields = ('name', 'full_name', 'short_name')
+    autocomplete_fields = ['ceo']
 
 
 @admin.register(Center)
@@ -37,12 +35,12 @@ class CenterAdmin(admin.ModelAdmin):
         })
     )
     filter_vertical = ('phones', 'emails')
-    form = autocomplete_light.modelform_factory(Center, exclude=[])
     list_display = ('number', 'name', 'company', 'head')
     list_display_links = ('number', 'name')
     list_filter = ('company__name', )
     list_select_related = ('company', )
     search_fields = ('number', 'name')
+    autocomplete_fields = ['head']
 
 
 @admin.register(Division)
@@ -57,12 +55,12 @@ class DivisionAdmin(admin.ModelAdmin):
         })
     )
     filter_vertical = ('phones', 'emails')
-    form = autocomplete_light.modelform_factory(Division, exclude=[])
     list_display = ('number', 'name', 'center', 'head')
     list_display_links = ('number', 'name')
     list_filter = ('center', )
     list_select_related = ('center', )
     search_fields = ('number', 'name')
+    autocomplete_fields = ['head']
 
 
 admin.site.register(CompanyCategory)

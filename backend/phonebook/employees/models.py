@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
 
@@ -60,14 +60,22 @@ class EmployeeManager(models.Manager):
 
 
 class Employee(models.Model):
-    surname = models.ForeignKey('Surname', null=True, blank=True, verbose_name='Фамилия')
-    firstname = models.ForeignKey('FirstName', null=True, blank=True, verbose_name='Имя')
-    patronymic = models.ForeignKey('Patronymic', null=True, blank=True, verbose_name='Отчество')
+    surname = models.ForeignKey('Surname', null=True, blank=True, verbose_name='Фамилия', on_delete=models.SET_NULL)
+    firstname = models.ForeignKey('FirstName', null=True, blank=True, verbose_name='Имя', on_delete=models.SET_NULL)
+    patronymic = models.ForeignKey(
+        'Patronymic', null=True, blank=True, verbose_name='Отчество', on_delete=models.SET_NULL
+    )
     birthday = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
-    company = models.ForeignKey('companies.Company', null=True, blank=True, verbose_name='Предприятие')
-    center = models.ForeignKey('companies.Center', null=True, blank=True, verbose_name='Центр')
-    division = models.ForeignKey('companies.Division', null=True, blank=True, verbose_name='Отделение/Отдел')
-    position = models.ForeignKey('Position', null=True, blank=True, verbose_name='Должность')
+    company = models.ForeignKey(
+        'companies.Company', null=True, blank=True, verbose_name='Предприятие', on_delete=models.SET_NULL
+    )
+    center = models.ForeignKey(
+        'companies.Center', null=True, blank=True, verbose_name='Центр', on_delete=models.SET_NULL
+    )
+    division = models.ForeignKey(
+        'companies.Division', null=True, blank=True, verbose_name='Отделение/Отдел', on_delete=models.SET_NULL
+    )
+    position = models.ForeignKey('Position', null=True, blank=True, verbose_name='Должность', on_delete=models.SET_NULL)
     place = models.CharField(max_length=255, blank=True, verbose_name='Рабочее место')
     comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
     phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')

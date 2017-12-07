@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='Название')
@@ -15,7 +16,7 @@ class Category(models.Model):
 
 class Email(models.Model):
     email = models.EmailField(unique=True, verbose_name='Эл. адрес')
-    category = models.ForeignKey('Category', verbose_name='Категория')
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
     comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
 
     class Meta:
@@ -29,7 +30,7 @@ class Email(models.Model):
 
 class Phone(models.Model):
     number = models.CharField(max_length=20, unique=True, verbose_name='Номер')
-    category = models.ForeignKey('Category', verbose_name='Категория')
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
     comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
 
     class Meta:

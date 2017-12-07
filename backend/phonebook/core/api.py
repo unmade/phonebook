@@ -4,6 +4,8 @@ from companies import views as companies_views
 from employees import views as employees_views
 from feedback import views as feedback_views
 
+app_name = 'core'
+
 
 urlpatterns = [
     url(r'^companies/company/$', companies_views.CompanyListAPIView.as_view(), name='company-list'),

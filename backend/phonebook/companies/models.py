@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
 
@@ -40,7 +40,9 @@ class CompanyCategory(models.Model):
 class Company(models.Model):
     ceo = models.ForeignKey('employees.Employee', null=True, blank=True, on_delete=models.SET_NULL,
                             related_name='company_ceo', verbose_name='Руководитель')
-    category = models.ForeignKey('CompanyCategory', null=True, blank=True, verbose_name='Тип предприятия')
+    category = models.ForeignKey(
+        'CompanyCategory', null=True, blank=True, verbose_name='Тип предприятия', on_delete=models.SET_NULL
+    )
     name = models.CharField(max_length=255, verbose_name='Название')
     full_name = models.TextField(verbose_name='Полное название', blank=True)
     short_name = models.CharField(max_length=255, verbose_name='Сокращенное название', blank=True)
@@ -65,7 +67,7 @@ class Company(models.Model):
 
 
 class Center(models.Model):
-    company = models.ForeignKey('Company', verbose_name='Предприятие')
+    company = models.ForeignKey('Company', verbose_name='Предприятие', on_delete=models.CASCADE)
     head = models.ForeignKey('employees.Employee', null=True, blank=True, on_delete=models.SET_NULL,
                              related_name='center_head', verbose_name="Начальник")
     number = models.CharField(max_length=10, verbose_name='Номер')
@@ -89,7 +91,7 @@ class Center(models.Model):
 
 
 class Division(models.Model):
-    center = models.ForeignKey('Center', verbose_name='Центр')
+    center = models.ForeignKey('Center', verbose_name='Центр', on_delete=models.CASCADE)
     head = models.ForeignKey('employees.Employee', null=True, blank=True, on_delete=models.SET_NULL,
                              related_name='division_head', verbose_name='Начальник')
     number = models.CharField(max_length=10, verbose_name='Номер')
