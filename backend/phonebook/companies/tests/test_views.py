@@ -9,13 +9,13 @@ class TestCompanyListAPIView:
 
     @pytest.mark.django_db
     def test_response_status_code(self, client, company_factory):
-        company_factory.create_batch(5)
+        company_factory.create_batch(5, ceo__boss=None)
         response = client.get(self.url)
         assert response.status_code == 200
 
     @pytest.mark.django_db
     def test_num_queries(self, client, django_assert_num_queries, company_factory):
-        company_factory.create_batch(5)
+        company_factory.create_batch(5, ceo__boss=None)
 
         with django_assert_num_queries(6):
             client.get(self.url)
@@ -25,7 +25,7 @@ class TestCompanyRetrieveAPIView:
 
     @pytest.fixture
     def company(self, company_factory):
-        return company_factory.create()
+        return company_factory.create(ceo__boss=None)
 
     @pytest.mark.django_db
     def test_response_status_code(self, client, company):
@@ -45,13 +45,13 @@ class TestCenterListAPIView:
 
     @pytest.mark.django_db
     def test_response_status_code(self, client, center_factory):
-        center_factory.create_batch(5)
+        center_factory.create_batch(5, head__boss=None, company__ceo__boss=None)
         response = client.get(self.url)
         assert response.status_code == 200
 
     @pytest.mark.django_db
     def test_num_queries(self, client, django_assert_num_queries, center_factory):
-        center_factory.create_batch(5)
+        center_factory.create_batch(5, head__boss=None, company__ceo__boss=None)
 
         with django_assert_num_queries(6):
             client.get(self.url)
@@ -61,7 +61,7 @@ class TestCenterRetrieveAPIView:
 
     @pytest.fixture
     def center(self, center_factory):
-        return center_factory.create()
+        return center_factory.create(head__boss=None, company__ceo__boss=None)
 
     @pytest.mark.django_db
     def test_response_status_code(self, client, center):
@@ -81,13 +81,13 @@ class TestDivisionListAPIView:
 
     @pytest.mark.django_db
     def test_response_status_code(self, client, division_factory):
-        division_factory.create_batch(5)
+        division_factory.create_batch(5, head__boss=None, center__head__boss=None, center__company__ceo__boss=None)
         response = client.get(self.url)
         assert response.status_code == 200
 
     @pytest.mark.django_db
     def test_num_queries(self, client, django_assert_num_queries, division_factory):
-        division_factory.create_batch(5)
+        division_factory.create_batch(5, head__boss=None, center__head__boss=None, center__company__ceo__boss=None)
 
         with django_assert_num_queries(6):
             client.get(self.url)
@@ -97,7 +97,7 @@ class TestDivisionRetrieveAPIView:
 
     @pytest.fixture
     def division(self, division_factory):
-        return division_factory.create()
+        return division_factory.create(head__boss=None, center__head__boss=None, center__company__ceo__boss=None)
 
     @pytest.mark.django_db
     def test_response_status_code(self, client, division):

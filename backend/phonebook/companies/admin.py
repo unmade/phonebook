@@ -11,7 +11,7 @@ class CompanyAdmin(admin.ModelAdmin):
             'fields': ('name', 'ceo', 'category')
         }),
         (_('Additional info'), {
-            'fields': ('full_name', 'short_name', 'logo', 'comment',)
+            'fields': ('full_name', 'short_name', 'logo', 'comment', )
         }),
         (_('Contacts'), {
             'fields': ('address', ('phones', 'emails'))
@@ -33,7 +33,7 @@ class CenterAdmin(admin.ModelAdmin):
             'fields': (('phones', 'emails'), )
         })
     )
-    filter_vertical = ('phones', 'emails')
+    filter_horizontal = ('phones', 'emails')
     list_display = ('number', 'name', 'company', 'head')
     list_display_links = ('number', 'name')
     list_filter = ('company__name', )
@@ -52,7 +52,7 @@ class DivisionAdmin(admin.ModelAdmin):
             'fields': (('phones', 'emails'), )
         })
     )
-    filter_vertical = ('phones', 'emails')
+    filter_horizontal = ('phones', 'emails')
     list_display = ('number', 'name', 'center', 'head')
     list_display_links = ('number', 'name')
     list_filter = ('center', )

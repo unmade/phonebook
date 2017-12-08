@@ -13,7 +13,7 @@ faker = FakerFactory.create()
 
 @register
 class CompanyCategoryFactory(factory.django.DjangoModelFactory):
-    category = factory.LazyAttributeSequence(lambda s, x: faker.word())
+    category = factory.LazyAttributeSequence(lambda s, x: f'{faker.word()}{x}')
     name = factory.LazyAttribute(lambda x: faker.sentence(nb_words=4))
 
     class Meta:
