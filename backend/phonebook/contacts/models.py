@@ -1,13 +1,13 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
-# Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name='Название')
+    name = models.CharField(_('Name'), max_length=100, unique=True)
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
         ordering = ['name']
 
     def __str__(self):
@@ -15,13 +15,13 @@ class Category(models.Model):
 
 
 class Email(models.Model):
-    email = models.EmailField(unique=True, verbose_name='Эл. адрес')
-    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
-    comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
+    email = models.EmailField(_('Email'), unique=True)
+    category = models.ForeignKey('Category', verbose_name=_('Category'), on_delete=models.CASCADE)
+    comment = models.CharField(_('Additional info'), max_length=255, blank=True)
 
     class Meta:
-        verbose_name = 'Электронный адрес'
-        verbose_name_plural = 'Электронные адреса'
+        verbose_name = _('Email')
+        verbose_name_plural = _('Emails')
         ordering = ['email']
 
     def __str__(self):
@@ -29,13 +29,13 @@ class Email(models.Model):
 
 
 class Phone(models.Model):
-    number = models.CharField(max_length=20, unique=True, verbose_name='Номер')
-    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
-    comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
+    number = models.CharField(_('Number'), max_length=20, unique=True)
+    category = models.ForeignKey('Category', verbose_name=_('Category'), on_delete=models.CASCADE)
+    comment = models.CharField(_('Additional info'), max_length=255, blank=True)
 
     class Meta:
-        verbose_name = 'Телефон'
-        verbose_name_plural = 'Телефоны'
+        verbose_name = _('Phone')
+        verbose_name_plural = _('Phones')
         ordering = ['number']
 
     def __str__(self):
