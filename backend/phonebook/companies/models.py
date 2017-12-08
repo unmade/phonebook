@@ -3,25 +3,28 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 
-class CompanyManager(models.Manager):
-    def get_queryset(self):
-        queryset = super(CompanyManager, self).get_queryset()
-        return queryset.select_related('ceo__surname', 'ceo__firstname', 'ceo__patronymic', 'ceo__position')\
-                       .prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
+class CompanyQuerySet(models.QuerySet):
+    def select_ceo(self):
+        return self.select_related('ceo__surname', 'ceo__firstname', 'ceo__patronymic', 'ceo__position')
+
+    def prefetch_contacts(self):
+        return self.prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
 
 
-class CenterManager(models.Manager):
-    def get_queryset(self):
-        queryset = super(CenterManager, self).get_queryset()
-        return queryset.select_related('head', 'head__surname', 'head__firstname', 'head__patronymic')\
-                       .prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
+class CenterQuerySet(models.QuerySet):
+    def select_head(self):
+        return self.select_related('head', 'head__surname', 'head__firstname', 'head__patronymic')
+
+    def prefetch_contacts(self):
+        return self.prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
 
 
-class DivisionManager(models.Manager):
-    def get_queryset(self):
-        queryset = super(DivisionManager, self).get_queryset()
-        return queryset.select_related('head', 'head__surname', 'head__firstname', 'head__patronymic')\
-                       .prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
+class DivisionQuerySet(models.QuerySet):
+    def select_head(self):
+        return self.select_related('head', 'head__surname', 'head__firstname', 'head__patronymic')
+
+    def prefetch_contacts(self):
+        return self.prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
 
 
 class CompanyCategory(models.Model):  # TODO: rename to BusinessEntity
@@ -53,8 +56,7 @@ class Company(models.Model):
     emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name=_('Emails'))
     logo = models.ImageField(_('Logo'), upload_to='logos', default='logos/no-logo.png', blank=True)
     comment = models.CharField(_('Additional info'), max_length=255, blank=True)
-    objects = models.Manager()
-    related_objects = CompanyManager()
+    objects = CompanyQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Company')
@@ -79,8 +81,7 @@ class Center(models.Model):
     comment = models.CharField(_('Additional info'), max_length=255, blank=True)
     phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name=_('Phones'))
     emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name=_('Emails'))
-    objects = models.Manager()
-    related_objects = CenterManager()
+    objects = CenterQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Center')
@@ -105,8 +106,7 @@ class Division(models.Model):
     comment = models.CharField(_('Additional info'), max_length=255, blank=True)
     phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name=_('Phones'))
     emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name=_('Emails'))
-    objects = models.Manager()
-    related_objects = DivisionManager()
+    objects = DivisionQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Division')
