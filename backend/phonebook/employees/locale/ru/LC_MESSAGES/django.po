@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 16:44+0300\n"
+"POT-Creation-Date: 2017-12-08 22:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,12 +28,12 @@ msgstr "Работа"
 msgid "Contacts"
 msgstr "Контакты"
 
-#: phonebook/employees/apps.py:7 phonebook/employees/models.py:98
+#: phonebook/employees/apps.py:7 phonebook/employees/models.py:107
 msgid "Employees"
 msgstr "Сотрудники"
 
 #: phonebook/employees/models.py:7 phonebook/employees/models.py:10
-#: phonebook/employees/models.py:67
+#: phonebook/employees/models.py:74
 msgid "First name"
 msgstr "Имя"
 
@@ -42,7 +42,7 @@ msgid "First names"
 msgstr "Имена"
 
 #: phonebook/employees/models.py:19 phonebook/employees/models.py:22
-#: phonebook/employees/models.py:70
+#: phonebook/employees/models.py:77
 msgid "Patronymic"
 msgstr "Отчество"
 
@@ -51,7 +51,7 @@ msgid "Patronymics"
 msgstr "Отчества"
 
 #: phonebook/employees/models.py:31 phonebook/employees/models.py:34
-#: phonebook/employees/models.py:64
+#: phonebook/employees/models.py:71
 msgid "Surname"
 msgstr "Фамилия"
 
@@ -63,7 +63,7 @@ msgstr "Фамилии"
 msgid "Name"
 msgstr "Название"
 
-#: phonebook/employees/models.py:46 phonebook/employees/models.py:83
+#: phonebook/employees/models.py:46 phonebook/employees/models.py:92
 msgid "Position"
 msgstr "Должность"
 
@@ -71,46 +71,46 @@ msgstr "Должность"
 msgid "Positions"
 msgstr "Должности"
 
-#: phonebook/employees/models.py:72
+#: phonebook/employees/models.py:80
 msgid "Birthday"
 msgstr "День рождения"
 
-#: phonebook/employees/models.py:74
+#: phonebook/employees/models.py:83
 msgid "Company"
 msgstr "Компания"
 
-#: phonebook/employees/models.py:77
+#: phonebook/employees/models.py:86
 msgid "Center"
 msgstr "Центр"
 
-#: phonebook/employees/models.py:80
+#: phonebook/employees/models.py:89
 msgid "Division"
 msgstr "Дивизия"
 
-#: phonebook/employees/models.py:85
-msgid "Place"
-msgstr "Рабочее место"
-
-#: phonebook/employees/models.py:86
-msgid "Additional info"
-msgstr "Дополнительная информация"
-
-#: phonebook/employees/models.py:87
-msgid "Phones"
-msgstr "Телефоны"
-
-#: phonebook/employees/models.py:88
-msgid "Emails"
-msgstr "Эл. адреса"
-
-#: phonebook/employees/models.py:90
+#: phonebook/employees/models.py:95
 msgid "Boss"
 msgstr "Начальник"
 
-#: phonebook/employees/models.py:92
+#: phonebook/employees/models.py:97
+msgid "Place"
+msgstr "Рабочее место"
+
+#: phonebook/employees/models.py:99
+msgid "Additional info"
+msgstr "Дополнительная информация"
+
+#: phonebook/employees/models.py:100
+msgid "Phones"
+msgstr "Телефоны"
+
+#: phonebook/employees/models.py:101
+msgid "Emails"
+msgstr "Эл. адреса"
+
+#: phonebook/employees/models.py:102
 msgid "Is retired"
 msgstr "Числится уволенным"
 
-#: phonebook/employees/models.py:97
+#: phonebook/employees/models.py:106
 msgid "Employee"
 msgstr "Сотрудник"

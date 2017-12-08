@@ -76,7 +76,9 @@ class Employee(models.Model):
     patronymic = models.ForeignKey(
         'Patronymic', null=True, blank=True, verbose_name=_('Patronymic'), on_delete=models.SET_NULL
     )
+
     birthday = models.DateField(_('Birthday'), null=True, blank=True)
+
     company = models.ForeignKey(
         'companies.Company', null=True, blank=True, verbose_name=_('Company'), on_delete=models.SET_NULL
     )
@@ -89,13 +91,14 @@ class Employee(models.Model):
     position = models.ForeignKey(
         'Position', null=True, blank=True, verbose_name=_('Position'), on_delete=models.SET_NULL
     )
-    place = models.CharField(_('Place'), max_length=255, blank=True)
-    comment = models.CharField(_('Additional info'), max_length=255, blank=True)
-    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name=_('Phones'))
-    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name=_('Emails'))
     boss = models.ForeignKey(
         'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='secretaries', verbose_name=_('Boss')
     )
+    place = models.CharField(_('Place'), max_length=255, blank=True)
+
+    comment = models.CharField(_('Additional info'), max_length=255, blank=True)
+    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name=_('Phones'))
+    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name=_('Emails'))
     is_retired = models.BooleanField(_('Is retired'), default=False)
     objects = EmployeeQuerySet.as_manager()
 
