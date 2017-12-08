@@ -8,7 +8,7 @@
     employeeService.$inject = ['$resource'];
 
     function employeeService($resource) {
-        return $resource('api/employees/employee/:id', {}, {
+        return $resource('employees/api/employee/:id', {}, {
             query: {method: 'GET', isArray: false}
         });
     };

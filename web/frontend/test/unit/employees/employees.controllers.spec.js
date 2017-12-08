@@ -37,23 +37,23 @@ describe('Employees controllers', function() {
 
         beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenGET('api/employees/employee/?limit=20&offset=0')
+            $httpBackend.whenGET('employees/api/employee/?limit=20&offset=0')
                         .respond(employeeRespond.employees);
-            $httpBackend.whenGET('api/employees/employee/?limit=20&offset=20')
+            $httpBackend.whenGET('employees/api/employee/?limit=20&offset=20')
                         .respond(employeeRespond.employeesNext);
-            $httpBackend.whenGET('api/employees/employee/?company=1&limit=20&offset=0')
+            $httpBackend.whenGET('employees/api/employee/?company=1&limit=20&offset=0')
                         .respond(employeeRespond.filteredByCompany);
-            $httpBackend.whenGET('api/employees/employee/?center=1&company=1&limit=20&offset=0')
+            $httpBackend.whenGET('employees/api/employee/?center=1&company=1&limit=20&offset=0')
                         .respond(employeeRespond.filteredByCompanyAndCenter);
-            $httpBackend.whenGET('api/employees/employee/?center=1&company=1&division=1&limit=20&offset=0')
+            $httpBackend.whenGET('employees/api/employee/?center=1&company=1&division=1&limit=20&offset=0')
                         .respond(employeeRespond.filteredByCompanyAndCenterAndDivision);
-            $httpBackend.whenGET('api/employees/employee/?limit=8&offset=0&search=%D0%BC%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
+            $httpBackend.whenGET('employees/api/employee/?limit=8&offset=0&search=%D0%BC%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.employeeSearch);
-            $httpBackend.whenGET('api/employees/employee/?limit=20&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
+            $httpBackend.whenGET('employees/api/employee/?limit=20&offset=0&search=%D0%9C%D0%BE%D1%80%D0%BE%D0%B7%D0%BE%D0%B2')
                         .respond(employeeRespond.search);
-            $httpBackend.whenGET('api/companies/company/').respond(companiesRespond.companyList);
-            $httpBackend.whenGET('api/companies/center/?company=1').respond(companiesRespond.centerList);
-            $httpBackend.whenGET('api/companies/division/?center=1').respond(companiesRespond.divisionList);
+            $httpBackend.whenGET('companies/api/company/').respond(companiesRespond.companyList);
+            $httpBackend.whenGET('companies/api/center/?company=1').respond(companiesRespond.centerList);
+            $httpBackend.whenGET('companies/api/division/?center=1').respond(companiesRespond.divisionList);
             scope = $rootScope.$new();
             ctrl = $controller('EmployeeListCtrl', {$scope: scope});
         }));

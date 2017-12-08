@@ -26,9 +26,9 @@ describe('Companies controllers', function() {
 
         beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenGET('api/companies/company/?limit=40&offset=0')
+            $httpBackend.whenGET('companies/api/company/?limit=40&offset=0')
                         .respond(companyRespond.companies);
-            $httpBackend.whenGET('api/companies/company/?limit=4&offset=0&search=%D0%BD%D0%BF%D0%BE%D0%BB')
+            $httpBackend.whenGET('companies/api/company/?limit=4&offset=0&search=%D0%BD%D0%BF%D0%BE%D0%BB')
                         .respond(companyRespond.companySearch);
             scope = $rootScope.$new();
             ctrl = $controller('CompanyListCtrl', {$scope: scope});

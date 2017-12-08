@@ -11,7 +11,7 @@
 
 ## Предприятия
 
-### /api/companies/company
+### /companies/api/company
 
 **Метод GET**
 
@@ -24,14 +24,14 @@
 | emails__emails | Строка  | Фильтрует предприятия с указанным электронным адресом |
 
 
-### /api/companies/company/:id
+### /companies/api/company/:id
 
 **Метод GET**
 
 Возвращает предприятие с указанным id
 
 
-### /api/companies/center
+### /companies/api/center
 
 **Метод GET**
 
@@ -45,14 +45,14 @@
 | emails__emails | Строка  | Фильтрует центры с указанным электронным адресом |
 
 
-### /api/companies/center/:id
+### /companies/api/center/:id
 
 **Метод GET**
 
 Возвращает центр с указанным id
 
 
-### /api/companies/division
+### /companies/api/division
 
 **Метод GET**
 
@@ -66,7 +66,7 @@
 | emails__emails | Строка  | Фильтрует отделения/отделы с указанным электронным адресом |
 
 
-### /api/companies/division/:id
+### /companies/api/division/:id
 
 **Метод GET**
 
@@ -75,7 +75,7 @@
 
 ## Сотрудники
 
-### /api/employees/employee
+### /employees/api/employee
 
 **Метод GET**
 
@@ -91,7 +91,7 @@
 | emails__emails | Строка  | Фильтрует отделения/отделы с указанным электронным адресом |
 
 
-### /api/employees/employee/:id
+### /employees/api/employee/:id
 
 **Метод GET**
 
@@ -100,7 +100,7 @@
 
 ## Обратная связь
 
-### /api/feedback/feedback
+### /feedback/api/feedback
 
 **Метод GET**
 

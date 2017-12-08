@@ -4,7 +4,7 @@ services:
 
   web:
     restart: always
-    build: ./web/backend
+    build: ./web
     expose:
       - "8000"
     links:
@@ -13,10 +13,24 @@ services:
       - ./secrets/django.env
       - ./secrets/db.env
     volumes:
-      - ./web:/home/phonebook/web
+      - ./web/backend:/home/phonebook/web/backend
     depends_on:
       - db
-    entrypoint: /home/phonebook/web/entrypoint.sh
+    entrypoint: /home/phonebook/web/backend/entrypoint.sh
+
+  testweb:
+    build: ./web
+    links:
+      - db:db
+    env_file:
+      - ./secrets/django.env
+      - ./secrets/db.env
+    volumes:
+      - ./web/backend:/home/phonebook/web/backend
+    depends_on:
+      - db
+    entrypoint:
+      - /home/phonebook/web/backend/test.sh
 
   db:
     restart: always
@@ -38,7 +52,7 @@ services:
       - ./backend:/home/phonebook/backend
       - ./nginx:/etc/nginx/conf.d/
     links:
-      - backend:backend
+      - web:web
 
 volumes:
   dbdata:

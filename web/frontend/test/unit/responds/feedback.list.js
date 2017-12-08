@@ -1,7 +1,7 @@
 function getFeedbackList() {
     return {
         "count": 30,
-        "next": "http://localhost:8000/api/feedback/feedback/?limit=20&offset=20",
+        "next": "http://localhost:8000/feedback/api/feedback/?limit=20&offset=20",
         "previous": null,
         "results": [
             {

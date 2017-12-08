@@ -12,19 +12,19 @@
     divisionService.$inject = ['$resourse'];
 
     function companyService($resource) {
-        return $resource('api/companies/company/:id', {} , {
+        return $resource('companies/api/company/:id', {} , {
             query: {method: 'GET', isArray: false}
         });
     }
 
     function centerService($resource) {
-        return $resource('api/companies/center/:id', {} , {
+        return $resource('companies/api/center/:id', {} , {
             query: {method: 'GET', isArray: false}
         });
     }
 
     function divisionService($resource) {
-        return $resource('api/companies/division/:id', {} , {
+        return $resource('companies/api/division/:id', {} , {
             query: {method: 'GET', isArray: false}
         });
     }

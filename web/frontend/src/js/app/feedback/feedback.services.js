@@ -8,7 +8,7 @@
     feedbackService.$inject = ['$resource'];
 
     function feedbackService($resource) {
-        return $resource('api/feedback/feedback/', {}, {
+        return $resource('feedback/api/feedback/', {}, {
             query: {
                 method: 'GET',
                 isArray: false

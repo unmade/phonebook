@@ -26,7 +26,7 @@ describe('feedbacks.controllers', function() {
     describe('FeedbackListCtrl', function() {
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenGET('api/feedback/feedback/?limit=20&offset=0')
+            $httpBackend.whenGET('feedback/api/feedback/?limit=20&offset=0')
                         .respond(feedbackRespond.feedbacks);
             scope = $rootScope.$new();
             ctrl = $controller('FeedbackListCtrl', {$scope: scope});
