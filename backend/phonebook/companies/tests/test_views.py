@@ -1,3 +1,5 @@
+# pylint: disable=unused-argument,no-self-use
+
 import pytest
 from django.urls import reverse
 
@@ -79,7 +81,6 @@ class TestDivisionListAPIView:
     def test_response_status_code(self, client):
         response = client.get(self.url)
         assert response.status_code == 200
-
 
     @pytest.mark.django_db
     def test_num_queries(self, client, django_assert_num_queries, division_factory):

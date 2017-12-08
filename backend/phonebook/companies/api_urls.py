@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-app_name = 'companies'  # pylint: disable=invalid-name
+app_name = 'companies'
 
 
 urlpatterns = [

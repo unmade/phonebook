@@ -3,7 +3,7 @@ from django.urls import include
 
 from . import api_urls
 
-app_name = 'feedback'  # pylint: disable=invalid-name
+app_name = 'feedback'
 
 
 urlpatterns = [

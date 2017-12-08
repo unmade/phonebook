@@ -96,8 +96,10 @@ class Center(models.Model):
 
 class Division(models.Model):
     center = models.ForeignKey('Center', verbose_name=_('Center'), on_delete=models.CASCADE)
-    head = models.ForeignKey('employees.Employee', null=True, blank=True, on_delete=models.SET_NULL,
-                             related_name='division_head', verbose_name=_('Head'))
+    head = models.ForeignKey(
+        'employees.Employee', null=True, blank=True, on_delete=models.SET_NULL,
+        related_name='division_head', verbose_name=_('Head')
+    )
     number = models.CharField(_('Code'), max_length=10)  # TODO: rename to Code
     name = models.CharField(_('Name'), max_length=255, blank=True)
     comment = models.CharField(_('Additional info'), max_length=255, blank=True)

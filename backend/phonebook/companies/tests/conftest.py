@@ -1,9 +1,11 @@
-import factory
-from pytest_factoryboy import register
-from faker import Factory as FakerFactory
+# pylint: disable=unused-argument,no-self-use
 
-from companies.models import CompanyCategory, Company, Center, Division
-from contacts.tests.conftest import PhoneFactory, EmailFactory
+import factory
+from faker import Factory as FakerFactory
+from pytest_factoryboy import register
+
+from companies.models import Center, Company, CompanyCategory, Division
+from contacts.tests.conftest import EmailFactory, PhoneFactory
 from employees.tests.conftest import EmployeeFactory
 
 faker = FakerFactory.create()

@@ -1,6 +1,6 @@
 import factory
-from pytest_factoryboy import register
 from faker import Factory as FakerFactory
+from pytest_factoryboy import register
 
 from employees.models import Employee, FirstName, Patronymic, Surname
 
