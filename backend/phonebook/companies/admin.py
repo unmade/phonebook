@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Center, Company, CompanyCategory, Division
 
@@ -6,17 +7,17 @@ from .models import Center, Company, CompanyCategory, Division
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('Основная информация', {
+        (None, {
             'fields': ('name', 'ceo', 'category')
         }),
-        ('Дополнительная информация', {
+        (_('Additional info'), {
             'fields': ('full_name', 'short_name', 'logo', 'comment',)
         }),
-        ('Контакты', {
+        (_('Contacts'), {
             'fields': ('address', ('phones', 'emails'))
         })
     )
-    filter_vertical = ('phones', 'emails')
+    filter_horizontal = ('phones', 'emails')
     list_display = ('name', 'ceo')
     search_fields = ('name', 'full_name', 'short_name')
     autocomplete_fields = ['ceo']
@@ -25,10 +26,10 @@ class CompanyAdmin(admin.ModelAdmin):
 @admin.register(Center)
 class CenterAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('Основная информация', {
+        (None, {
             'fields': ('number', 'name', 'head', 'company', 'comment')
         }),
-        ('Контакты', {
+        (_('Contacts'), {
             'fields': (('phones', 'emails'), )
         })
     )
@@ -44,10 +45,10 @@ class CenterAdmin(admin.ModelAdmin):
 @admin.register(Division)
 class DivisionAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('Основная информация', {
+        (None, {
             'fields': ('number', 'name', 'head', 'center', 'comment')
         }),
-        ('Контакты', {
+        (_('Contacts'), {
             'fields': (('phones', 'emails'), )
         })
     )

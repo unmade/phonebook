@@ -53,3 +53,4 @@ phonebook_local_20160305.sql
 secrets.json
 coverage.xml
 .coverage
+.cache

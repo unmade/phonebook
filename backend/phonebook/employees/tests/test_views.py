@@ -3,8 +3,8 @@ import json
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Employee, FirstName, Patronymic, Surname
-from .serializers import EmployeeSerializer
+from employees.models import Employee, FirstName, Patronymic, Surname
+from employees.serializers import EmployeeSerializer
 
 
 class EmployeeTests(TestCase):
