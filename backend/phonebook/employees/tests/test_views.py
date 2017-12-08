@@ -1,39 +1,39 @@
-import json
+# pylint: disable=unused-argument,no-self-use
 
-from django.test import TestCase
+import pytest
 from django.urls import reverse
 
-from employees.models import Employee, FirstName, Patronymic, Surname
-from employees.serializers import EmployeeSerializer
+
+class TestEmployeeListAPIView:
+    url = reverse('employees:api:employee-list')
+
+    @pytest.mark.django_db
+    def test_response_status_code(self, client, employee_factory):
+        employee_factory.create_batch(5, boss__boss=None)
+        response = client.get(self.url)
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_num_queries(self, client, django_assert_num_queries, employee_factory):
+        employee_factory.create_batch(10, boss=None)
+        with django_assert_num_queries(5):
+            client.get(self.url)
 
 
-class EmployeeTests(TestCase):
-    def setUp(self):
-        firstname1, _ = FirstName.objects.get_or_create(name="Василий")
-        firstname2, _ = FirstName.objects.get_or_create(name="Валентин")
-        patronymic, _ = Patronymic.objects.get_or_create(name="Валентинович")
-        surname, _ = Surname.objects.get_or_create(name="Асмус")
+class TestEmployeeRetrieveAPIView:
 
-        self.employee, _ = Employee.objects.get_or_create(
-            firstname=firstname1,
-            patronymic=patronymic,
-            surname=surname
-        )
-        Employee.objects.get_or_create(
-            firstname=firstname2,
-            patronymic=patronymic,
-            surname=surname
-        )
+    @pytest.fixture
+    def employee(self, employee_factory):
+        return employee_factory.create(boss__boss=None)
 
-    def test_list(self):
-        url = reverse('employees:api:employee-list')
-        response = self.client.get(url)
-        self.assertContains(response, "Василий")
-        self.assertContains(response, "Валентин")
-        self.assertEqual(response.data["count"], 2)
+    @pytest.mark.django_db
+    def test_response_status_code(self, client, employee):
+        url = employee.get_absolute_api_url()
+        response = client.get(url)
+        assert response.status_code == 200
 
-    def test_detail(self):
-        url = reverse('employees:api:employee-detail', kwargs={'pk': self.employee.pk})
-        response = self.client.get(url)
-        data = json.loads(response.content.decode())
-        self.assertEqual(data, EmployeeSerializer(self.employee).data)
+    @pytest.mark.django_db
+    def test_num_queries(self, client, django_assert_num_queries, employee):
+        url = employee.get_absolute_api_url()
+        with django_assert_num_queries(4):
+            client.get(url)

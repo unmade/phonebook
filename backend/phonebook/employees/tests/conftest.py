@@ -31,11 +31,15 @@ class SurnameFactory(factory.django.DjangoModelFactory):
         model = Surname
 
 
-@register
 class EmployeeFactory(factory.django.DjangoModelFactory):
     surname = factory.SubFactory(SurnameFactory)
     firstname = factory.SubFactory(FirstNameFactory)
     patronymic = factory.SubFactory(PatronymicFactory)
 
+    boss = factory.SubFactory('employees.tests.conftest.EmployeeFactory')
+
     class Meta:
         model = Employee
+
+
+register(EmployeeFactory)

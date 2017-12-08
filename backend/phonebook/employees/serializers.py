@@ -16,7 +16,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     company = CompanyShortSerializer()
     center = CenterShortSerializer()
     division = DivisionShortSerializer()
-    secretary = EmployeeShortSerializer(many=True)
+    secretaries = EmployeeShortSerializer(many=True)
     phones = PhoneSerializer(many=True)
     emails = EmailSerializer(many=True)
 
@@ -24,4 +24,4 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = Employee
         fields = ('id', 'firstname', 'patronymic', 'surname', 'position',
                   'company', 'center', 'division', 'place', 'is_retired',
-                  'secretary', 'phones', 'emails', 'birthday', 'comment')
+                  'secretaries', 'phones', 'emails', 'birthday', 'comment')

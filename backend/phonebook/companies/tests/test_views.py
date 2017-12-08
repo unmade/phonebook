@@ -8,7 +8,8 @@ class TestCompanyListAPIView:
     url = reverse('companies:api:company-list')
 
     @pytest.mark.django_db
-    def test_response_status_code(self, client):
+    def test_response_status_code(self, client, company_factory):
+        company_factory.create_batch(5)
         response = client.get(self.url)
         assert response.status_code == 200
 
@@ -43,7 +44,8 @@ class TestCenterListAPIView:
     url = reverse('companies:api:center-list')
 
     @pytest.mark.django_db
-    def test_response_status_code(self, client):
+    def test_response_status_code(self, client, center_factory):
+        center_factory.create_batch(5)
         response = client.get(self.url)
         assert response.status_code == 200
 
@@ -78,7 +80,8 @@ class TestDivisionListAPIView:
     url = reverse('companies:api:division-list')
 
     @pytest.mark.django_db
-    def test_response_status_code(self, client):
+    def test_response_status_code(self, client, division_factory):
+        division_factory.create_batch(5)
         response = client.get(self.url)
         assert response.status_code == 200
 

@@ -51,12 +51,19 @@ class Position(models.Model):
         return self.name
 
 
-class EmployeeManager(models.Manager):
-    def get_queryset(self):
-        queryset = super(EmployeeManager, self).get_queryset()
-        return queryset.select_related('firstname', 'patronymic', 'surname',
-                                       'company', 'center', 'division', 'position')\
-                       .prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
+class EmployeeQuerySet(models.QuerySet):
+
+    def select_name(self):
+        return self.select_related('firstname', 'patronymic', 'surname')
+
+    def select_job(self):
+        return self.select_related('company', 'center', 'division', 'position')
+
+    def prefetch_contacts(self):
+        return self.prefetch_related('phones', 'emails', 'phones__category', 'emails__category')
+
+    def prefetch_secretaries(self):
+        return self.prefetch_related('secretaries')
 
 
 class Employee(models.Model):
@@ -87,11 +94,10 @@ class Employee(models.Model):
     phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name=_('Phones'))
     emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name=_('Emails'))
     boss = models.ForeignKey(
-        'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='secretary', verbose_name=_('Boss')
+        'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='secretaries', verbose_name=_('Boss')
     )
     is_retired = models.BooleanField(_('Is retired'), default=False)
-    objects = models.Manager()
-    related_objects = EmployeeManager()
+    objects = EmployeeQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Employee')
@@ -102,4 +108,4 @@ class Employee(models.Model):
         return f'{self.surname} {self.firstname} {self.patronymic}'
 
     def get_absolute_api_url(self):
-        return reverse('employees:api:employees-detail', kwargs={'pk': self.pk})
+        return reverse('employees:api:employee-detail', kwargs={'pk': self.pk})
