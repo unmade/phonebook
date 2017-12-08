@@ -2,9 +2,9 @@ version: "3.3"
 
 services:
 
-  backend:
+  web:
     restart: always
-    build: ./backend
+    build: ./web/backend
     expose:
       - "8000"
     links:
@@ -13,17 +13,16 @@ services:
       - ./secrets/django.env
       - ./secrets/db.env
     volumes:
-      - ./backend:/home/phonebook/backend
+      - ./web:/home/phonebook/web
     depends_on:
       - db
-    entrypoint: /home/phonebook/backend/entrypoint.sh
+    entrypoint: /home/phonebook/web/entrypoint.sh
 
   db:
     restart: always
     image: postgres:latest
     volumes:
       - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - ./backups/postresql:/backup
       - dbdata:/var/lib/postgresql
     env_file:
       - ./secrets/db.env
