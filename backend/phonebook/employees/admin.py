@@ -1,9 +1,9 @@
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Employee, FirstName, Patronymic, Position, Surname
 
 
-# Register your models here.
 @admin.register(FirstName)
 class FirstNameAdmin(admin.ModelAdmin):
     search_fields = ('name', )
@@ -27,18 +27,17 @@ class PositionAdmin(admin.ModelAdmin):
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('Данные', {
+        (None, {
             'fields': ('surname', 'firstname', 'patronymic', 'birthday', 'comment')
         }),
-        ('Место работы', {
+        (_('Job'), {
             'fields': ('company', 'center', 'division', 'position', 'place', 'boss', 'is_retired')
         }),
-        ('Контакты', {
-            'classes': ('admin-short-label', ),
+        (_('Contacts'), {
             'fields': (('phones', 'emails'), )
         })
     )
-    filter_vertical = ('phones', 'emails')
+    filter_horizontal = ('phones', 'emails')
     list_display = ('surname', 'firstname', 'company', 'center', 'division')
     list_filter = ('is_retired', 'company', 'center', 'division')
     list_select_related = ('surname', 'firstname', 'company', 'center', 'division')

@@ -1,13 +1,14 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 
 class FirstName(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name='Имя')
+    name = models.CharField(_('First name'), max_length=50, unique=True)
 
     class Meta:
-        verbose_name = 'Имя'
-        verbose_name_plural = 'Имена'
+        verbose_name = _('First name')
+        verbose_name_plural = _('First names')
         ordering = ['name']
 
     def __str__(self):
@@ -15,11 +16,11 @@ class FirstName(models.Model):
 
 
 class Patronymic(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name='Отчество')
+    name = models.CharField(_('Patronymic'), max_length=50, unique=True)
 
     class Meta:
-        verbose_name = 'Отчество'
-        verbose_name_plural = 'Отчества'
+        verbose_name = _('Patronymic')
+        verbose_name_plural = _('Patronymics')
         ordering = ['name']
 
     def __str__(self):
@@ -27,11 +28,11 @@ class Patronymic(models.Model):
 
 
 class Surname(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name='Фамилия')
+    name = models.CharField(_('Surname'), max_length=50, unique=True)
 
     class Meta:
-        verbose_name = 'Фамилия'
-        verbose_name_plural = 'Фамилии'
+        verbose_name = _('Surname')
+        verbose_name_plural = _('Surnames')
         ordering = ['name']
 
     def __str__(self):
@@ -39,11 +40,11 @@ class Surname(models.Model):
 
 
 class Position(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name='Название')
+    name = models.CharField(_('Name'), max_length=255, unique=True)
 
     class Meta:
-        verbose_name = 'Должность'
-        verbose_name_plural = 'Должности'
+        verbose_name = _('Position')
+        verbose_name_plural = _('Positions')
         ordering = ['name']
 
     def __str__(self):
@@ -59,41 +60,46 @@ class EmployeeManager(models.Manager):
 
 
 class Employee(models.Model):
-    surname = models.ForeignKey('Surname', null=True, blank=True, verbose_name='Фамилия', on_delete=models.SET_NULL)
-    firstname = models.ForeignKey('FirstName', null=True, blank=True, verbose_name='Имя', on_delete=models.SET_NULL)
-    patronymic = models.ForeignKey(
-        'Patronymic', null=True, blank=True, verbose_name='Отчество', on_delete=models.SET_NULL
+    surname = models.ForeignKey(
+        'Surname', null=True, blank=True, verbose_name=_('Surname'), on_delete=models.SET_NULL
     )
-    birthday = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
+    firstname = models.ForeignKey(
+        'FirstName', null=True, blank=True, verbose_name=_('First name'), on_delete=models.SET_NULL
+    )
+    patronymic = models.ForeignKey(
+        'Patronymic', null=True, blank=True, verbose_name=_('Patronymic'), on_delete=models.SET_NULL
+    )
+    birthday = models.DateField(_('Birthday'), null=True, blank=True)
     company = models.ForeignKey(
-        'companies.Company', null=True, blank=True, verbose_name='Предприятие', on_delete=models.SET_NULL
+        'companies.Company', null=True, blank=True, verbose_name=_('Company'), on_delete=models.SET_NULL
     )
     center = models.ForeignKey(
-        'companies.Center', null=True, blank=True, verbose_name='Центр', on_delete=models.SET_NULL
+        'companies.Center', null=True, blank=True, verbose_name=_('Center'), on_delete=models.SET_NULL
     )
     division = models.ForeignKey(
-        'companies.Division', null=True, blank=True, verbose_name='Отделение/Отдел', on_delete=models.SET_NULL
+        'companies.Division', null=True, blank=True, verbose_name=_('Division'), on_delete=models.SET_NULL
     )
     position = models.ForeignKey(
-        'Position', null=True, blank=True, verbose_name='Должность', on_delete=models.SET_NULL
+        'Position', null=True, blank=True, verbose_name=_('Position'), on_delete=models.SET_NULL
     )
-    place = models.CharField(max_length=255, blank=True, verbose_name='Рабочее место')
-    comment = models.CharField(max_length=255, blank=True, verbose_name='Доп. инф.')
-    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name='Телефоны')
-    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name='Эл. адреса')
-    boss = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL,
-                             related_name='secretary', verbose_name='Является секретарем у')
-    is_retired = models.BooleanField(default=False, verbose_name="Числится уволеным")
+    place = models.CharField(_('Place'), max_length=255, blank=True)
+    comment = models.CharField(_('Additional info'), max_length=255, blank=True)
+    phones = models.ManyToManyField('contacts.Phone', blank=True, verbose_name=_('Phones'))
+    emails = models.ManyToManyField('contacts.Email', blank=True, verbose_name=_('Emails'))
+    boss = models.ForeignKey(
+        'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='secretary', verbose_name=_('Boss')
+    )
+    is_retired = models.BooleanField(_('Is retired'), default=False)
     objects = models.Manager()
     related_objects = EmployeeManager()
 
     class Meta:
-        verbose_name = 'Сотрудник'
-        verbose_name_plural = 'Сотрудники'
+        verbose_name = _('Employee')
+        verbose_name_plural = _('Employees')
         ordering = ['surname', 'firstname', 'patronymic']
 
-    def get_absolute_api_url(self):
-        return reverse('api:employees-detail', kwargs={'pk': self.pk})
-
     def __str__(self):
-        return "%s %s %s" % (self.surname, self.firstname, self.patronymic)
+        return f'{self.surname} {self.firstname} {self.patronymic}'
+
+    def get_absolute_api_url(self):
+        return reverse('employees:api:employees-detail', kwargs={'pk': self.pk})
