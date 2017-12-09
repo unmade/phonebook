@@ -1,0 +1,11 @@
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+before_script:
+  - docker-compose build db testweb
+
+script:
+  - docker-compose up db testweb
