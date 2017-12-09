@@ -1,5 +1,7 @@
 # Электронный телефонный справочник
 
+![Travis CI](https://travis-ci.org/unmade/phonebook.svg?branch=master)
+
 ![Main page image](docs/images/1 main.png?raw=true "Main page")
 
 Цель этого справочника предоставить единый доступ к абонентской базе сотрудников какого-либо предприятия и смежных
