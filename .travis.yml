@@ -17,7 +17,8 @@ before_script:
   - docker-compose build db testweb
 
 script:
-  - docker-compose up db testweb
+  - docker-compose up -d db
+  - docker-compose up testweb
 
 after_script:
   - docker-compose down
