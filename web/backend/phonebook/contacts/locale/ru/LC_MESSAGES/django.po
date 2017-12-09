@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 22:37+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: phonebook/contacts/apps.py:7
+msgid "Contacts"
+msgstr "Контакты"
+
+#: phonebook/contacts/models.py:6
+msgid "Name"
+msgstr "Название"
+
+#: phonebook/contacts/models.py:9 phonebook/contacts/models.py:19
+#: phonebook/contacts/models.py:33
+msgid "Category"
+msgstr "Категория"
+
+#: phonebook/contacts/models.py:10
+msgid "Categories"
+msgstr "Категории"
+
+#: phonebook/contacts/models.py:18 phonebook/contacts/models.py:23
+msgid "Email"
+msgstr "Эл. адрес"
+
+#: phonebook/contacts/models.py:20 phonebook/contacts/models.py:34
+msgid "Additional info"
+msgstr "Дополнительная информация"
+
+#: phonebook/contacts/models.py:24
+msgid "Emails"
+msgstr "Эл. адреса"
+
+#: phonebook/contacts/models.py:32
+msgid "Number"
+msgstr "Номер"
+
+#: phonebook/contacts/models.py:37
+msgid "Phone"
+msgstr "Телефон"
+
+#: phonebook/contacts/models.py:38
+msgid "Phones"
+msgstr "Телефоны"
