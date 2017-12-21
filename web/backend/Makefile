@@ -17,4 +17,4 @@ runserver:
 	python $(PROJECT_NAME)/manage.py runserver --settings=$(PROJECT_NAME).settings.local
 
 test:
-	pytest $(PROJECT_NAME)
+	pytest $$(pwd)/$(PROJECT_NAME)

@@ -13,6 +13,9 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
+install:
+  - pip install python-coveralls
+
 before_script:
   - docker-compose build db testweb
 
@@ -22,3 +25,7 @@ script:
 
 after_script:
   - docker-compose down
+
+after_success:
+  - coverage combine
+  - coveralls
