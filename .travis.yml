@@ -14,7 +14,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - pip install python-coveralls
+  - sudo pip install python-coveralls
 
 before_script:
   - docker-compose build db testweb
