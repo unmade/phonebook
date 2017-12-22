@@ -1,56 +1,25 @@
-# Python bytecode:
-*.py[co]
-
-# Packaging files:
-*.egg*
-
-# Sphinx docs:
-build
-
-# SQLite3 database files:
+.*
 *.db
+*.sqlite3
+coverage.xml
 
-# Logs:
-*.log
+!.gitignore
+!.coveragerc
+!.pylintrc
+!.isort.cfg
+!.travis.yml
+!.bowerrc
 
-# Eclipse
-.project
-.pydevproject
-.settings
-
-# Linux Editors
-*~
-\#*\#
-/.emacs.desktop
-/.emacs.desktop.lock
-.elc
-auto-save-list
-tramp
-.\#*
-*.swp
-*.swo
-
-# Mac
-.DS_Store
-._*
-
-# Windows
-Thumbs.db
-Desktop.ini
-
-# PyCharm
-.idea
 
 # bower_components
 bower_components
 node_modules
 
-# Phonebook
+# Project
 media
 initial_data.json
 phonebook_db.sql
 phonebook_local_20160305.sql
 secrets.json
-coverage.xml
-.coverage
-.cache
+npm-debug.log
+staticfiles/

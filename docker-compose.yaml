@@ -1,10 +1,15 @@
 version: "3.3"
 
+volumes:
+  dbdata:
+
 services:
 
   web:
     restart: always
-    build: ./web
+    build:
+      context: .
+      dockerfile: ./compose/web/Dockerfile
     expose:
       - "8000"
     links:
@@ -13,30 +18,16 @@ services:
       - ./secrets/django.env
       - ./secrets/db.env
     volumes:
-      - ./web/backend:/home/phonebook/web/backend
+      - ./backend:/app
     depends_on:
       - db
-    entrypoint: /home/phonebook/web/backend/entrypoint.sh
-
-  testweb:
-    build: ./web
-    links:
-      - db:db
-    env_file:
-      - ./secrets/django.env
-      - ./secrets/db.env
-    volumes:
-      - ./web/backend:/home/phonebook/web/backend
-    depends_on:
-      - db
-    entrypoint:
-      - /home/phonebook/web/backend/test.sh
+    command: /start.sh
 
   db:
     restart: always
     image: postgres:latest
     volumes:
-      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./compose/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/postgresql
     env_file:
       - ./secrets/db.env
@@ -49,10 +40,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./backend:/home/phonebook/backend
-      - ./nginx:/etc/nginx/conf.d/
+      - ./backend:/app
+      - ./compose/nginx:/etc/nginx/conf.d/
     links:
       - web:web
-
-volumes:
-  dbdata:
