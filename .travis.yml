@@ -15,12 +15,12 @@ before_install:
 
 install:
   - sudo pip install python-coveralls
+  - sudo pip install coverage==4.4.2
 
 before_script:
   - docker-compose build db testweb
 
 script:
-  - docker-compose up -d db
   - docker-compose up testweb
 
 after_script:
@@ -28,5 +28,6 @@ after_script:
 
 after_success:
   - cd web/backend
-  - coverage combine
+  - mv .coverage .coverage.travis
+  - coverage combine --append
   - coveralls

@@ -1,4 +1,4 @@
 [paths]
 source =
-    .
-    /home/phonebook/web/backend/
+    phonebook/
+    /home/phonebook/web/backend/phonebook
