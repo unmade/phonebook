@@ -18,8 +18,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - sudo pip install python-coveralls
-  - sudo pip install coverage==4.4.2
+  - sudo pip3 install python-coveralls
+  - sudo pip3 install coverage==4.4.2
 
 before_script:
   - docker-compose build db testweb
