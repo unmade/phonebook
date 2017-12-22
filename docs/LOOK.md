@@ -1,34 +1,32 @@
-## Внешний вид телефонного справочника
-
-> Все сотрудники являются вымышленными и любое совпадение с реально живущими или когда-либо жившими людьми случайно
-
-### Страница с сотрудниками
-
-**Просмотр данных сотрудника**
-![Employee detail image](images/2 main detail.png?raw=true "Main page. Employee detail")
-
-**Адаптивный дизайн**
-![Main Page Responsive image](images/3 main responsive.png?raw=true "Main page. Responsive")
-
-**Печать**
-![Main Page Print image](images/4 main print.png?raw=true "Main page. Print")
+## Phonebook look
 
 
-### Страница с организациями
-![Organizations image](images/5 organizations.png?raw=true "Organizations")
+### Employees page
 
-**Просмотр данных организации**
-![Organization detail image](images/6 organizations detail.png?raw=true "Organization detail")
+**Employee detail**
+![Employee detail image](images/2 main detail.png "Main page. Employee detail")
 
+**Adaptive design**
+![Main Page Responsive image](images/3 main responsive.png "Main page. Responsive")
 
-### Обратная связь
-![Feedback image](images/7 feedback.png?raw=true "Feedback")
-
-**Добавления отзыва обратной связи**
-![New feedback image](images/8 new feedback.png?raw=true "New feedback")
+**Print dialog**
+![Main Page Print image](images/4 main print.png "Main page. Print")
 
 
-### Административная часть сайта
+### Companies page
+![Organizations image](images/5 organizations.png "Organizations")
 
-**Добавление нового сотрудника**
-![Admin image](images/9 admin.png?raw=true "Admin")
+**Companies list**
+![Organization detail image](images/6 organizations detail.png "Organization detail")
+
+
+### Feedback
+![Feedback image](images/7 feedback.png "Feedback")
+
+**New feedback**
+![New feedback image](images/8 new feedback.png "New feedback")
+
+
+### Admin
+
+![Admin image](images/9 admin.png "Admin")

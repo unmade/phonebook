@@ -1,31 +1,42 @@
-# Электронный телефонный справочник
+# Phonebook
 
 ![Travis CI](https://travis-ci.org/unmade/phonebook.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/unmade/phonebook/badge.svg?branch=coveralls)](https://coveralls.io/github/unmade/phonebook?branch=coveralls)
 
-![Main page image](docs/images/1 main.png?raw=true "Main page")
+![Main page image](docs/images/1 main.png "Main page")
 
-Цель этого справочника предоставить единый доступ к абонентской базе сотрудников какого-либо предприятия и смежных
-организаций.
-Данный телефонный справочник не персонализирован, обычные пользователи не могут создавать учетные записи и формировать собственные списки.
-Добавление/изменение/удаление сотрудников осуществляется администратором телефонного справочника. Обычные пользователи
-могут оставить заявки на внесение/изменение тех или иных данных.
+This is just simple phonebook to store employees contacts.
+See how it [looks](docs/LOOK.md)
 
 
-## Особенности
+## QuickStart
 
-- удобный поиск сотрудников с подсказками
-- возможность вывести сотрудников на печать по различным критериям
-- адаптивный дизайн
-- возможность обратной связи для конечных пользователей
-- легкая расширяемость
-- скорость работы
-- простота администрирования
+Simply run:
+```
+docker-compose up --build
+```
+
+Create superuser for django admin:
+```
+docker-compose run web python3 phonebook/manage.py createsuperuser
+```
+
+> Don't forget to change password and security settings in [secrets](secrets/)
 
 
-## Оглавление
+## Development
 
-- [Внешний вид](docs/LOOK.md)
-- [Запуск в эксплуатацию](docs/DEPLOY.md)
-- [Модификация](docs/INSTALL.md)
-- [API](docs/API.md)
+Just run:
+```
+docker-compose -f docker-compose.yml -f docker-compose.local.yml up --build
+```
+
+> You could set up settings suitable for development in `.env` file
+
+
+## Testing
+
+To run test locally:
+```
+docker-compose -f docker-compose.yml -f docker-compose.test.yml up test
+```

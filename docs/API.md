@@ -1,116 +1,116 @@
 # API
 
-Для каждого адреса у метода GET доступны следующие параметры:
+Each GET-method accepts following parameters:
 
-| Параметры      | Тип     | Описание |
-| :------------- | :------ | :------- |
-| limit          | Число   | Определяет количество возвращаемых предприятий за раз. По умолчанию: 50 |
-| offset         | Число   | Определяет с какого элемента от начала списка начать выборку. |
-| ordering       | Строка  | Поле по которому выполнять сортировку. |
+| Name      | Type | Description |
+| :-------- | :--- | :---------- |
+| limit     | int  | Defines page size. Default to 50 |
+| offset    | int  | Defines offset of the elements |
+| ordering  | str  | Field to apply ordering by |
 
 
-## Предприятия
+## Companies
 
 ### /companies/api/company
 
-**Метод GET**
+**Method GET**
 
-Возвращает список предприятий в формате json.
+Returns list of companies
 
-| Параметры      | Тип     | Описание |
-| :------------- | :------ | :------- |
-| search         | Строка  | Ищет предприятия удовлетворяющих указанному значению. Поиск производится по названию предприятия |
-| phones__number | Строка  | Фильтрует предприятия с указанным номером телефона |
-| emails__emails | Строка  | Фильтрует предприятия с указанным электронным адресом |
+| Name           | Type | Description |
+| :------------- | :--- | :---------- |
+| search         | str  | Search by name |
+| phones__number | str  | Filters by provided phone number |
+| emails__emails | str  | Filters by provided email |
 
 
 ### /companies/api/company/:id
 
-**Метод GET**
+**Method GET**
 
-Возвращает предприятие с указанным id
+Returns company with specified `id`
 
 
 ### /companies/api/center
 
-**Метод GET**
+**Method GET**
 
-Возвращает список центров
+Returns list of centers
 
-| Параметры      | Тип     | Описание |
-| :------------- | :------ | :------- |
-| company        | Число   | id предприятия. |
-| search         | Строка  | Ищет центры удовлетворяющих указанному значению. Поиск производится по названию центра |
-| phones__number | Строка  | Фильтрует центры с указанным номером телефона |
-| emails__emails | Строка  | Фильтрует центры с указанным электронным адресом |
+| Name           | Type | Description |
+| :------------- | :--- | :---------- |
+| company        | int  | Filters by id of the company |
+| search         | str  | Search by name |
+| phones__number | str  | Filters by provided phone number |
+| emails__emails | str  | Filter by provided email |
 
 
 ### /companies/api/center/:id
 
-**Метод GET**
+**Method GET**
 
-Возвращает центр с указанным id
+Returns center with specified `id`
 
 
 ### /companies/api/division
 
-**Метод GET**
+**Method GET**
 
-Возвращает список отделений/отделов
+Returns list of divisions
 
-| Параметры      | Тип     | Описание |
-| :------------- | :------ | :------- |
-| center         | Число   | Фильтрует отделения/отделы в соответствии с указанным id центра. |
-| search         | Строка  | Ищет отделения/отделы удовлетворяющих указанному значению. Поиск производится по названию отделения/отдела |
-| phones__number | Строка  | Фильтрует отделения/отделы с указанным номером телефона |
-| emails__emails | Строка  | Фильтрует отделения/отделы с указанным электронным адресом |
+| Name           | Type | Description |
+| :------------- | :--- | :---------- |
+| center         | int  | Filters by id of the center |
+| search         | str  | Search by name |
+| phones__number | str  | Filters by provided phone number |
+| emails__emails | str  | Filter by provided email |
 
 
 ### /companies/api/division/:id
 
-**Метод GET**
+**Method GET**
 
-Возвращает отделение/отдел с указанным id
+Returns division with provided `id`
 
 
-## Сотрудники
+## Employees
 
 ### /employees/api/employee
 
-**Метод GET**
+**Method GET**
 
-Возвращает список сотрудников
+Return list of employees
 
-| Параметры      | Тип     | Описание |
-| :------------- | :------ | :------- |
-| company        | Число   | Фильтрует сотрудников в соответствии с указанным id предприятия. |
-| center         | Число   | Фильтрует сотрудников в соответствии с указанным id центра. |
-| division       | Число   | Фильтрует сотрудников в соответствии с указанным id отделения/отдела |
-| search         | Строка  | Ищет сотрудников удовлетворяющих указанному значению. Поиск производится по фамилии, имени и отчеству |
-| phones__number | Строка  | Фильтрует отделения/отделы с указанным номером телефона |
-| emails__emails | Строка  | Фильтрует отделения/отделы с указанным электронным адресом |
+| Name           | Type | Description |
+| :------------- | :--- | :---------- |
+| company        | int  | Filters by id of the company |
+| center         | int  | Filters  by id of the center |
+| division       | int  | Filters by id of the division |
+| search         | str  | Search by first name, surname and patronymic |
+| phones__number | str  | Filters by provided phone number |
+| emails__emails | str  | Filter by provided email |
 
 
 ### /employees/api/employee/:id
 
-**Метод GET**
+**Method GET**
 
-Возвращает сотрудника с указанным id
+Returns employee with specified `id`
 
 
-## Обратная связь
+## Feedback
 
 ### /feedback/api/feedback
 
-**Метод GET**
+**Method GET**
 
-Возвращает список отзывов и предложений от пользователей справочника.
+Returns list of feedbacks
 
-**Метод POST**
+**Method POST**
 
-Добавляет новый отзыв.
+Create new feedback
 
-| Параметры | Тип     | Описание |
-| :-------- | :------ | :------- |
-| sender    | Строка  | ФИО отправителя |
-| text      | Текст   | Содержмиое отзывы |
+| Name      | Type | Description |
+| :---------| :--- | :---------- |
+| sender    | str  | Sender name |
+| text      | text | text |
