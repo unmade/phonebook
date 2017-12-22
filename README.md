@@ -1,7 +1,7 @@
 # Электронный телефонный справочник
 
 ![Travis CI](https://travis-ci.org/unmade/phonebook.svg?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/unmade/discuss-project/badge.svg?branch=master)](https://coveralls.io/github/unmade/discuss-project?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/unmade/phonebook/badge.svg?branch=coveralls)](https://coveralls.io/github/unmade/phonebook?branch=coveralls)
 
 ![Main page image](docs/images/1 main.png?raw=true "Main page")
 
