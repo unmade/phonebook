@@ -14,7 +14,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
 
 class EmailFactory(factory.django.DjangoModelFactory):
-    email = factory.LazyAttributeSequence(lambda s, x: f'{faker.email()}')
+    email = factory.LazyAttributeSequence(lambda s, x: f'{faker.email()}{x}')
     category = factory.SubFactory(CategoryFactory)
     comment = factory.LazyAttribute(lambda x: faker.sentence(nb_words=10))
 
