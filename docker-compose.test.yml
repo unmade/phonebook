@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  test:
+    build:
+      context: .
+      dockerfile: ./compose/web/Dockerfile
+    expose:
+      - "8000"
+    links:
+      - db:db
+    env_file:
+      - ./secrets/django.env
+      - ./secrets/db.env
+    volumes:
+      - ./backend:/app
+      - ./compose/web/runtest.sh:/runtest.sh
+    depends_on:
+      - db
+    command: /runtest.sh
