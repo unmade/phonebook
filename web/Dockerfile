@@ -16,5 +16,4 @@ RUN apk update && \
     mkdir -p phonebook/static/admin && \
     chown -R phonebook:phonebook /home/phonebook/backend
 
-COPY ./backend /home/phonebook/backend
-WORKDIR /home/phonebook/backend/phonebook
+WORKDIR /home/phonebook/web/backend/phonebook
