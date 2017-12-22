@@ -27,4 +27,6 @@ after_script:
   - docker-compose down
 
 after_success:
-  - cd web/backend && coveralls
+  - cd web/backend
+  - coverage combine
+  - coveralls

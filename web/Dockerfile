@@ -1,19 +1,15 @@
 FROM alpine
 
-RUN addgroup -S phonebook && \
-    adduser -S -g phonebook phonebook && \
-    mkdir -p /home/phonebook/backend
+RUN mkdir -p /unmade/phonebook/backend
 
-WORKDIR /home/phonebook/backend
-COPY ./backend/requirements /home/phonebook/backend/requirements
+WORKDIR /unmade/phonebook/backend
+COPY ./backend/requirements /unmade/phonebook/backend/requirements
 
 RUN apk update && \
     apk upgrade && \
     apk add --update python3 python3-dev git postgresql-client postgresql-dev build-base gettext jpeg-dev zlib-dev && \
     pip3 install --upgrade pip && \
     pip3 install -r requirements/local.txt && \
-    apk del -r python3-dev postgresql git && \
-    mkdir -p phonebook/static/admin && \
-    chown -R phonebook:phonebook /home/phonebook/backend
+    apk del -r python3-dev postgresql git
 
-WORKDIR /home/phonebook/web/backend/phonebook
+WORKDIR /unmade/phonebook/web/backend/phonebook
