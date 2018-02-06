@@ -15,8 +15,7 @@ services:
     links:
       - db:db
     env_file:
-      - ./secrets/django.env
-      - ./secrets/db.env
+      - ./example.env
     volumes:
       - ./backend:/app
     depends_on:
@@ -30,7 +29,7 @@ services:
       - ./compose/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/postgresql
     env_file:
-      - ./secrets/db.env
+      - ./example.env
     expose:
       - "5432"
 

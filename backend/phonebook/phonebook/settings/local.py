@@ -16,7 +16,7 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
 INTERNAL_IPS = ('127.0.0.1',)
 
-ROOT_URLCONF = '%s.urls.local' % SITE_NAME
+ROOT_URLCONF = 'phonebook.urls.local'
 
 
 def show_toolbar(request):

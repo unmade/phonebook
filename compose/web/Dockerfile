@@ -1,11 +1,11 @@
 FROM alpine
 
-COPY ./backend/requirements /requirements
-
 RUN apk update && \
     apk upgrade && \
-    apk add --update python3 python3-dev git postgresql-client postgresql-dev build-base gettext jpeg-dev zlib-dev && \
-    pip3 install --upgrade pip && \
+    apk add --update python3 python3-dev git postgresql-client postgresql-dev build-base gettext jpeg-dev zlib-dev
+
+COPY ./backend/requirements /requirements
+RUN pip3 install --upgrade pip && \
     pip3 install -r /requirements/prod.txt && \
     pip3 install -r /requirements/test.txt && \
     apk del -r python3-dev postgresql git
