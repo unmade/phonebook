@@ -11,6 +11,8 @@ services:
       - db:db
     env_file:
       - ./example.env
+    environment:
+      - DJANGO_SETTINGS_MODULE=phonebook.settings.test
     volumes:
       - ./backend:/app
       - ./compose/web/runtest.sh:/runtest.sh
