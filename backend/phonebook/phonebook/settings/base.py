@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SITE_ROOT = os.path.dirname(BASE_DIR)
@@ -53,6 +54,7 @@ MIDDLEWARE = [
 
 THIRD_PARTY_APPS = (
     'django_filters',
+    'raven.contrib.django.raven_compat',
     'rest_framework',
 )
 
@@ -145,4 +147,57 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
+
+
+RAVEN_CONFIG = {
+    'DSN': os.environ['DJANGO_SENTRY_DSN'],
+}
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry', ],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': os.environ['DJANGO_SENTRY_LOG_LEVEL'],
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'console': {
+            'level': os.environ['DJANGO_CONSOLE_LOG_LEVEL'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'django.security.DisallowedHost': {
+            'level': 'ERROR',
+            'handlers': ['console', 'sentry', ],
+            'propagate': False,
+        },
+    },
 }

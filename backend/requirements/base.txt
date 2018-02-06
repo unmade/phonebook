@@ -3,3 +3,4 @@ psycopg2==2.7.3
 djangorestframework==3.7.3
 Pillow==4.3.0
 django-filter==1.1.0
+raven
