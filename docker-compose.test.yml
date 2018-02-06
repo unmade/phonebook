@@ -10,8 +10,7 @@ services:
     links:
       - db:db
     env_file:
-      - ./secrets/django.env
-      - ./secrets/db.env
+      - ./example.env
     volumes:
       - ./backend:/app
       - ./compose/web/runtest.sh:/runtest.sh

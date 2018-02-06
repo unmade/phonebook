@@ -1,6 +1,7 @@
 Django==2.0
-psycopg2==2.7.3
+django-environ==0.4.4
+django-filter==1.1.0
 djangorestframework==3.7.3
 Pillow==4.3.0
-django-filter==1.1.0
-raven
+psycopg2==2.7.3
+raven==6.5.0
