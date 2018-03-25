@@ -24,7 +24,7 @@
                         <span class="pb-float-left">
                             <span class="item-title">
                                 <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">
-                                    {{ item | toFullname }}
+                                    {{ item.full_name }}
                                 </span>
                             </span>
                             <span class="item-metadata">
@@ -36,7 +36,7 @@
                         <span class="pb-float-right">
                             <span class="item-company-logo">
                                 <span class="helper"></span>
-                                <img ng-src="{{ item.company.logo }}"/>
+                                <img ng-src="{{ item.company_logo }}"/>
                             </span>
                         </span>
                     </md-item-template>

@@ -3,7 +3,8 @@
 
     angular
         .module('pbApp.employees')
-        .factory('employeeService', employeeService);
+        .factory('employeeService', employeeService)
+        .factory('employeeSuggest', employeeSuggest);
 
     employeeService.$inject = ['$resource'];
 
@@ -12,5 +13,13 @@
             query: {method: 'GET', isArray: false}
         });
     };
+
+    employeeSuggest.$inject = ['$resource'];
+
+    function employeeSuggest($resource) {
+        return $resource('search/api/suggests/', {}, {
+            query: {method: 'GET', isArray: true}
+        })
+    }
 
 })();

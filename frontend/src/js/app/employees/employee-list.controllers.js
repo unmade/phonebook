@@ -6,10 +6,10 @@
         .controller('EmployeeListCtrl',  EmployeeListCtrl);
 
     EmployeeListCtrl.$inject = ['$q', '$filter', '$mdSidenav', 'employeeService', 'Scroll',
-                                'companyService', 'centerService', 'divisionService'];
+                                'companyService', 'centerService', 'divisionService', 'employeeSuggest'];
 
     function EmployeeListCtrl($q, $filter, $mdSidenav, employeeService, Scroll,
-                              companyService, centerService, divisionService) {
+                              companyService, centerService, divisionService, employeeSuggest) {
         var self = this;
 
         self.employees = new Scroll(employeeService);
@@ -66,16 +66,13 @@
         }
 
         function employeeSearch(query) {
-            var limit = 8;
+            var limit = 3;
             if (!query) return self.employees.results.slice(0, limit);
-            var deferred = $q.defer(),
-                translated = $filter('englishCharsToRussian')(query);
-            employeeService.query({
-                search: translated,
-                limit: limit,
-                offset: 0
+            var deferred = $q.defer();
+            employeeSuggest.query({
+                q: query
             }, function(results, status) {
-                deferred.resolve(results.results)
+                deferred.resolve(results)
             });
 
             return deferred.promise
