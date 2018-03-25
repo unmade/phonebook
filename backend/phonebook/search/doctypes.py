@@ -1,5 +1,5 @@
 from django.utils.encoding import force_text
-from elasticsearch_dsl import DocType, Text, Completion
+from elasticsearch_dsl import Completion, DocType, Text
 
 from employees.models import Employee
 

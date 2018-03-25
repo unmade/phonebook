@@ -108,7 +108,11 @@ class Employee(models.Model):
         ordering = ['surname', 'firstname', 'patronymic']
 
     def __str__(self):
-        return f'{self.surname} {self.firstname} {self.patronymic}'
+        return ' '.join([
+            self.surname.name if self.surname else '',
+            self.firstname.name if self.firstname else '',
+            self.patronymic.name if self.patronymic else '',
+        ]).strip()
 
     def get_absolute_api_url(self):
         return reverse('employees:api:employee-detail', kwargs={'pk': self.pk})
