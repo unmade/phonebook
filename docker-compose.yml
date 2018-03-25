@@ -2,6 +2,7 @@ version: "3.3"
 
 volumes:
   dbdata:
+  esdata:
 
 services:
 
@@ -37,9 +38,17 @@ services:
     restart: always
     image: nginx:latest
     ports:
-      - "80:80"
+      - 80:80
     volumes:
       - ./backend:/app
       - ./compose/nginx:/etc/nginx/conf.d/
     links:
       - web:web
+
+  elasticsearch:
+    restart: always
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
+    expose:
+      - "9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
